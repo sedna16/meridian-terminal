@@ -1,0 +1,27 @@
+.app-widget {
+  height: 250px;
+  color: var(--bs-body-color);
+}
+
+.app-widget .card-header {
+  padding: 0.5rem;
+}
+
+.app-widget > .app-header > h1,
+.app-widget > .app-header > h2,
+.app-widget > .app-header > h3,
+.app-widget > .app-header > h4,
+.app-widget > .app-header > h5,
+.app-widget > .app-header > h6 {
+  margin: 0 !important;
+}
+
+.app-widget .card-body {
+  overflow-y: auto !important;
+  padding: 0.5rem;
+}
+
+.app-widget .card-footer {
+  color: var(--bs-body-color) !important;
+  padding: 0.5rem;
+}

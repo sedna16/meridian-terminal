@@ -1,0 +1,359 @@
+@import "./base.css";
+
+/* * Cyber-CLI Bootstrap Theme - v1.2
+ * Solid Black Edition (No Scanlines/Gradients)
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:ital,wght@0,200;1,200&display=swap");
+
+:root {
+  /* Color Palette - Matrix High Contrast #00ff41*/
+  --bs-body-bg: #000000;
+  --bs-body-color: #0cbd38;
+  --bs-primary: #003b00;
+  --bs-secondary: #0A8129;
+  --bs-success: #00ff41;
+  --bs-danger: #ff0000;
+  --bs-warning: #f3f315;
+  --bs-info: #00ccff;
+
+  /* Typography - Monospaced & Small */
+  --bs-body-font-family: "Space Grotesk", "Courier New", Courier, monospace;
+  --bs-body-font-size: 0.85rem;
+  --bs-body-line-height: 1.2;
+
+  /* Global UI Resets: Strict Zero Radius */
+  --bs-border-radius: 0 !important;
+  --bs-border-radius-sm: 0 !important;
+  --bs-border-radius-lg: 0 !important;
+  --bs-border-radius-xl: 0 !important;
+  --bs-border-radius-2xl: 0 !important;
+  --bs-border-radius-pill: 0 !important;
+  --bs-border-color: #008f11;
+
+  /* Global UI Resets: Zero Shadows */
+  --bs-box-shadow: none !important;
+  --bs-box-shadow-sm: none !important;
+  --bs-box-shadow-lg: none !important;
+  --bs-box-shadow-inset: none !important;
+}
+
+/* --- Global Background --- */
+body,
+.custom-body {
+  background-color: var(--bs-body-bg) !important;
+  color: var(--bs-body-color) !important;
+  min-height: 100vh;
+}
+
+/* --- Navbar: Clean Terminal Header --- */
+.navbar {
+  background-color: #000000 !important;
+  border-bottom: 1px solid var(--bs-border-color);
+  padding: 0.2rem 1rem;
+}
+
+.navbar-brand {
+  font-size: 0.75rem;
+  color: var(--bs-success) !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.nav-link {
+  color: var(--bs-secondary) !important;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  padding: 0.4rem 0.8rem !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--bs-success) !important;
+  background-color: #0c0c0c; /* Very subtle grey-black for depth */
+}
+
+/* --- Cards: Hard-Edged Modules --- */
+.card {
+  background-color: #000000;
+  border: 1px solid var(--bs-border-color);
+  color: var(--bs-success);
+  border-radius: 0 !important;
+}
+
+.card-header,
+.card-body {
+  border-bottom: 1px solid var(--bs-border-color);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+}
+
+.card-body {
+  overflow-y: hidden;
+}
+
+.card-footer {
+  background-color: transparent;
+  border-top: 1px solid var(--bs-border-color);
+  font-size: 0.65rem;
+}
+
+/* --- Forms: Terminal Command Style --- */
+.form-label {
+  font-size: 0.65rem;
+  color: var(--bs-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.form-control,
+.form-select {
+  background-color: #000000;
+  color: var(--bs-success);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0 !important;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.8rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: #000000;
+  color: var(--bs-success);
+  border-color: var(--bs-border-color);
+  box-shadow: none !important; /* Strictly no glow/shadow */
+  outline: 1px solid var(--bs-success);
+}
+
+::placeholder {
+  color: var(--bs-body-color) !important;
+}
+
+/* --- Buttons: Interactive Prompts --- */
+.btn {
+  border-radius: 0 !important;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.8rem;
+  border: 1px solid var(--bs-border-color);
+  color: var(--bs-success);
+  background: transparent;
+}
+
+.btn:hover {
+  background-color: var(--bs-success);
+  color: #000;
+}
+
+/* --- Tables & List Groups --- */
+.table {
+  --bs-table-bg: #000000;
+  --bs-table-color: var(--bs-success);
+  --bs-table-border-color: var(--bs-border-color);
+  font-size: 0.75rem;
+}
+
+.list-group-item {
+  background-color: #000000;
+  color: var(--bs-success);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0 !important;
+  padding: 0.4rem;
+}
+
+/* --- Custom Slim Scrollbar --- */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bs-primary);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bs-success);
+}
+
+/* --- Text & Background Utility Overrides --- */
+
+/* Forcing all background utilities to be solid and high-contrast */
+.bg-primary {
+  background-color: var(--bs-primary) !important;
+  color: #00ff41 !important;
+}
+.bg-secondary {
+  background-color: #001a00 !important;
+  color: var(--bs-secondary) !important;
+}
+.bg-success {
+  background-color: var(--bs-success) !important;
+  color: #000 !important;
+}
+.bg-danger {
+  background-color: #330000 !important;
+  color: #ff0000 !important;
+}
+.bg-warning {
+  background-color: #333300 !important;
+  color: #f3f315 !important;
+}
+.bg-info {
+  background-color: #002233 !important;
+  color: #00ccff !important;
+}
+.bg-dark {
+  background-color: #000000 !important;
+  color: var(--bs-success) !important;
+}
+.bg-light {
+  background-color: #0a0a0a !important;
+  color: var(--bs-success) !important;
+}
+
+/* Text Utilities - Ensuring high readability on black */
+.text-primary {
+  color: var(--bs-secondary) !important;
+} /* Primary is the mid-tone green */
+.text-success {
+  color: var(--bs-success) !important;
+} /* Success is the bright Matrix green */
+.text-muted {
+  color: #003b00 !important;
+} /* Muted is very dark green */
+.text-secondary {
+  color: var(--bs-secondary) !important;
+}
+
+/* Custom Badge Overrides (Since they use bg classes) */
+.badge {
+  border-radius: 0 !important;
+  font-family: "Fira Code", monospace;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  padding: 0.2em 0.5em;
+}
+
+/* --- CLI Header Scaling --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: "Space Grotesk", monospace;
+  font-weight: 200;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  color: var(--bs-body-color);
+}
+
+/* Small, precise increments for headers */
+h1,
+.h1 {
+  font-size: 1.25rem;
+}
+h2,
+.h2 {
+  font-size: 1.15rem;
+}
+h3,
+.h3 {
+  font-size: 1.05rem;
+}
+h4,
+.h4 {
+  font-size: 0.95rem;
+}
+h5,
+.h5 {
+  font-size: 0.85rem;
+}
+h6,
+.h6 {
+  font-size: 0.75rem;
+}
+
+/* Adds a terminal prompt character before main headers */
+h1::before,
+h2::before,
+h3::before {
+  content2: "> ";
+  opacity: 0.7;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bs-primary);
+}
+
+/* capitalize all letters */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div,
+strong,
+i,
+b,
+p,
+u,
+span,
+th,
+tr,
+td,
+button,
+a {
+  text-transform: uppercase !important;
+}
+
+/* change text selection color */
+::-moz-selection { /* Code for Firefox */
+  color: var(--bs-body-bg);
+  background: var(--bs-success);
+}
+
+::selection {
+  color: var(--bs-body-bg);
+  background: var(--bs-success);
+}
+
+/* grid line */
+.grid-background {
+  /* Set the background color */
+  background-color: #131313 !important;
+
+  /* Define the grid lines using two linear gradients (vertical and horizontal) */
+  background-image:
+    linear-gradient(to right, rgb(255, 255, 255, 0.25) 1px, transparent 1px),
+    /* Vertical lines */ linear-gradient(to bottom, rgb(255, 255, 255, 0.25) 1px, transparent 1px) !important; /* Horizontal lines */
+
+  /* Set the size of each grid cell (e.g., 40px x 40px) */
+  background-size: 20px 20px;
+}
+
+.modal-content {
+  border: 1px solid var(--bs-border-color);
+}
+
