@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0">
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark py-0">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">Meridian Terminal</router-link>
       <button

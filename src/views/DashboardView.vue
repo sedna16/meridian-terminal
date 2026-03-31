@@ -1,79 +1,84 @@
 <template>
   <section class="dashboard">
-    <div class="widgets-area p-3">
-      <div class="row m-0 gx-3">
-        <div class="col-lg-3">
-          <TimeWidget />
+    <div class="widgets-area p-0">
+      <div class="row m-0 gx-0 widget-container">
+        <div class="col-12 widget-box">
+          <WorldMap />
+        </div>
+        <div class="col-lg-3 widget-box">
+          <TimeWidget :base_time="base_time" />
         </div>
 
-        <div class="col-lg-3">
-          <CalendarWidget />
+        <div class="col-lg-3 widget-box">
+          <CalendarWidget :base_time="base_time" />
         </div>
 
-        <div class="col-lg-3">
-          <div class="card app-widget">
-            <div class="card-header d-flex justify-content-between align-items-center">
-
-              <h6 class="m-0 d-inline-block">Widget Title</h6>
-
-              <div class="btn-group float-end">
-        
-                <button
-                  type="button"
-                  class="btn btn-sm btn-light text-secondary py-0 px-1"
-                  aria-label="Settings"
-                >
-                  S
-                </button>
-
-                <button
-                  type="button"
-                  class="btn btn-sm btn-light text-secondary py-0 px-1"
-                  aria-label="Settings"
-                >
-                  X
-                </button>
-
-              </div>
-
-            </div>
-
-            <div class="card-body">
-              <p class="card-text">
-                This is a simple widget card. The body is set to a fixed height, and because the
-                content exceeds that height, it becomes scrollable.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
-              <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit anim id est laborum.
-              </p>
-            </div>
-
-            <div class="card-footer text-muted small">Last updated 3 mins ago</div>
-          </div>
+        <div class="col-lg-3 widget-box">
+          <TaskManagerWidget />
         </div>
+
+        <div class="col-lg-3 widget-box">
+          <NotesWidget />
+        </div>
+
+        <div class="col-lg-3 widget-box">
+          <NewsWidget saved_source="" />
+        </div>
+
+        <div class="col-lg-3 widget-box">
+          <AddWidget @click="" />
+        </div>
+
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import AddWidget from "@/components/elements/AddWidget.vue";
+import WorldMap from "@/components/widgets/WorldMap.vue";
 import TimeWidget from "@/components/widgets/TimeWidget.vue";
 import CalendarWidget from "@/components/widgets/CalendarWidget.vue";
+import TaskManagerWidget from "@/components/widgets/TaskManagerWidget.vue";
+import NotesWidget from "@/components/widgets/NotesWidget.vue";
+import NewsWidget from "@/components/widgets/NewsWidget.vue";
 
 export default {
   name: "Dashboard",
+  data() {
+      return {
+          show_modal: false,
+          base_time: '',
+          widgets_array: '',
+          settings_json: '',
+      }
+  },
+  created(){
+
+    // Update the time immediately on page load
+    this.update_clock();
+
+    // Update the time every 1000 milliseconds (1 second)
+    setInterval(this.update_clock, 1000);
+
+  },
+  methods: {
+    update_clock() {
+      this.base_time = new Date();
+    },
+  },
   components: {
+    AddWidget,
+    WorldMap,
     TimeWidget,
     CalendarWidget,
+    TaskManagerWidget,
+    NotesWidget,
+    NewsWidget,
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

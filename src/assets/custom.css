@@ -10,7 +10,7 @@
   /* Color Palette - Matrix High Contrast #00ff41*/
   --bs-body-bg: #000000;
   --bs-body-color: #0cbd38;
-  --bs-primary: #003b00;
+  --bs-primary: #026b02;
   --bs-secondary: #0A8129;
   --bs-success: #00ff41;
   --bs-danger: #ff0000;
@@ -29,7 +29,7 @@
   --bs-border-radius-xl: 0 !important;
   --bs-border-radius-2xl: 0 !important;
   --bs-border-radius-pill: 0 !important;
-  --bs-border-color: #008f11;
+  --bs-border-color: #0cbd38;
 
   /* Global UI Resets: Zero Shadows */
   --bs-box-shadow: none !important;
@@ -44,6 +44,7 @@ body,
   background-color: var(--bs-body-bg) !important;
   color: var(--bs-body-color) !important;
   min-height: 100vh;
+  font-family: "Space Grotesk", monospace;
 }
 
 /* --- Navbar: Clean Terminal Header --- */
@@ -51,6 +52,8 @@ body,
   background-color: #000000 !important;
   border-bottom: 1px solid var(--bs-border-color);
   padding: 0.2rem 1rem;
+  z-index: 999999;
+  font-family: "Space Grotesk", monospace;
 }
 
 .navbar-brand {
@@ -76,14 +79,12 @@ body,
 /* --- Cards: Hard-Edged Modules --- */
 .card {
   background-color: #000000;
-  border: 1px solid var(--bs-border-color);
   color: var(--bs-success);
   border-radius: 0 !important;
 }
 
 .card-header,
 .card-body {
-  border-bottom: 1px solid var(--bs-border-color);
   font-size: 0.65rem;
   text-transform: uppercase;
   padding: 0.3rem 0.6rem;
@@ -97,6 +98,32 @@ body,
   background-color: transparent;
   border-top: 1px solid var(--bs-border-color);
   font-size: 0.65rem;
+}
+
+/* --- Borders --- */
+.border-primary {
+  border-color: var(--bs-primary) !important;
+}
+.border-secondary {
+  border-color: var(--bs-secondary) !important;
+}
+.border-success {
+  border-color: var(--bs-success) !important;
+}
+.border-danger {
+  border-color: var(--bs-danger) !important;
+}
+.border-warning {
+  border-color: var(--bs-warning) !important;
+}
+.border-info {
+  border-color: var(--bs-info) !important;
+}
+.border-light {
+  border-color: var(--bs-light) !important;
+}
+.border-dark {
+  border-color: var(--bs-dark) !important;
 }
 
 /* --- Forms: Terminal Command Style --- */
@@ -124,6 +151,11 @@ body,
   border-color: var(--bs-border-color);
   box-shadow: none !important; /* Strictly no glow/shadow */
   outline: 1px solid var(--bs-success);
+}
+
+.form-check-input:checked, .form-check-input:focus {
+  background-color: var(--bs-primary); /* Change the background color of the checked state */
+  border-color: var(--bs-success); /* Optional: ensures the border matches the background */
 }
 
 ::placeholder {
@@ -346,11 +378,15 @@ a {
 
   /* Define the grid lines using two linear gradients (vertical and horizontal) */
   background-image:
-    linear-gradient(to right, rgb(255, 255, 255, 0.25) 1px, transparent 1px),
-    /* Vertical lines */ linear-gradient(to bottom, rgb(255, 255, 255, 0.25) 1px, transparent 1px) !important; /* Horizontal lines */
+    linear-gradient(to right, rgb(125, 125, 125, 0.15) 1px, transparent 1px),
+    /* Vertical lines */ linear-gradient(to bottom, rgb(125, 125, 125, 0.15) 1px, transparent 1px) !important; /* Horizontal lines */
 
   /* Set the size of each grid cell (e.g., 40px x 40px) */
   background-size: 20px 20px;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
 }
 
 .modal-content {

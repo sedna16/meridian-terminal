@@ -47,7 +47,8 @@ import Navbar from "./components/elements/navbar.vue";
   crimerates
   military conflicts
   random quote
-
+  buttons, not links - http requests
+  coundown timers
  */
 </script>
 

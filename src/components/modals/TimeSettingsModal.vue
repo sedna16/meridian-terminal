@@ -4,7 +4,7 @@
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header p-2">
-                    <h1 class="modal-title fs-6 p-0 d-inline-block" id="staticBackdropLabel">Modal title</h1>
+                    <h1 class="modal-title fs-6 p-0 d-inline-block" id="staticBackdropLabel">Settings</h1>
                     
                     <button
                     type="button"

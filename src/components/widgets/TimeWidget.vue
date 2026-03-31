@@ -1,5 +1,5 @@
 <template>
-  <div class="card app-widget">
+  <div class="card app-widget bg-transparent">
     <div class="card-header d-flex justify-content-between align-items-center">
 
       <h6 class="m-0 pb-0 mb-0 d-inline-block">Local_time_zones</h6>
@@ -21,7 +21,7 @@
               <div class="d-block truncate mb-1">
                 <small class="text-primary" style="font-size: 0.6rem;">{{item.text}}</small>
               </div>
-              <span class="fs-3 text-success" style="font-weight: 900 !important;">{{convert_timezone(item.offset)}}</span>
+              <span class="fs-3 text-success text-glow" style="font-weight: 900 !important;">{{convert_timezone(item.offset)}}</span>
           </div>
 
         </template>
@@ -42,11 +42,10 @@ import TimeSettingsModal from "@/components/modals/TimeSettingsModal.vue";
 
 export default {
   name: "TimeWidget",
-  props: ['sample_prop'],
+  props: ['base_time'],
   data() {
     return {
       show_modal: false,
-      base_time: '',
       active_timezones: [
         {
           "value": "Japan Standard Time",
@@ -68,12 +67,6 @@ export default {
   },
   created(){
 
-    // Update the time immediately on page load
-    this.update_clock();
-
-    // Update the time every 1000 milliseconds (1 second)
-    setInterval(this.update_clock, 1000);
-
   },
   components: {
     TimeSettingsModal,
@@ -83,11 +76,6 @@ export default {
 
     update_modal(newData) {
       this.show_modal = newData;
-    },
-    update_clock() {
-      
-      this.base_time = new Date();
-
     },
     convert_timezone(utc_offset){
 
@@ -108,15 +96,17 @@ export default {
       const newDate = new Date(originalTime + offsetDifference);
 
       const hours = String(newDate.getHours()).padStart(2, '0');
-      hours.replace('-','');
+      // hours = hours - 12
+      // if(hours < 0){
+      //   hours = '0' +hours.toString().replace('-','')
+      // }
+      //hours.replace('-','');
       const minutes = String(newDate.getMinutes()).padStart(2, '0');
       const seconds = String(newDate.getSeconds()).padStart(2, '0');
 
-      return (hours-12) + ':' + minutes + ':' + seconds;
+      return (hours-12).toString().replace('-','') + ':' + minutes.toString() + ':' + seconds.toString();
 
     },
-
-
 
   }
 };
@@ -132,6 +122,12 @@ export default {
     white-space: nowrap; /* Prevents wrapping */
     overflow: hidden; /* Hides the extra text */
     text-overflow: ellipsis; /* Adds "..." */
+  }
+  .text-glow {
+    text-shadow: 
+      0 0 3px var(--bs-success),  /* horizontal-offset vertical-offset blur-radius color */
+      0 0 3px var(--bs-success),
+      0 0 0px var(--bs-success);
   }
 
 </style>

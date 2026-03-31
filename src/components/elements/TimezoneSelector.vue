@@ -3,7 +3,8 @@
     <select class="form-select p-1" @change="update_timezone($event)">
         <option selected>Select timezone</option>
         <template v-for="(item,index) in timezone_array" :key="item.id">
-            <option :value="index" selected>{{item.text}}</option>
+            <option v-if="selected_timezone['text'] == item.text" :value="index" selected>{{item.text}}</option>
+            <option v-if="selected_timezone['text'] != item.text" :value="index">{{item.text}}</option>
         </template>
     </select>
 
@@ -556,7 +557,7 @@ export default {
                     "abbr": "GMT",
                     "offset": 0,
                     "isdst": false,
-                    "text": "(UTC) Edinburgh, London",
+                    "text": "(UTC) Edinburgh",
                     "utc": [
                     "Europe/Isle_of_Man",
                     "Europe/Guernsey",
@@ -569,7 +570,7 @@ export default {
                     "abbr": "BST",
                     "offset": 1,
                     "isdst": true,
-                    "text": "(UTC+01:00) Edinburgh, London",
+                    "text": "(UTC+01:00) London",
                     "utc": [
                     "Europe/Isle_of_Man",
                     "Europe/Guernsey",
@@ -1221,6 +1222,16 @@ export default {
                     ]
                 },
                 {
+                    "value": "Philippine Standard Time",
+                    "abbr": "PST",
+                    "offset": 8,
+                    "isdst": false,
+                    "text": "(UTC+08:00) Manila",
+                    "utc": [
+                    "Asia/Manila"
+                    ]
+                },
+                {
                     "value": "Ulaanbaatar Standard Time",
                     "abbr": "UST",
                     "offset": 8,
@@ -1303,7 +1314,7 @@ export default {
                     "abbr": "AEST",
                     "offset": 10,
                     "isdst": false,
-                    "text": "(UTC+10:00) Canberra, Melbourne, Sydney",
+                    "text": "(UTC+10:00) Melbourne, Sydney, Canberra",
                     "utc": [
                     "Australia/Melbourne",
                     "Australia/Sydney"
