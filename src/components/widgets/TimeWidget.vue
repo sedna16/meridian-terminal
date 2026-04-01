@@ -6,7 +6,7 @@
 
       <div class="btn-group float-end">
 
-        <WidgetHeaderButton @click="show_modal=true">O</WidgetHeaderButton>
+        <WidgetHeaderButton @click="show_panel=true">O</WidgetHeaderButton>
 
       </div>
 
@@ -31,21 +31,21 @@
     </div>
   </div>
 
-<TimeSettingsModal v-if="show_modal==true" @update-modal="update_modal" :timezones="active_timezones" />
+<TimezoneSP v-if="show_panel==true" @update-panel="update_panel" :timezones="active_timezones" />
 
 </template>
 
 <script>
 
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
-import TimeSettingsModal from "@/components/modals/TimeSettingsModal.vue";
+import TimezoneSP from "@/components/sidepanels/TimezoneSP.vue";
 
 export default {
   name: "TimeWidget",
   props: ['base_time'],
   data() {
     return {
-      show_modal: false,
+      show_panel: false,
       active_timezones: [
         {
           "value": "Japan Standard Time",
@@ -69,13 +69,13 @@ export default {
 
   },
   components: {
-    TimeSettingsModal,
-    WidgetHeaderButton
+    WidgetHeaderButton,
+    TimezoneSP,
   },
   methods: {
 
-    update_modal(newData) {
-      this.show_modal = newData;
+    update_panel(v) {
+      this.show_panel = v;
     },
     convert_timezone(utc_offset){
 

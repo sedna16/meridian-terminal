@@ -8,7 +8,7 @@
         <div class="btn-group float-end">
 
             <WidgetHeaderButton @click="add_task()" title="Add task">+</WidgetHeaderButton>
-            <WidgetHeaderButton @click="show_modal=true">O</WidgetHeaderButton>
+            <WidgetHeaderButton @click="show_panel=true">O</WidgetHeaderButton>
 
         </div>
 
@@ -51,21 +51,28 @@
         </div>
     </div>
 
+<TaskManagerSP v-if="show_panel==true" @update-panel="update_panel" />
+
 </template>
 
 <script>
 
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
+import TaskManagerSP from "@/components/sidepanels/TaskManagerSP.vue";
 
 export default {
     name: "TaskManagerWidget",
     props: ['prop_name'],
     data() {
         return {
+            show_panel: false,
             task_array: [],
         }
     },
     methods: {
+        update_panel(v) {
+            this.show_panel = v;
+        },
         add_task() {
 
             var _new = {
@@ -99,12 +106,13 @@ export default {
             // wait for 1,5 seconds before removing
             setTimeout(() => {
                 this.task_array.splice(index,1);
-            }, 2000);
+            }, 500);
 
         }
     },
     components: {
-        WidgetHeaderButton
+        WidgetHeaderButton,
+        TaskManagerSP,
     },
 };
 </script>

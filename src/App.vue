@@ -49,6 +49,9 @@ import Navbar from "./components/elements/navbar.vue";
   random quote
   buttons, not links - http requests
   coundown timers
+  seo tools
+  gaming and entertainment news
+
  */
 </script>
 

@@ -11,9 +11,9 @@
             :href="item.link" 
             :title="item.title" 
             target="_blank" 
-            class="text-primary w-100 h-100 p-2">
+            class="text-success w-100 h-100 p-2">
                 {{item.title}}
-                <small class="d-block text-muted">{{item.pubDate}}</small>
+                <small class="d-block text-primary">{{item.pubDate}}</small>
             </a>
             
 

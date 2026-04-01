@@ -1,7 +1,7 @@
 <template>
 
     <div class="modal d-block" style="background-color: rgb(0,0,0,0.65);">
-        <div class="modal-dialog modal-md">
+        <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header p-2">
                     <h1 class="modal-title fs-6 p-0 d-inline-block" id="staticBackdropLabel">Settings</h1>

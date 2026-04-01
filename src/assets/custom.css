@@ -138,6 +138,7 @@ body,
 .form-select {
   background-color: #000000;
   color: var(--bs-success);
+  text-transform: uppercase;
   border: 1px solid var(--bs-border-color);
   border-radius: 0 !important;
   font-size: 0.7rem;

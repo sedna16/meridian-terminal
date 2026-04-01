@@ -10,7 +10,7 @@
 
         <div class="btn-group float-end">
 
-            <WidgetHeaderButton @click="show_modal=true">O</WidgetHeaderButton>
+            <WidgetHeaderButton @click="show_panel=true">O</WidgetHeaderButton>
 
         </div>
 
@@ -28,9 +28,15 @@
         </div>
     </div>
 
-<NewsModal 
+<!-- <NewsModal 
  v-if="show_modal==true" 
  @update-modal="update_modal" 
+ @update-active-source="update_source" 
+ :current_source="active_source" /> -->
+
+<NewsSP 
+ v-if="show_panel==true" 
+ @update-panel="update_panel" 
  @update-active-source="update_source" 
  :current_source="active_source" />
 
@@ -38,18 +44,16 @@
 
 <script>
 
-import axios from 'axios';
-
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
 import NewsLoop from "@/components/elements/NewsLoop.vue";
-import NewsModal from "@/components/modals/NewsModal.vue";
+import NewsSP from "@/components/sidepanels/NewsSP.vue";
 
 export default {
     name: "NoteWidget",
-    props: ['saved_source'],
+    props: ['widget_index','saved_source'],
     data() {
         return {
-            show_modal: false,
+            show_panel: false,
             show_news_feed: false,
             proxy_url: 'https://corsproxy.io/?url=',
             active_source: {
@@ -72,8 +76,8 @@ export default {
 
     },
     methods: {
-        update_modal(newData) {
-            this.show_modal = newData;
+        update_panel(v) {
+            this.show_panel = v;
         },
         update_source(v){
             this.active_source = v;
@@ -87,7 +91,7 @@ export default {
     components: {
         WidgetHeaderButton,
         NewsLoop,
-        NewsModal,
+        NewsSP,
     },
 };
 </script>

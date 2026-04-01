@@ -7,7 +7,7 @@
 
       <div class="btn-group float-end">
 
-        <WidgetHeaderButton @click="show_modal=true">O</WidgetHeaderButton>
+        <WidgetHeaderButton @click="show_panel=true">O</WidgetHeaderButton>
 
       </div>
 
@@ -58,11 +58,13 @@
     </div>
   </div>
 
+<CalendarSP v-if="show_panel==true" @update-panel="update_panel" />
+
 </template>
 
 <script>
 
-//import TimeSettingsModal from "@/components/modals/TimeSettingsModal.vue";
+import CalendarSP from "@/components/sidepanels/CalendarSP.vue";
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
 
 export default {
@@ -70,17 +72,22 @@ export default {
     props: ['base_time'],
     data() {
         return {
-            show_modal: false,
+            show_panel: false,
             calendar_array: [],
             current_day: '',
         }
     },
     created(){
 
-      this.set_calendar();
+        this.set_calendar();
 
     },
     methods: {
+
+        update_panel(v) {
+            this.show_panel = v;
+        },
+
         set_calendar() {
 
           var currentDate = this.base_time;
@@ -141,7 +148,8 @@ export default {
         
     },
     components: {
-      WidgetHeaderButton
+      WidgetHeaderButton,
+      CalendarSP,
     },
 };
 </script>

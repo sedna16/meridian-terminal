@@ -4,7 +4,7 @@
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header p-2">
-                    <h1 class="modal-title fs-6 p-0 d-inline-block" id="staticBackdropLabel">News</h1>
+                    <h1 class="modal-title fs-6 p-0 d-inline-block" id="staticBackdropLabel">Add Widget</h1>
                     
                     <button
                     type="button"
@@ -16,16 +16,22 @@
                     
                 </div>
                 <div class="modal-body">
-
+                    
                     <div class="d-block mb-3">
-                        <NewsSelector 
-                        @update-selected-source="change_selected_source"
-                        />
+
+                        <select class="form-select p-1" @change="selected_widget = $event.target.value">
+                            <template 
+                            v-for="(item,index) in widget_selection" 
+                            :key="item.id">
+                                <option :value="item">{{item}}</option>
+                            </template>
+                        </select>
+
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <GenericButton @click="change_active_source()" label="Update" />
+                    <GenericButton @click="add_widget()" label="Add" />
                 </div>
             </div>
         </div>
@@ -36,37 +42,38 @@
 <script>
 
 import GenericButton from "@/components/elements/GenericButton.vue";
-import NewsSelector from "@/components/elements/NewsSelector.vue";
 
 export default {
-    name: "NewsModal",
-    props: ['current_source'],
+    name: "AddWidgetModal",
+    props: ['prop_name'],
     data() {
         return {
-            
-            selected_source: {},
-
+            widget_selection: [
+                'Local Timezones',
+                'Calendar',
+                'Task Manager',
+                'Notes',
+                'RSS News',
+                'Metrics',
+            ],
+            selected_widget: 'Local Timezones',
         }
     },
     methods: {
         hide_modal() {
             this.$emit('update-modal', false);
         },
-        change_selected_source(source_object){
-            this.selected_source = source_object;
-        },
-        change_active_source(){
+        add_widget(){
             
             this.$emit(
-                'update-active-source', 
-                this.selected_source
+                'add-widget', 
+                this.selected_widget
             );
 
         },
     },
     components: {
-        GenericButton,
-        NewsSelector
+        GenericButton
     },
 };
 </script>

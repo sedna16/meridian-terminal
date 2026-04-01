@@ -27,9 +27,9 @@
                 :key="item.id">
 
                     <a 
-                    @click="read_note(index,item)" 
+                    @click.prevent="read_note(index,item)" 
                     href="#" 
-                    class="d-block mb-3 text-primary note-bullet">{{item.title}}</a>
+                    class="d-block mb-3 text-success note-bullet">{{item.title}}</a>
 
                 </template>
             </template>

@@ -1,26 +1,26 @@
 
 .widget-container {
-  border-top: 1px solid var(--bs-primary) !important;
-  border-left: 1px solid var(--bs-primary) !important;
+    border-top: 1px solid var(--bs-primary) !important;
+    border-left: 1px solid var(--bs-primary) !important;
 }
 
 .widget-box {
-  min-height: 100px !important;
+    min-height: 100px !important;
 }
 
 .app-widget {
-  min-height: 200px !important;
-  max-height: 300px !important;
-  height: 100% !important;
-  color: var(--bs-body-color);
-  font-family: "Space Grotesk", monospace !important;
-  border-right: 1px solid var(--bs-primary) !important;
-  border-bottom: 1px solid var(--bs-primary) !important;
+    min-height: 200px !important;
+    max-height: 300px !important;
+    height: 100% !important;
+    color: var(--bs-body-color);
+    font-family: "Space Grotesk", monospace !important;
+    border-right: 1px solid var(--bs-primary) !important;
+    border-bottom: 1px solid var(--bs-primary) !important;
 }
 
 .app-widget .card-header {
-  padding: 0.5rem;
-  border-bottom: 1px solid var(--bs-primary) !important;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--bs-primary) !important;
 }
 
 .app-widget > .app-header > h1,
@@ -29,16 +29,35 @@
 .app-widget > .app-header > h4,
 .app-widget > .app-header > h5,
 .app-widget > .app-header > h6 {
-  margin: 0 !important;
+    margin: 0 !important;
 }
 
-.app-widget .card-body {
-  overflow-y: auto !important;
-  padding: 0.5rem;
-  border-bottom: 0px;
+.app-widget .card-body, .side-panel .card-body {
+    overflow-y: auto !important;
+    padding: 0.5rem;
+    border-bottom: 0px;
 }
 
 .app-widget .card-footer {
-  color: var(--bs-body-color) !important;
-  padding: 0.5rem;
+    color: var(--bs-body-color) !important;
+    padding: 0.5rem;
+}
+
+.side-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100% !important;
+    width: 375px;
+    background-color: #131313;
+    overflow-y: auto;
+    z-index: 3000;
+}
+
+.side-panel .card {
+    padding-top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #131313; 
+    border-left: 1px solid var(--bs-primary);
 }
