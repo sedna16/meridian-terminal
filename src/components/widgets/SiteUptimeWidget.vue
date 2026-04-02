@@ -9,9 +9,6 @@
 
         <div class="btn-group float-end">
 
-            <WidgetHeaderButton @click="show_modal='add'" title="Add note">
-                <PlusSVG w="12" h="12" c="var(--bs-light)" />
-            </WidgetHeaderButton>
             <WidgetHeaderButton @click="update_panel(true)">
                 <GearSVG w="12" h="12" c="var(--bs-light)" />
             </WidgetHeaderButton>
@@ -21,50 +18,21 @@
         </div>
         <div class="card-body p-3">
 
-            <template v-if="widget_data.notes_array.length < 1">
+            <div v-if="show_links==false" class="d-block">
+                <span>Searching_urls...</span>
+            </div>
 
-                <p>Add a note</p>
-
-            </template>
-        
-            <template v-if="widget_data.notes_array.length > 0">
+            <div v-if="show_links==true" class="d-block">
                 <template 
-                v-for="(item,index) in widget_data.notes_array" 
-                :key="item.id">
-
-                    <a 
-                    @click.prevent="read_note(index,item)" 
-                    href="#" 
-                    class="d-block mb-3 text-success note-bullet">{{item.title}}</a>
-
+                v-for="(item,index) in widget_data.url_array">
+                    <UptimeLink :queue_gap="queue_gap" :url="item" />
                 </template>
-            </template>
+            </div>  
 
         </div>
     </div>
 
-<NotesModal 
- v-if="show_modal=='add'" 
- @update-modal="update_modal" 
- :mode="'add'" 
- index="0" 
- note="" />
-
-<NotesModal 
- v-if="show_modal=='read'" 
- @update-modal="update_modal" 
- :mode="'read'" 
- :index="modal_index" 
- :note="modal_note" />
-
-<NotesModal 
- v-if="show_modal=='edit'" 
- @update-modal="update_modal" 
- :mode="'edit'" 
- :index="modal_index" 
- :note="modal_note" />
-
-<NotesSP 
+<SiteUptimeSP 
 v-if="widget_data.show_panel==true" 
 @update-panel="update_panel" 
 :widget_data="widget_data" 
@@ -74,73 +42,64 @@ v-if="widget_data.show_panel==true"
 
 <script>
 
-//import 'dotenv/config'; // This loads and configures in one line
-
-import PlusSVG from "@/components/svg/PlusSVG.vue";
 import GearSVG from "@/components/svg/GearSVG.vue";
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
-import NotesModal from "@/components/modals/NotesModal.vue";
-import NotesSP from "@/components/sidepanels/NotesSP.vue";
+import SiteUptimeSP from "@/components/sidepanels/SiteUptimeSP.vue";
+import UptimeLink from "@/components/elements/UptimeLink.vue";
 
 export default {
-    name: "NotesWidget",
+    name: "SiteUptimeWidget",
     props: ['widget_index','widget_data'],
     data() {
         return {
-            show_modal: 'hide',
-            modal_index: '',
-            modal_note: {},
+            show_links: true,
+            queue_gap: 5000, // 5 seconds
         }
     },
     created(){
+
+        // https://dev.to/saganmarketing/free-website-uptime-api-json-for-developers-and-ai-integrations-519m
+        // https://api.siteinformant.com/api/public/status/prudentdev.com
 
     },
     methods: {
         delete_widget(){
             this.$parent.widgets_array.splice(this.widget_index,1);
         },
-        update_modal(newData) {
-            this.show_modal = newData;
-        },
         update_panel(v) {
             this.$parent.hide_all_panel();
             this.widget_data.show_panel = v;
         },
-        add_note(t,c){
-            this.widget_data.notes_array.push({
-                'title': t,
-                'content': c,
-            })
-            this.show_modal = 'hide'
-            console.log('added')
+        add_url(){
+            this.widget_data.url_array.push(
+                'https://www.google.com/'
+            )
         },
-        switch_to_edit_mode(){
-
-            this.show_modal = 'edit'
-
+        update_url(index,value){
+            this.widget_data.url_array[index] = value;
         },
-        read_note(i,n){
-
-            this.modal_index = i;
-            this.modal_note = n;
-            this.show_modal = 'read';
-
+        remove_url(index){
+            this.widget_data.url_array.splice(index,1);
         },
-        edit_note(){
-            this.show_modal = 'hide';
-            // save to db
-        },
-        remove_note(i){
-            this.widget_data.notes_array.splice(i,1);
-            this.show_modal = 'hide';
+        reload_urls(){
+
+            //
+            //
+            this.show_links = false;
+
+            //
+            //
+            setTimeout(() => {
+                this.show_links = true;
+            }, 1000);
+
         },
     },
     components: {
-        PlusSVG,
         GearSVG,
         WidgetHeaderButton,
-        NotesModal,
-        NotesSP,
+        SiteUptimeSP,
+        UptimeLink,
     },
 };
 </script>

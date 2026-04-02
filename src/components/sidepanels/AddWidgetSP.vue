@@ -165,6 +165,15 @@ export default {
                     'show_panel': false,
                     'code': 'NASDAQ:AAPL',
                 },
+                {
+                    'type': 'Site Uptime',
+                    'name': 'Signal_Pulse',
+                    'show_panel': false,
+                    'query_interval': 1, // 1 hr
+                    'url_array': [
+                        'https://www.google.com/',
+                    ],
+                },
             ],
             selected_widget_index: 0,
         }

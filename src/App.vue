@@ -24,16 +24,15 @@ import Navbar from "./components/elements/navbar.vue";
   weather forecast
   live webcams - youtube
   travel safety
-  xstock prices chart
+  xstock prices chart / crypto
   regional/country/continent news feed
   market indices
-  crypto
   weather storms
   earthquakes
   layoffs trackers - companies
   ISS location
   nasa images/data
-  site uptime monitor - multiple
+  xsite uptime monitor - multiple (may need improvement)
   trending github repos
   radiation watch
   photo gallery
@@ -48,10 +47,10 @@ import Navbar from "./components/elements/navbar.vue";
   crime rates
   military conflicts
   random quote
-  buttons, not links - http requests
   coundown timers
   seo tools
   gaming and entertainment news - merge this with rss news widget
+  buttons, not links - http requests (same below)
   widget with buttons, that triggers http requests                  ** important
   widget with form fields with submit button                        ** important
   ai agent chat widget

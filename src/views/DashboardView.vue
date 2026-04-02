@@ -20,6 +20,7 @@
                     <MetricsWidget v-if="item.type=='Metrics'" :widget_index="index" :widget_data="item" />
                     <YoutubeWidget v-if="item.type=='Youtube'" :widget_index="index" :widget_data="item" />
                     <TradingChartWidget v-if="item.type=='Trading Chart'" :widget_index="index" :widget_data="item" />
+                    <SiteUptimeWidget v-if="item.type=='Site Uptime'" :widget_index="index" :widget_data="item" />
                     
                 </div>
               
@@ -54,6 +55,7 @@ import NewsWidget from "@/components/widgets/NewsWidget.vue";
 import MetricsWidget from "@/components/widgets/MetricsWidget.vue";
 import YoutubeWidget from "@/components/widgets/YoutubeWidget.vue";
 import TradingChartWidget from "@/components/widgets/TradingChartWidget.vue";
+import SiteUptimeWidget from "@/components/widgets/SiteUptimeWidget.vue";
 
 export default {
   name: "Dashboard",
@@ -116,6 +118,7 @@ export default {
         MetricsWidget,
         YoutubeWidget,
         TradingChartWidget,
+        SiteUptimeWidget,
     },
 };
 </script>

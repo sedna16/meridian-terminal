@@ -74,8 +74,6 @@ v-if="widget_data.show_panel==true"
 
 <script>
 
-//import 'dotenv/config'; // This loads and configures in one line
-
 import PlusSVG from "@/components/svg/PlusSVG.vue";
 import GearSVG from "@/components/svg/GearSVG.vue";
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
