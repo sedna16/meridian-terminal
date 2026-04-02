@@ -6,7 +6,7 @@
 
             <div class="card-header text-success p-3 pt-4">
 
-                <h1 class="modal-title fs-6 m-0 p-0 d-inline-block">Calendar</h1>
+                <h1 class="modal-title fs-6 m-0 p-0 d-inline-block">Notes</h1>
 
                 <button
                 type="button"
@@ -41,15 +41,6 @@
                     placeholder="Widget Title">
                 </div>
 
-                <hr>
-
-                <div id="calendar-style" class="d-block mb-3">
-                    <label class="form-label mb-2 text-success">Calendar Style (wip)</label>
-                    <select class="form-select p-1" @change="update_source($event)">
-                        <option selected>Select style</option>
-                    </select>
-                </div>
-
             </div>
 
         </div>
@@ -64,7 +55,7 @@ import TrashSVG from "@/components/svg/TrashSVG.vue";
 import GenericButton from "@/components/elements/GenericButton.vue";
 
 export default {
-    name: "CalendarSP",
+    name: "NotesSP",
     props: ['widget_data'],
     data() {
         return {

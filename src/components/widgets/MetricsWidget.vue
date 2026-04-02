@@ -3,18 +3,22 @@
     <div class="card app-widget bg-transparent">
         <div class="card-header d-flex justify-content-between align-items-center">
 
-        <h6 class="m-0 pb-0 mb-0 d-inline-block">Metrics</h6>
+        <h6 class="m-0 pb-0 mb-0 d-inline-block">
+            {{widget_data.name.replace(' ','_')}}
+        </h6>
 
         <div class="btn-group float-end">
 
-            <WidgetHeaderButton @click="show_panel=true">O</WidgetHeaderButton>
+            <WidgetHeaderButton @click="show_panel=true">
+                <GearSVG w="12" h="12" c="var(--bs-light)" />
+            </WidgetHeaderButton>
 
         </div>
 
         </div>
         <div class="card-body p-3">
 
-            <ChartVisualizer :chart_data="chart_data" />
+            <ChartVisualizer :chart_data="widget_data.chart_data" />
 
         </div>
     </div>
@@ -23,68 +27,73 @@
 v-if="show_panel==true" 
 @update-panel="update_panel" 
 @update-chart-data="update_chart_data" 
-:chart_data="chart_data" 
+:widget_data="widget_data" 
 />
 
 </template>
 
 <script>
 
+import GearSVG from "@/components/svg/GearSVG.vue";
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
 import MetricsSP from "@/components/sidepanels/MetricsSP.vue";
 import ChartVisualizer from "@/components/elements/ChartVisualizer.vue";
 
 export default {
     name: "MetricsWidget",
-    props: ['widget_index'],
+    props: ['widget_index','widget_data'],
     data() {
         return {
             show_panel: false,
-            chart_data: {
-                'type': 'doughnut',
-                'title': 'Monthly Sales',
-                'show_title': true,
-                'labels': ['Alpha','Beta'],
-                'show_labels': true,
-                //'dataset': [10,100],
-                'data': [
-                    {
-                        'label': 'Alpha',
-                        'dataset': 10,
-                    },
-                    {
-                        'label': 'Beta',
-                        'dataset': 100,
-                    },
-                ],
-                'color_theme': {
-                    'r': '0',
-                    'g': '255',
-                    'b': '65',
-                },
-            },
+            // chart_data: {
+            //     'type': 'doughnut',
+            //     'title': 'Monthly Sales',
+            //     'show_title': true,
+            //     'labels': ['Alpha','Beta'],
+            //     'show_labels': true,
+            //     //'dataset': [10,100],
+            //     'data': [
+            //         {
+            //             'label': 'Alpha',
+            //             'dataset': 10,
+            //         },
+            //         {
+            //             'label': 'Beta',
+            //             'dataset': 100,
+            //         },
+            //     ],
+            //     'color_theme': {
+            //         'r': '0',
+            //         'g': '255',
+            //         'b': '65',
+            //     },
+            // },
         }
     },
     methods: {
+        delete_widget(){
+            this.$parent.widgets_array.splice(this.widget_index,1);
+        },
         update_panel(v) {
             this.show_panel = v;
         },
         update_chart_data(d){
-            this.chart_data = d;
+            this.widget_data.chart_data = d;
         },
         add_labels_dataset(){
-            // this.chart_data.labels.push('New Label');
-            // this.chart_data.dataset.push(10);
-            this.chart_data.data.push(
+            
+            //
+            //
+            this.widget_data.chart_data.data.push(
                 {
                     'label': 'Label',
                     'dataset': 10,
                 }
             )
-            console.log('var')
         },
     },
     components: {
+        GearSVG,
         WidgetHeaderButton,
         MetricsSP,
         ChartVisualizer,

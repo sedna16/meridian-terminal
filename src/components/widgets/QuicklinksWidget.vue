@@ -2,11 +2,15 @@
   <div class="card app-widget bg-transparent">
         <div class="card-header d-flex justify-content-between align-items-center">
 
-            <h6 class="m-0 pb-0 mb-0 d-inline-block">Quicklinks</h6>
+            <h6 class="m-0 pb-0 mb-0 d-inline-block">
+                {{widget_data.name.replace(' ','_')}}
+            </h6>
 
             <div class="btn-group float-end">
 
-                <WidgetHeaderButton @click.prevent="show_panel=true">O</WidgetHeaderButton>
+                <WidgetHeaderButton @click.prevent="update_panel(true)">
+                    <GearSVG w="12" h="12" c="var(--bs-light)" />
+                </WidgetHeaderButton>
 
             </div>
 
@@ -14,18 +18,18 @@
         <div class="card-body p-3">
 
             <a 
-            v-if="qlinks_array.length < 1" 
-            @click.prevent="show_panel=true" 
+            v-if="widget_data.qlinks_array.length < 1" 
+            @click.prevent="update_panel(true)" 
             href="#" 
             class="text-success text-decoration-none">
                 Add new links
             </a>
 
             <template 
-            v-if="qlinks_array.length > 0">
+            v-if="widget_data.qlinks_array.length > 0">
 
                 <template 
-                v-for="(item,index) in qlinks_array" 
+                v-for="(item,index) in widget_data.qlinks_array" 
                 :key="item.id">
                     <a 
                     class="d-block mb-3 text-success text-decoration-none truncate link-item"
@@ -40,35 +44,57 @@
         </div>
   </div>
 
-<QuicklinksSP v-if="show_panel==true" @update-panel="update_panel" :qlinks_array="qlinks_array" />
+<QuicklinksSP 
+v-if="widget_data.show_panel==true" 
+@update-panel="update_panel" 
+:widget_data="widget_data" 
+:qlinks_array="widget_data.qlinks_array" 
+/>
 
 </template>
 
 <script>
 
+import GearSVG from "@/components/svg/GearSVG.vue";
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
 import QuicklinksSP from "@/components/sidepanels/QuicklinksSP.vue";
 
 export default {
-    name: "TimeWidget",
-    props: ['base_time'],
+    name: "QuicklinksWidget",
+    props: ['widget_index','widget_data','base_time'],
     data() {
         return {
-            show_panel: false,
-            qlinks_array: [],
+
         }
     },
     created(){
 
     },
     methods: {
-
+        delete_widget(){
+            this.$parent.widgets_array.splice(this.widget_index,1);
+        },
         update_panel(v) {
-            this.show_panel = v;
+            this.$parent.hide_all_panel();
+            this.widget_data.show_panel = v;
+        },
+        add_link(){
+            this.widget_data.qlinks_array.push({
+                'name': 'Google',
+                'link': 'https://www.google.com/',
+            })
+            console.log('add')
+        },
+        remove_link(index){
+            this.widget_data.qlinks_array.splice(index,1);
+        },
+        update_link(index,key,new_value){
+            this.widget_data.qlinks_array[index][key] = new_value;
         },
 
     },
     components: {
+        GearSVG,
         WidgetHeaderButton,
         QuicklinksSP,
     },

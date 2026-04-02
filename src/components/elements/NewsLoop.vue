@@ -2,22 +2,36 @@
 
     <div class="row g-0 m-0 p-0">
 
-        <div 
-        v-for="(item,index) in feed_loop" 
-        :key="item.id" 
-        class="col-12 news-item mb-3">
-
-            <a 
-            :href="item.link" 
-            :title="item.title" 
-            target="_blank" 
-            class="text-success w-100 h-100 p-2">
-                {{item.title}}
-                <small class="d-block text-primary">{{item.pubDate}}</small>
-            </a>
-            
-
+        <div v-if="query_status=='idle'" class="d-block mb-3">
+            <p>Static_buzz...</p>
         </div>
+
+        <div v-if="query_status=='querying'" class="d-block mb-3">
+            <p class="text-success">Gathering_intel...</p>
+        </div>
+
+        <div v-if="query_status=='error'" class="d-block mb-3">
+            <p class="text-danger">Unknown_intel_found (error)</p>
+        </div>
+
+        <template v-if="query_status=='success'">
+            <div 
+            v-for="(item,index) in feed_loop" 
+            :key="item.id" 
+            class="col-12 news-item mb-3">
+
+                <a 
+                :href="item.link" 
+                :title="item.title" 
+                target="_blank" 
+                class="text-success w-100 h-100 p-2">
+                    {{item.title}}
+                    <small class="d-block text-primary">{{item.pubDate}}</small>
+                </a>
+                
+
+            </div>
+        </template>
 
     </div>
 
@@ -29,10 +43,11 @@ import axios from 'axios';
 
 export default {
     name: "NewsLoop",
-    props: ['rss_url','rss_source'],
+    props: ['widget_data'],
     data() {
         return {
             show_logs: false,
+            query_status: 'idle',
             feed_loop: [],
         }
     },
@@ -50,10 +65,27 @@ export default {
             //
             //
             try {
-                
+
                 //
                 //
-                var response = await axios.get(this.rss_url);
+                this.query_status = 'querying';
+
+                //
+                //
+                var rss_url = this.widget_data.active_source.url;
+                if(this.widget_data.use_proxy == true){
+                    rss_url = this.widget_data.proxy_url + rss_url;
+                }
+
+                //
+                //
+                if(this.show_logs == true) {
+                    console.log(rss_url);
+                }
+
+                //
+                //
+                var response = await axios.get(rss_url);
                 var response_data = response.data;
                 var feedItems = []
 
@@ -101,7 +133,7 @@ export default {
 
                 //
                 // Map the XML nodes to a standard JavaScript array
-                const items = xmlDoc.querySelectorAll(this.rss_source['format']);
+                const items = xmlDoc.querySelectorAll(this.widget_data.active_source.format);
 
                 //
                 //
@@ -117,7 +149,7 @@ export default {
                         
                         //
                         //
-                        switch (this.rss_source['value_map']) {
+                        switch (this.widget_data.active_source.value_map) {
 
                             case 'manila_times':
                                 feedItems.push({
@@ -177,8 +209,22 @@ export default {
                 //
                 this.feed_loop = feedItems;
 
+                //
+                //
+                this.query_status = 'success';
+
             } catch (error) {
                 
+                //
+                //
+                if(this.show_logs==true){
+                    console.log(error);
+                }
+
+                //
+                //
+                this.query_status = 'error';
+
             }
 
 

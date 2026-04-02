@@ -17,6 +17,7 @@
     "axios": "^1.14.0",
     "bootstrap": "^5.3.8",
     "chart.js": "^4.5.1",
+    "dotenv": "^17.4.0",
     "leaflet": "^1.9.4",
     "vue": "beta",
     "vue-chartjs": "^5.3.3",

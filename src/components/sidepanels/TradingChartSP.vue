@@ -6,7 +6,7 @@
 
             <div class="card-header text-success p-3 pt-4">
 
-                <h1 class="modal-title fs-6 m-0 p-0 d-inline-block">Calendar</h1>
+                <h1 class="modal-title fs-6 m-0 p-0 d-inline-block">Trading Chart</h1>
 
                 <button
                 type="button"
@@ -34,20 +34,25 @@
                 <div id="widget-title" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
-                    v-model="widget_data.name"  
+                    v-model="widget_data.name" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
                     placeholder="Widget Title">
                 </div>
 
-                <hr>
+                <div id="widget-title" class="d-block mb-3">
+                    <label class="form-label mb-2 text-success">Stock/Crypto Code</label>
+                    <input 
+                    v-model="widget_data.code" 
+                    type="text" 
+                    class="form-control" 
+                    id="title_input" 
+                    placeholder="e.g. APPL">
+                </div>
 
-                <div id="calendar-style" class="d-block mb-3">
-                    <label class="form-label mb-2 text-success">Calendar Style (wip)</label>
-                    <select class="form-select p-1" @change="update_source($event)">
-                        <option selected>Select style</option>
-                    </select>
+                <div class="d-block text-end mb-3">
+                    <GenericButton @click="$parent.load_chart()" label="Reload" />
                 </div>
 
             </div>
@@ -64,12 +69,18 @@ import TrashSVG from "@/components/svg/TrashSVG.vue";
 import GenericButton from "@/components/elements/GenericButton.vue";
 
 export default {
-    name: "CalendarSP",
+    name: "TradingChartSP",
     props: ['widget_data'],
     data() {
         return {
-            data_var: [],
+            //alpaca_key: import.meta.env.VITE_ALPACA_API_KEY,     // not needed for now
         }
+    },
+    created(){
+
+        // const apiKey = import.meta.env.VITE_ALPACA_API_KEY;
+        // console.log(apiKey);
+
     },
     methods: {
         hide_panel() {

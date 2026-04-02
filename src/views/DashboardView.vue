@@ -11,13 +11,15 @@
                 :key="item.id" 
                 class="col-lg-3 widget-box">
 
-                    <TimeWidget v-if="item=='Local Timezones'" :base_time="base_time" />
-                    <CalendarWidget v-if="item=='Calendar'" :base_time="base_time" />
-                    <QuicklinksWidget v-if="item=='Quicklinks'" />
-                    <TaskManagerWidget v-if="item=='Task Manager'" />
-                    <NotesWidget v-if="item=='Notes'" />
-                    <NewsWidget v-if="item=='RSS News'" saved_source="" />
-                    <MetricsWidget v-if="item=='Metrics'" />
+                    <TimezoneWidget v-if="item.type=='Local Timezones'" :widget_index="index" :widget_data="item"  :base_time="base_time" />
+                    <CalendarWidget v-if="item.type=='Calendar'" :widget_index="index" :widget_data="item" :base_time="base_time" />
+                    <QuicklinksWidget v-if="item.type=='Quicklinks'" :widget_index="index" :widget_data="item" />
+                    <TaskManagerWidget v-if="item.type=='Task Manager'" :widget_index="index" :widget_data="item" />
+                    <NotesWidget v-if="item.type=='Notes'" :widget_index="index" :widget_data="item" />
+                    <NewsWidget v-if="item.type=='RSS News'" :widget_index="index" :widget_data="item" />
+                    <MetricsWidget v-if="item.type=='Metrics'" :widget_index="index" :widget_data="item" />
+                    <YoutubeWidget v-if="item.type=='Youtube'" :widget_index="index" :widget_data="item" />
+                    <TradingChartWidget v-if="item.type=='Trading Chart'" :widget_index="index" :widget_data="item" />
                     
                 </div>
               
@@ -38,17 +40,20 @@ v-if="show_panel==true"
 </template>
 
 <script>
+
 import AddWidget from "@/components/elements/AddWidget.vue";
 import AddWidgetSP from "@/components/sidepanels/AddWidgetSP.vue";
 
 import WorldMap from "@/components/widgets/WorldMap.vue";
-import TimeWidget from "@/components/widgets/TimeWidget.vue";
+import TimezoneWidget from "@/components/widgets/TimezoneWidget.vue";
 import CalendarWidget from "@/components/widgets/CalendarWidget.vue";
 import QuicklinksWidget from "@/components/widgets/QuicklinksWidget.vue";
 import TaskManagerWidget from "@/components/widgets/TaskManagerWidget.vue";
 import NotesWidget from "@/components/widgets/NotesWidget.vue";
 import NewsWidget from "@/components/widgets/NewsWidget.vue";
 import MetricsWidget from "@/components/widgets/MetricsWidget.vue";
+import YoutubeWidget from "@/components/widgets/YoutubeWidget.vue";
+import TradingChartWidget from "@/components/widgets/TradingChartWidget.vue";
 
 export default {
   name: "Dashboard",
@@ -71,7 +76,25 @@ export default {
     },
     methods: {
         hide_panel() {
+            this.hide_all_panel();
             this.show_panel = false;
+        },
+        hide_all_panel(){
+            
+            //
+            //
+            for (let i = 0; i < this.widgets_array.length; i++) {
+                
+                //
+                //
+                this.widgets_array[i].show_panel = false;
+                
+            }
+
+            //
+            //
+            this.show_panel = false;
+
         },
         update_clock() {
             this.base_time = new Date();
@@ -84,13 +107,15 @@ export default {
     components: {
         AddWidget, AddWidgetSP,
         WorldMap,
-        TimeWidget,
+        TimezoneWidget,
         CalendarWidget,
         QuicklinksWidget,
         TaskManagerWidget,
         NotesWidget,
         NewsWidget,
         MetricsWidget,
+        YoutubeWidget,
+        TradingChartWidget,
     },
 };
 </script>

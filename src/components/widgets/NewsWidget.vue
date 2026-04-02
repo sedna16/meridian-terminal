@@ -4,13 +4,15 @@
         <div class="card-header d-flex justify-content-between align-items-center">
 
         <h6 class="m-0 pb-0 mb-0 d-inline-block">
-            News_intel 
-            <small style="font-size:0.55rem;">({{active_source.text}})</small>
+            {{widget_data.name.replace(' ','_')}} 
+            <small style="font-size:0.55rem;">({{widget_data.active_source.text}})</small>
         </h6>
 
         <div class="btn-group float-end">
 
-            <WidgetHeaderButton @click="show_panel=true">O</WidgetHeaderButton>
+            <WidgetHeaderButton @click="show_panel=true">
+                <GearSVG w="12" h="12" c="var(--bs-light)" />
+            </WidgetHeaderButton>
 
         </div>
 
@@ -20,42 +22,47 @@
             <p v-if="show_news_feed==false">Acquiring_Intel...</p>
 
             <NewsLoop 
-            v-if="show_news_feed==true" 
-            :rss_url="proxy_url + active_source.url" 
-            :rss_source="active_source" 
+            v-if="show_news_feed==true && use_proxy==true" 
+            :rss_url="widget_data.proxy_url + widget_data.active_source.url" 
+            :rss_source="widget_data.active_source" 
+            :widget_data="widget_data" 
+            />
+
+            <NewsLoop 
+            v-if="show_news_feed==true && use_proxy==false" 
+            :rss_url="widget_data.proxy_url + widget_data.active_source.url" 
+            :rss_source="widget_data.active_source" 
+            :widget_data="widget_data" 
             />
 
         </div>
     </div>
 
-<!-- <NewsModal 
- v-if="show_modal==true" 
- @update-modal="update_modal" 
- @update-active-source="update_source" 
- :current_source="active_source" /> -->
-
 <NewsSP 
- v-if="show_panel==true" 
- @update-panel="update_panel" 
- @update-active-source="update_source" 
- :current_source="active_source" />
+v-if="show_panel==true" 
+@update-panel="update_panel" 
+@update-active-source="update_source" 
+@update-proxy-url="update_proxy" 
+:widget_data="widget_data" />
 
 </template>
 
 <script>
 
+import GearSVG from "@/components/svg/GearSVG.vue";
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
 import NewsLoop from "@/components/elements/NewsLoop.vue";
 import NewsSP from "@/components/sidepanels/NewsSP.vue";
 
 export default {
-    name: "NoteWidget",
-    props: ['widget_index','saved_source'],
+    name: "NewsWidget",
+    props: ['widget_index','widget_data'],
     data() {
         return {
             show_panel: false,
             show_news_feed: false,
-            proxy_url: 'https://corsproxy.io/?url=',
+            use_proxy: false,
+            proxy_url: 'https://api.codetabs.com/v1/proxy?quest=', //'https://corsproxy.io/?url=', //'https://api.allorigins.win/raw?url=', //
             active_source: {
                 'text': 'The Verge',
                 'url': 'https://www.theverge.com/rss/index.xml',
@@ -76,19 +83,36 @@ export default {
 
     },
     methods: {
+        delete_widget(){
+            this.$parent.widgets_array.splice(this.widget_index,1);
+        },
         update_panel(v) {
             this.show_panel = v;
         },
         update_source(v){
-            this.active_source = v;
+
+            //
+            //
+            this.widget_data.active_source = v;
+
+            //
+            //
             this.show_news_feed = false;
             setTimeout(() => {
                 this.show_news_feed = true;
             }, 500);
-            this.show_modal = false;
+            // this.show_panel = false; // no need to hide for now
+        },
+        update_proxy(u){
+
+            //
+            //
+            this.widget_data.proxy_url = u;
+
         },
     },
     components: {
+        GearSVG,
         WidgetHeaderButton,
         NewsLoop,
         NewsSP,

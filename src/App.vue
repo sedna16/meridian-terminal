@@ -8,22 +8,23 @@ import Navbar from "./components/elements/navbar.vue";
   need to be able to create pages with widget slots
   not just in the dashboard
 
-  news videos
-  real time from different locations
-  calendar
-  quicklinks
-  task manager
-  youtube/spotify playlist
-  emails
-  youtube live news
+  xnews
+  xreal time from different locations
+  xcalendar
+  xquicklinks
+  xtask manager
+  xyoutube embed
+  spotify playlist
+  emails - ***could be dangerous***
+  youtube live news -- can be done via youtube embed, but takes work to find videos
   job openings
   latest hacking/data breach/cyber security news
-  notes
-  KPI/metric/charts
+  xnotes
+  xKPI/metric/charts
   weather forecast
   live webcams - youtube
   travel safety
-  stock prices chart
+  xstock prices chart
   regional/country/continent news feed
   market indices
   crypto
@@ -44,15 +45,17 @@ import Navbar from "./components/elements/navbar.vue";
   service status - different platforms/apps/tools
   supply chains (worldmonitor.app - chokepoints, shipping rates, add this trains/highways/airlines)
   energy prices in all countries
-  crimerates
+  crime rates
   military conflicts
   random quote
   buttons, not links - http requests
   coundown timers
   seo tools
-  gaming and entertainment news
-  widget with buttons, that triggers http requests
-  widget form fields with submit button
+  gaming and entertainment news - merge this with rss news widget
+  widget with buttons, that triggers http requests                  ** important
+  widget with form fields with submit button                        ** important
+  ai agent chat widget
+  anonymous chat room
 
  */
 </script>

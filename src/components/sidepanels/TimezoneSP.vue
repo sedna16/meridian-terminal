@@ -10,10 +10,19 @@
 
                 <button
                 type="button"
-                class="btn btn-close btn-sm btn-success text-secondary p-1 me-2 float-end" 
+                class="btn btn-close btn-sm btn-success bg-success text-secondary p-1 px-2 me-2 float-end" 
                 style="padding-bottom: 8px !important;" 
+                title="Hide panel" 
                 @click="hide_panel()">
-                    X
+                    >
+                </button>
+                <button
+                type="button"
+                class="btn btn-close btn-sm btn-danger text-light p-1 px-2 me-2 float-end" 
+                style="padding-bottom: 8px !important;" 
+                title="Delete Widget" 
+                @click="$parent.delete_widget()">
+                    <TrashSVG w="12" h="12" c="var(--bs-success)" />
                 </button>
 
             </div>
@@ -22,14 +31,25 @@
 
             <div class="card-body text-success p-3">
 
+                <div id="widget-title" class="d-block mb-3">
+                    <label class="form-label mb-2 text-success">Widget Title</label>
+                    <input 
+                    v-model="widget_data.name"  
+                    type="text" 
+                    class="form-control" 
+                    id="title_input" 
+                    placeholder="Widget Title">
+                </div>
+
+                <hr>
+
                 <div class="d-block text-end mb-3">
 
                     <GenericButton label="Add" @click="add_timezone()" />
-                    <GenericButton label="Delete Widget" />
 
                 </div>
 
-                <template v-for="(item, index) in timezones" :key="item.id">
+                <template v-for="(item, index) in widget_data.active_timezones" :key="item.id">
 
                     <div class="row gx-0 mb-3">
 
@@ -60,15 +80,16 @@
 
 <script>
 
+import TrashSVG from "@/components/svg/TrashSVG.vue";
+import PlusSVG from "@/components/svg/PlusSVG.vue";
 import GenericButton from "@/components/elements/GenericButton.vue";
 import TimezoneSelector from "@/components/elements/TimezoneSelector.vue";
 
 export default {
     name: "TimezoneSP",
-    props: ['timezones'],
+    props: ['widget_data'],
     data() {
         return {
-            active_timezones: [],
         }
     },
     methods: {
@@ -78,27 +99,16 @@ export default {
         add_timezone(){
 
             // add default timezone
-            this.$parent.active_timezones.push(
-                {
-                    "value": "Japan Standard Time",
-                    "abbr": "JST",
-                    "offset": 9,
-                    "isdst": false,
-                    "text": "(UTC+09:00) Tokyo",
-                    "utc": [
-                    "Asia/Dili",
-                    "Asia/Jayapura",
-                    "Asia/Tokyo",
-                    "Etc/GMT-9",
-                    "Pacific/Palau"
-                    ]
-                }
-            )
+            this.$parent.add_timezone();
+
         },
         update_timezone(change_value){
 
             // update parent var
-            this.$parent.active_timezones[ change_value[0] ] = change_value[1]
+            this.$parent.update_timezone(
+                change_value[0],
+                change_value[1]
+            );
 
             // update database
 
@@ -106,13 +116,15 @@ export default {
         remove_timezone(index){
 
             // remove item by index
-            this.$parent.active_timezones.splice(index,1)
+            this.$parent.remove_timezone(index);
 
             // update database
 
         },
     },
     components: {
+        TrashSVG,
+        PlusSVG,
         GenericButton,
         TimezoneSelector
     },

@@ -1,9 +1,10 @@
 <template>
 
     <select class="form-select p-1" @change="update_source($event)">
-        <option selected>Select news source</option>
+        <option selected>Select source</option>
         <template v-for="(item,index) in rss_sources" :key="item.id">
-            <option :value="index">{{item.text}}</option>
+            <option v-if="widget_data.active_source.text==item.text" :value="index" selected>{{item.text}}</option>
+            <option v-if="widget_data.active_source.text!=item.text" :value="index">{{item.text}}</option>
         </template>
     </select>
 
@@ -16,7 +17,7 @@
 
 export default {
     name: "NewsSelector",
-    props: ['item_index', 'selected_timezone'],
+    props: ['widget_data'],
     data() {
         return {
             rss_sources: [

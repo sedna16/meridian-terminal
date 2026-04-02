@@ -1485,7 +1485,6 @@ export default {
     },
     methods: {
         update_timezone(e){
-            console.log(this.timezone_array[e.target.value]);
             this.$emit(
                 'change-timezone', 
                 [this.item_index,this.timezone_array[e.target.value]]

@@ -9,6 +9,8 @@
                 class="text-success text-decoration-none" 
                 href="#" 
                 title="Add a new widget">
+                    <PlusSVG w="56" h="56" c="var(--bs-success)" />
+                    <br>
                     Add Widget
                 </a>
             </h4>
@@ -20,8 +22,7 @@
 
 <script>
 
-//import TimeSettingsModal from "@/components/modals/TimeSettingsModal.vue";
-//import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
+import PlusSVG from "@/components/svg/PlusSVG.vue";
 
 export default {
     name: "AddWidget",
@@ -40,7 +41,7 @@ export default {
         }
     },
     components: {
-        
+        PlusSVG,
     },
 };
 </script>
