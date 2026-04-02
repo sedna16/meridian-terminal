@@ -22,9 +22,9 @@
 
             <div class="card-body text-success p-3">
 
-                <div class="d-block mb-3">
+                <div class="d-block mb-4">
                     <label class="form-label mb-2 text-success">Chart Type</label>
-                    <select class="form-select p-1" @change="update_chart_data($event.target.value)">
+                    <select class="form-select p-1" @change="chart_data.type = $event.target.value">
                         <option selected>Select chart type</option>
                         <template v-for="(item,index) in chart_type_selection" :key="item.id">
                             <option v-if="child_chart_data.type==item" :value="item" selected>{{item}}</option>
@@ -33,18 +33,12 @@
                     </select>
                 </div>
 
-                <hr>
-
-                <div class="d-block mb-4">
-                    <label class="form-label mb-2 text-success">Settings</label>
-                </div>
-
                 <div class="data-chart d-block m-0 p-0">
 
-                    <div class="d-block mb-3">
+                    <div id="chart-title" class="d-block mb-3">
                         <label class="form-label mb-2 text-success">Title</label>
                         <input 
-                        v-model="child_chart_data.title" 
+                        v-model="chart_data.title" 
                         @input="" 
                         type="text" 
                         class="form-control" 
@@ -52,9 +46,10 @@
                         placeholder="Title">
                     </div>
 
-                    <div class="d-block mb-3">
+                    <div id="show-title" class="d-block mb-3">
                         <div class="form-check ps-4" style="font-size:0.8rem;">
                             <input 
+                            v-model="chart_data.show_title" 
                             class="form-check-input me-3 fs-6" 
                             type="checkbox" 
                             role="switch" 
@@ -65,9 +60,10 @@
                         </div>
                     </div>
 
-                    <div class="d-block mb-5">
+                    <div id="show-labels" class="d-block mb-3">
                         <div class="form-check ps-4" style="font-size:0.8rem;">
                             <input 
+                            v-model="chart_data.show_labels" 
                             class="form-check-input me-3 fs-6" 
                             type="checkbox" 
                             role="switch" 
@@ -78,19 +74,40 @@
                         </div>
                     </div>
 
+                    <div id="color-theme" class="d-block mb-4">
+
+                        <label 
+                        for="exampleColorInput" 
+                        class="form-label mb-2 text-success">
+                            Color theme
+                        </label>
+                        <input 
+                        type="color" 
+                        class="form-control form-control-color mb-2" 
+                        id="exampleColorInput" 
+                        title="Choose color theme" 
+                        :value="convert_rgbtohex(chart_data.color_theme.r,chart_data.color_theme.g,chart_data.color_theme.b)" 
+                        @input="chart_data.color_theme = hexToRgb($event.target.value) ">
+                        (<a 
+                        href="#" 
+                        class="text-success text-decoration-none"
+                        title="Set to default color value">Set to default</a>)
+
+                    </div>
+
                     <div class="d-block mb-1">
                         <label class="form-label mb-2 text-success">Dataset</label>
                     </div>
 
                     <template 
-                    v-for="(item,index) in child_chart_data.dataset" 
+                    v-for="(item,index) in chart_data.data" 
                     :key="item.id">
                         <div class="d-block mb-3 ps-4">
                             <label class="form-label mb-2 text-success">{{index + 1}}</label>
                             <div class="row g-0 m-0 p-0">
                                 <div class="col-4">
                                     <input 
-                                    v-model="child_chart_data.dataset[index]" 
+                                    v-model="chart_data.data[index].dataset" 
                                     @input="" 
                                     type="number" 
                                     step="any" 
@@ -100,7 +117,7 @@
                                 </div>
                                 <div class="col-8">
                                     <input 
-                                    v-model="child_chart_data.labels[index]" 
+                                    v-model="chart_data.data[index].labels" 
                                     @input="" 
                                     type="text" 
                                     class="form-control" 
@@ -111,8 +128,8 @@
                         </div>
                     </template>
 
-                    <div class="d-block text-end">
-                        <GenericButton @click.prevent="add_default_data()" label="Add" />
+                    <div id="add-dataset" class="d-block text-end mb-5">
+                        <GenericButton @click.prevent="$parent.add_labels_dataset()" label="Add" />
                     </div>
 
                 </div>
@@ -215,7 +232,8 @@ export default {
                 },
 
             },
-            child_chart_data: {
+            child_chart_data: this.chart_data,
+            child_chart_data_default: {
                 'type': 'doughnut',
                 'title': 'Monthly Sales',
                 'show_title': true,
@@ -230,37 +248,44 @@ export default {
             },
         }
     },
-    created(){
+    mounted(){
         //this.child_chart_data = this.chart_data;
     },
     methods: {
         hide_panel() {
             this.$emit('update-panel', false);
         },
-        update_chart_data(d){
-
-            this.child_chart_data = this.chart_selection_default_data[d];
-            //this.$emit('update-chart-data', this.child_chart_data);
+        get_dropdown_default_value(_type){
 
         },
-        add_default_data(){
+        hexToRgb(hex){
+            // Remove the hash if it's present
+            hex = hex.replace('#', '');
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+            //return `rgb(${r}, ${g}, ${b})`;
+            return {
+                'r': r,
+                'g': g,
+                'b': b,
+            }
+        },
+        color2hex(c) {
+            //var hex = c.toString(16);
+            
+            var hex = Math.max(0, Math.min(255, c)).toString(16);
+            return hex.length === 1 ? "0" + hex : hex;
 
-            this.child_chart_data.dataset.push(10);
-            this.child_chart_data.labels.push('Label');
+            
+            //return hex.padStart(2, '0'); // Ensures 2 digits
+        },
+        convert_rgbtohex(r,g,b){
 
-            //this.update_parent_data();
-            this.$parent.update_chart_data(this.child_chart_data);
-            console.log('add')
-        },
-        update_data(i,d){
-            //this.$parent.chart_data.dataset[i] = d;
-        },
-        update_label(i,d,){
-            //this.$parent.chart_data.labels[i] = d;
-        },
-        update_parent_data(){
-            //this.$emit('update-chart-data', this.child_chart_data);
-            this.$parent.update_chart_data(this.child_chart_data)
+            //
+            //
+            return "#" + this.color2hex(r) + this.color2hex(g) + this.color2hex(b);
+
         },
     },
     components: {

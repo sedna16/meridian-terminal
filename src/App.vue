@@ -51,6 +51,8 @@ import Navbar from "./components/elements/navbar.vue";
   coundown timers
   seo tools
   gaming and entertainment news
+  widget with buttons, that triggers http requests
+  widget form fields with submit button
 
  */
 </script>

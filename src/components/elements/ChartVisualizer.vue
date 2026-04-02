@@ -54,10 +54,10 @@ export default {
                 //
                 //
                 var return_value = {
-                    labels: d.labels,
+                    labels: this.format_labels(d),
                     datasets: [{ 
                         label: d.title,
-                        data: d.dataset,
+                        data: this.format_dataset(d),
                         backgroundColor: this.format_background(d),
                         borderColor: this.format_border(d),
                         borderWidth: 1, // line thickness
@@ -70,10 +70,10 @@ export default {
                 //
                 //
                 var return_value = {
-                    labels: d.labels,
+                    labels: this.format_labels(d),
                     datasets: [{ 
-                        label: d.labels,
-                        data: d.dataset,
+                        label: d.title, 
+                        data: this.format_dataset(d),
                         backgroundColor: this.format_background(d),
                         borderColor: this.format_border(d),
                         borderWidth: 1, // line thickness
@@ -84,7 +84,42 @@ export default {
 
             //
             //
-            //console.log(return_value);
+            return return_value;
+
+        },
+        format_labels(d){
+
+            //
+            //
+            var return_value = [];
+
+
+            //
+            //
+            for (let i = 0; i < d.data.length; i++) {
+                return_value.push(d.data[i].label)
+            }
+
+            //
+            //
+            return return_value;
+
+        },
+        format_dataset(d){
+
+            //
+            //
+            var return_value = [];
+
+
+            //
+            //
+            for (let i = 0; i < d.data.length; i++) {
+                return_value.push(d.data[i].dataset)
+            }
+
+            //
+            //
             return return_value;
 
         },
@@ -92,7 +127,7 @@ export default {
 
             //
             //
-            var data_count = d.dataset.length;
+            var data_count = d.data.length;
             var opacity = 0.8;
             var decrease = opacity / data_count;
             var palette = d.color_theme.r + ',' + d.color_theme.g + ',' + d.color_theme.b;
@@ -116,7 +151,7 @@ export default {
 
             //
             //
-            var data_count = d.dataset.length;
+            var data_count = d.data.length;
             var palette = d.color_theme.r + ',' + d.color_theme.g + ',' + d.color_theme.b;
             var return_value = []
 
@@ -143,7 +178,7 @@ export default {
                 responsive: true,
                 plugins: {
                      title: {
-                        display: true,
+                        display: d.show_title,
                         text: d.title
                     },
                     legend: {

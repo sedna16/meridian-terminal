@@ -46,7 +46,17 @@ export default {
                 'show_title': true,
                 'labels': ['Alpha','Beta'],
                 'show_labels': true,
-                'dataset': [10,100],
+                //'dataset': [10,100],
+                'data': [
+                    {
+                        'label': 'Alpha',
+                        'dataset': 10,
+                    },
+                    {
+                        'label': 'Beta',
+                        'dataset': 100,
+                    },
+                ],
                 'color_theme': {
                     'r': '0',
                     'g': '255',
@@ -61,6 +71,17 @@ export default {
         },
         update_chart_data(d){
             this.chart_data = d;
+        },
+        add_labels_dataset(){
+            // this.chart_data.labels.push('New Label');
+            // this.chart_data.dataset.push(10);
+            this.chart_data.data.push(
+                {
+                    'label': 'Label',
+                    'dataset': 10,
+                }
+            )
+            console.log('var')
         },
     },
     components: {
