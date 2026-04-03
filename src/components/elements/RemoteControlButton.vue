@@ -16,7 +16,7 @@ export default {
     props: ['control_data'],
     data() {
         return {
-            show_logs: true,
+            show_logs: true, 
             query_status: 'idle', // idle/querying/success/error
             use_proxy: false,
             proxy_url: 'https://api.codetabs.com/v1/proxy?quest=',
