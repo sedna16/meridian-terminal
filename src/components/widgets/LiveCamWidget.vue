@@ -19,6 +19,7 @@
         <div class="card-body p-0">
 
             <iframe 
+            v-if="show_video==true" 
             style="width:100% !important;height:100% !important;" 
             :src="base_url + get_youtube_id() + '?autoplay=1&mute=1'" 
             frameborder="0" 
@@ -29,7 +30,7 @@
         </div>
     </div>
 
-<YoutubeSP 
+<LiveCamSP 
 v-if="widget_data.show_panel==true" 
 @update-panel="update_panel" 
 :widget_data="widget_data" 
@@ -41,14 +42,15 @@ v-if="widget_data.show_panel==true"
 
 import GearSVG from "@/components/svg/GearSVG.vue";
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
-import YoutubeSP from "@/components/sidepanels/YoutubeSP.vue";
+import LiveCamSP from "@/components/sidepanels/LiveCamSP.vue";
 
 export default {
-    name: "YoutubeWidget",
+    name: "LiveCamWidget",
     props: ['widget_index','widget_data'],
     data() {
         return {
             base_url: 'https://www.youtube.com/embed/',
+            show_video: true,
         }
     },
     methods: {
@@ -70,7 +72,7 @@ export default {
 
             //
             // e.g. 'https://www.youtube.com/watch?v=ewx1aoA4FwQ&t=1627s';
-            var yt = this.widget_data.url.split('?')[1].split('&')
+            var yt = this.widget_data.active_cam.url.split('?')[1].split('&')
 
             //
             //
@@ -85,11 +87,27 @@ export default {
             }
 
         },
+        update_video(v){
+            this.widget_data.active_cam = v;
+        },
+        reload_video(){
+
+            //
+            //
+            this.show_video = false;
+
+            //
+            //
+            setTimeout(() => {
+                this.show_video = true;
+            }, 500);
+
+        },
     },
     components: {
         GearSVG,
         WidgetHeaderButton,
-        YoutubeSP,
+        LiveCamSP,
     },
 };
 </script>

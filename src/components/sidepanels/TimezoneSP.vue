@@ -31,6 +31,11 @@
 
             <div class="card-body text-success p-3">
 
+                <div id="widget-position" class="d-block mb-4">
+                    <label class="form-label mb-2 text-success">Widget Position</label>
+                    <WidgetPosition />
+                </div>
+
                 <div id="widget-title" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
@@ -45,7 +50,17 @@
 
                 <div class="d-block text-end mb-3">
 
-                    <GenericButton label="Add" @click="add_timezone()" />
+                    <div class="row g-0 m-0 p-0">
+
+                        <div class="col-6 text-start">
+                            <span>Timezones</span>
+                        </div>
+
+                        <div class="col-6 text-end">
+                            <GenericButton label="Add" @click="add_timezone()" />
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -83,6 +98,7 @@
 import TrashSVG from "@/components/svg/TrashSVG.vue";
 import PlusSVG from "@/components/svg/PlusSVG.vue";
 import GenericButton from "@/components/elements/GenericButton.vue";
+import WidgetPosition from "@/components/elements/WidgetPosition.vue";
 import TimezoneSelector from "@/components/elements/TimezoneSelector.vue";
 
 export default {
@@ -93,6 +109,9 @@ export default {
         }
     },
     methods: {
+        move_widget(direction){
+            this.$parent.move_widget(direction)
+        },
         hide_panel() {
             this.$emit('update-panel', false);
         },
@@ -126,7 +145,8 @@ export default {
         TrashSVG,
         PlusSVG,
         GenericButton,
-        TimezoneSelector
+        WidgetPosition,
+        TimezoneSelector,
     },
 };
 </script>

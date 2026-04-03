@@ -6,7 +6,7 @@
 
             <div class="card-header text-success p-3 pt-4">
 
-                <h1 class="modal-title fs-6 m-0 p-0 d-inline-block">News</h1>
+                <h1 class="modal-title fs-6 m-0 p-0 d-inline-block">Image</h1>
 
                 <button
                 type="button"
@@ -48,58 +48,14 @@
 
                 <hr>
 
-                <div id="query_interval" class="d-block mb-3">
-
-                    <label class="form-label mb-2 text-success">Query Interval (default: 1hr)</label>
+                <div id="image-url" class="d-block mb-3">
+                    <label class="form-label mb-2 text-success">Image URL</label>
                     <input 
-                    v-model="widget_data.query_interval"  
-                    type="number" 
+                    v-model="widget_data.url"  
+                    type="text" 
                     class="form-control" 
                     id="title_input" 
-                    placeholder="e.g. 1">
-
-                </div>
-
-                <div id="urls" class="d-block mb-2">
-
-                    <label class="form-label text-success">URLs</label>
-
-                </div>
-
-                <div 
-                v-for="(item,index) in widget_data.url_array" 
-                :key="item.id" 
-                class="d-block text-end mb-3">
-
-                    <div class="row g-0 m-0 p-0">
-
-                        <div class="col-10">
-
-                            <input 
-                            type="text" 
-                            class="form-control" 
-                            id="title_input" 
-                            placeholder="https://" 
-                            :value="item" 
-                            @input="update_url(index,$event.target.value)">
-
-                        </div>
-
-                        <div class="col">
-
-                            <GenericButton @click.prevent="remove_url(index)" label="Remove" />
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="d-block text-end mb-3">
-
-                    <GenericButton @click.prevent="add_url()" label="Add URL" />
-                    <GenericButton @click.prevent="reload_urls()" label="Reload" />
-
+                    placeholder="https://">
                 </div>
 
             </div>
@@ -117,10 +73,11 @@ import GenericButton from "@/components/elements/GenericButton.vue";
 import WidgetPosition from "@/components/elements/WidgetPosition.vue";
 
 export default {
-    name: "SiteUptimeSP",
+    name: "ImageSP",
     props: ['widget_data'],
     data() {
         return {
+            data_var: [],
         }
     },
     methods: {
@@ -129,18 +86,6 @@ export default {
         },
         hide_panel() {
             this.$emit('update-panel', false);
-        },
-        add_url(){
-            this.$parent.add_url();
-        },
-        update_url(i,v){
-            this.$parent.update_url(i,v)
-        },
-        remove_url(index){
-            this.$parent.remove_url(index);
-        },
-        reload_urls(){
-            this.$parent.reload_urls();
         },
     },
     components: {
@@ -152,7 +97,4 @@ export default {
 </script>
 
 <style scoped>
-
-    
-
 </style>

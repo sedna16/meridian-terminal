@@ -31,6 +31,11 @@
 
             <div class="card-body text-success p-3">
 
+                <div id="widget-position" class="d-block mb-4">
+                    <label class="form-label mb-2 text-success">Widget Position</label>
+                    <WidgetPosition />
+                </div>
+
                 <div id="widget-title" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
@@ -67,6 +72,7 @@
 
 import TrashSVG from "@/components/svg/TrashSVG.vue";
 import GenericButton from "@/components/elements/GenericButton.vue";
+import WidgetPosition from "@/components/elements/WidgetPosition.vue";
 
 export default {
     name: "TradingChartSP",
@@ -83,6 +89,9 @@ export default {
 
     },
     methods: {
+        move_widget(direction){
+            this.$parent.move_widget(direction)
+        },
         hide_panel() {
             this.$emit('update-panel', false);
         },
@@ -90,6 +99,7 @@ export default {
     components: {
         TrashSVG,
         GenericButton,
+        WidgetPosition,
     },
 };
 </script>

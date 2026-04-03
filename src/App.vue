@@ -21,8 +21,10 @@ import Navbar from "./components/elements/navbar.vue";
   latest hacking/data breach/cyber security news
   xnotes
   xKPI/metric/charts
+  xlive youtube webcams
+  live youtube news
+  ximage
   weather forecast
-  live webcams - youtube
   travel safety
   xstock prices chart / crypto
   regional/country/continent news feed

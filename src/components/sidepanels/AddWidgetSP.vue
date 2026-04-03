@@ -174,6 +174,36 @@ export default {
                         'https://www.google.com/',
                     ],
                 },
+                {
+                    'type': 'Live Webcam',
+                    'name': 'Remote_Optics',
+                    'show_panel': false,
+                    'active_cam': {
+                        'name': 'EarthCam Live: Aquarium Cam (Baltimore, Maryland)',
+                        'url': 'https://www.youtube.com/watch?v=_5zWp0bMgcI',
+                    },
+                },
+                {
+                    'type': 'Image',
+                    'name': 'PhotInt',
+                    'show_panel': false,
+                    'url': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4FichgawfwrnY9Iqrg8W7piwIlxkc-DSthg&s',
+                },
+                {
+                    'type': 'Remote Control',
+                    'name': 'Override_Console',
+                    'show_panel': false,
+                    'control_array': [
+                        {
+                            'label': 'Label',
+                            'query_type': 'GET',
+                            'url': 'https://www.google.com/',
+                            'headers': [],
+                            'parameters': [],
+                            'payload': [],
+                        },
+                    ],
+                },
             ],
             selected_widget_index: 0,
         }

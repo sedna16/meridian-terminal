@@ -4,7 +4,7 @@
         <div class="card-header d-flex justify-content-between align-items-center">
 
         <h6 class="m-0 pb-0 mb-0 d-inline-block">
-            {{widget_data.name.replace(' ','_')}} 
+            {{widget_index + 1}} - {{widget_data.name.replace(' ','_')}} 
             <small style="font-size:0.55rem;">({{widget_data.active_source.text}})</small>
         </h6>
 
@@ -83,6 +83,13 @@ export default {
 
     },
     methods: {
+        move_widget(direction){
+
+            //
+            //
+            this.$parent.move_widget(this.widget_index,direction);
+
+        },
         delete_widget(){
             this.$parent.widgets_array.splice(this.widget_index,1);
         },
