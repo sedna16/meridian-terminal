@@ -102,7 +102,7 @@ export default {
 
         },
         delete_widget(){
-            this.$parent.widgets_array.splice(this.widget_index,1);
+            this.$parent.delete_widget(this.widget_index);
         },
         update_modal(newData) {
             this.show_modal = newData;
@@ -111,13 +111,22 @@ export default {
             this.$parent.hide_all_panel();
             this.widget_data.show_panel = v;
         },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+
+        //
+        //
         add_note(t,c){
             this.widget_data.notes_array.push({
                 'title': t,
                 'content': c,
             })
-            this.show_modal = 'hide'
-            console.log('added')
+            this.show_modal = 'hide';
+            this.$parent.update_session();
         },
         switch_to_edit_mode(){
 
@@ -133,11 +142,12 @@ export default {
         },
         edit_note(){
             this.show_modal = 'hide';
-            // save to db
+            this.$parent.update_session();
         },
         remove_note(i){
             this.widget_data.notes_array.splice(i,1);
             this.show_modal = 'hide';
+            this.$parent.update_session();
         },
     },
     components: {

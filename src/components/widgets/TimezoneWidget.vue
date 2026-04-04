@@ -69,12 +69,21 @@ export default {
 
         },
         delete_widget(){
-            this.$parent.widgets_array.splice(this.widget_index,1);
+            this.$parent.delete_widget(this.widget_index);
         },
         update_panel(v) {
             this.$parent.hide_all_panel();
             this.widget_data.show_panel = v;
         },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+
+        //
+        //
         add_timezone(){
 
             //
@@ -93,12 +102,19 @@ export default {
                 "Pacific/Palau"
                 ]
             })
+
+            //
+            //
+            this.update_session();
+
         },
         update_timezone(index,new_value){
             this.widget_data.active_timezones[index] = new_value;
+            this.update_session();
         },
         remove_timezone(index){
             this.widget_data.active_timezones.splice(index,1);
+            this.update_session();
         },
         convert_timezone(utc_offset){
 

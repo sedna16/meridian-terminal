@@ -79,24 +79,35 @@ export default {
 
         },
         delete_widget(){
-            this.$parent.widgets_array.splice(this.widget_index,1);
+            this.$parent.delete_widget(this.widget_index);
         },
         update_panel(v) {
             this.$parent.hide_all_panel();
             this.widget_data.show_panel = v;
         },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+
+        //
+        //
         add_link(){
             this.widget_data.qlinks_array.push({
                 'name': 'Google',
                 'link': 'https://www.google.com/',
             })
-            console.log('add')
+            this.update_session();
         },
         remove_link(index){
             this.widget_data.qlinks_array.splice(index,1);
+            this.update_session();
         },
         update_link(index,key,new_value){
             this.widget_data.qlinks_array[index][key] = new_value;
+            this.update_session();
         },
 
     },

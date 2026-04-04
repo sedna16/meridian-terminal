@@ -89,24 +89,38 @@ export default {
 
         },
         delete_widget(){
-            this.$parent.widgets_array.splice(this.widget_index,1);
+            this.$parent.delete_widget(this.widget_index);
         },
         update_panel(v) {
             this.$parent.hide_all_panel();
             this.widget_data.show_panel = v;
         },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+
+        //
+        //
         add_task() {
 
+            //
+            //
             var _new = {
                 'checked': false,
                 'msg': 'Sample task'
             }
 
+            //
+            //
             this.widget_data.task_array.unshift(_new);
 
         },
         check_uncheck(index) {
             this.widget_data.task_array[index]['checked'] != this.widget_data.task_array[index]['checked'];
+            this.update_session();
         },
         update_task_item(index,e){
 
@@ -119,6 +133,7 @@ export default {
             //
             //
             this.widget_data.task_array[index].msg = e.target.innerText;
+            this.update_session();
 
         },
         remove_task(index){
@@ -132,6 +147,10 @@ export default {
             setTimeout(() => {
                 this.widget_data.task_array.splice(index,1);
             }, 500);
+
+            //
+            //
+            this.update_session();
 
         }
     },

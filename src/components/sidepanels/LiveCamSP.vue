@@ -40,6 +40,7 @@
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
                     v-model="widget_data.name" 
+                    @input="update_session()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -50,7 +51,7 @@
 
                 <div id="main-category" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Main Category</label>
-                    <select class="form-select p-1" @change="current_category=$event.target.value;current_sub_category=''">
+                    <select class="form-select p-1" @change="current_category=$event.target.value;current_sub_category='';update_session()">
                         <option selected>Select category</option>
                         <template v-for="(item,index) in categories" :key="item.id">
                             <option v-if="item.value == current_category" :value="item.value" selected>{{item.name}}</option>
@@ -61,27 +62,45 @@
 
                 <div id="sub-category" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Sub Category</label>
-                    <select class="form-select p-1" @change="current_sub_category=$event.target.value">
+                    <select 
+                    class="form-select p-1" 
+                    @change="current_sub_category=$event.target.value;update_session()">
                         <option selected>Select sub-category</option>
-                        <template v-for="(item,index) in categories[get_main_index(current_category)]['sub-categories']" :key="item.id">
-                            <option v-if="item.value == current_sub_category" :value="item.value" selected>{{item.name}}</option>
-                            <option v-if="item.value != current_sub_category" :value="item.value">{{item.name}}</option>
+                        <template 
+                        v-for="(item,index) in categories[get_main_index(current_category)]['sub-categories']" :key="item.id">
+                            <option 
+                            v-if="item.value == current_sub_category" 
+                            :value="item.value" selected>
+                                {{item.name}}
+                            </option>
+                            <option 
+                            v-if="item.value != current_sub_category" 
+                            :value="item.value">
+                                {{item.name}}
+                            </option>
                         </template>
                     </select>
                 </div>
 
                 <div id="video-select" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Select Cam</label>
-                    <select class="form-select p-1" @change="update_video($event.target.value)">
+                    <select 
+                    class="form-select p-1"
+                     @change="update_video($event.target.value);update_session()">
                         <option selected>Select video</option>
-                        <template v-for="(item,index) in livecam_array[current_category][current_sub_category]" :key="item.id">
-                            <option :value="index" selected>{{item.name}}</option>
+                        <template 
+                        v-for="(item,index) in livecam_array[current_category][current_sub_category]" :key="item.id">
+                            <option :value="index" selected>
+                                {{item.name}}
+                            </option>
                         </template>
                     </select>
                 </div>
 
                 <div id="select-vid" class="d-block mb-3 text-end">
-                    <GenericButton @click="reload_vid()" label="Reload" />
+                    <GenericButton 
+                    @click="reload_vid();update_session()" 
+                    label="Reload" />
                 </div>
 
             </div>
@@ -450,6 +469,15 @@ export default {
         hide_panel() {
             this.$emit('update-panel', false);
         },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+
+        //
+        //
         get_main_index(value){
 
             //
@@ -470,6 +498,7 @@ export default {
                 this.livecam_array[this.current_category][this.current_sub_category][index]
             );
         },
+
     },
     components: {
         TrashSVG,

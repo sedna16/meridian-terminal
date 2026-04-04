@@ -2,6 +2,22 @@
 import { RouterView } from "vue-router";
 import Navbar from "./components/elements/navbar.vue";
 
+//
+// for data assigning
+//
+import { ref } from 'vue'
+
+// This is automatically "exported" to your template
+var navbar_status = ref('idle')
+
+// const showAlert = () => {
+//   alert(greeting.value)
+// }
+function update_navbar(v){
+    navbar_status = v;
+}
+
+
 // widgets list
 /**
  
@@ -53,16 +69,17 @@ import Navbar from "./components/elements/navbar.vue";
   seo tools
   gaming and entertainment news - merge this with rss news widget
   buttons, not links - http requests (same below)
-  widget with buttons, that triggers http requests                  ** important
+  xwidget with buttons, that triggers http requests                  ** important
   widget with form fields with submit button                        ** important
   ai agent chat widget
   anonymous chat room
 
- */
+*/
+
 </script>
 
 <template>
-  <Navbar />
+  <Navbar :navbar_status="navbar_status" />
   <RouterView />
 </template>
 

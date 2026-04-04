@@ -1,7 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark py-0">
     <div class="container-fluid">
-      <router-link class="navbar-brand" to="/">Meridian Terminal</router-link>
+      <router-link class="navbar-brand" to="/">Meridian Terminal</router-link> 
+      <small v-if="navbar_status=='active'" style="font-size:9px;">(saving...)</small>
       <button
         class="navbar-toggler"
         type="button"
@@ -33,6 +34,7 @@
 <script>
 export default {
   name: "Navbar",
+  props: ['navbar_status'],
 };
 </script>
 

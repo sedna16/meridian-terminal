@@ -66,12 +66,21 @@ export default {
 
         },
         delete_widget(){
-            this.$parent.widgets_array.splice(this.widget_index,1);
+            this.$parent.delete_widget(this.widget_index);
         },
         update_panel(v) {
             this.$parent.hide_all_panel();
             this.widget_data.show_panel = v;
         },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+        
+        //
+        //
         load_chart(){
 
             //

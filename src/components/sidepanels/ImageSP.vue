@@ -39,7 +39,8 @@
                 <div id="widget-title" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
-                    v-model="widget_data.name"  
+                    v-model="widget_data.name" 
+                    @input="update_session()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -51,7 +52,8 @@
                 <div id="image-url" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Image URL</label>
                     <input 
-                    v-model="widget_data.url"  
+                    v-model="widget_data.url" 
+                    @input="update_session()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -86,6 +88,12 @@ export default {
         },
         hide_panel() {
             this.$emit('update-panel', false);
+        },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
         },
     },
     components: {

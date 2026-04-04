@@ -40,6 +40,7 @@
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
                     v-model="widget_data.name" 
+                    @input="update_session()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -50,6 +51,7 @@
                     <label class="form-label mb-2 text-success">Youtube URL</label>
                     <input 
                     v-model="widget_data.url" 
+                    @input="update_session()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -84,6 +86,12 @@ export default {
         },
         hide_panel() {
             this.$emit('update-panel', false);
+        },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
         },
     },
     components: {

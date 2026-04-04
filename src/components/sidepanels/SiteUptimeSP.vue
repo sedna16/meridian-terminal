@@ -39,7 +39,8 @@
                 <div id="widget-title" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
-                    v-model="widget_data.name"  
+                    v-model="widget_data.name" 
+                    @input="update_session()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -52,7 +53,8 @@
 
                     <label class="form-label mb-2 text-success">Query Interval (default: 1hr)</label>
                     <input 
-                    v-model="widget_data.query_interval"  
+                    v-model="widget_data.query_interval" 
+                    @input="update_session()" 
                     type="number" 
                     class="form-control" 
                     id="title_input" 
@@ -130,6 +132,15 @@ export default {
         hide_panel() {
             this.$emit('update-panel', false);
         },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+
+        //
+        //
         add_url(){
             this.$parent.add_url();
         },

@@ -75,15 +75,21 @@ export default {
 
         },
         delete_widget(){
-            this.$parent.widgets_array.splice(this.widget_index,1);
+            this.$parent.delete_widget(this.widget_index);
         },
         update_panel(v) {
             this.$parent.hide_all_panel();
             this.widget_data.show_panel = v;
         },
-        button_pressed(index){
-            console.log(index)
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
         },
+
+        //
+        //
         add_button(){
             this.widget_data.control_array.push({
                 'label': 'Label',
@@ -92,34 +98,41 @@ export default {
                 'parameters': [],
                 'headers': [],
                 'payload': [],
-            })
+            });
+            this.update_session();
         },
         add_parameters(i){
             this.widget_data.control_array[i].parameters.push({
                 'key': '',
                 'value': '',
-            })
+            });
+            this.update_session();
         },
         remove_parameters(i,i2){
             this.widget_data.control_array[i].parameters.splice(i2,1);
+            this.update_session();
         },
         add_headers(i){
             this.widget_data.control_array[i].headers.push({
                 'key': '',
                 'value': '',
-            })
+            });
+            this.update_session();
         },
         remove_headers(i,i2){
             this.widget_data.control_array[i].headers.splice(i2,1);
+            this.update_session();
         },
         add_payload(i){
             this.widget_data.control_array[i].payload.push({
                 'key': '',
                 'value': '',
-            })
+            });
+            this.update_session();
         },
         remove_payload(i,i2){
             this.widget_data.control_array[i].payload.splice(i2,1);
+            this.update_session();
         },
     },
     components: {

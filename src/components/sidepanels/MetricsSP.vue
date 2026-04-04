@@ -39,7 +39,8 @@
                 <div id="widget-title" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
-                    v-model="widget_data.name"  
+                    v-model="widget_data.name" 
+                    @input="update_session()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -50,11 +51,24 @@
 
                 <div id="chart-type" class="d-block mb-4">
                     <label class="form-label mb-2 text-success">Chart Type</label>
-                    <select class="form-select p-1" @change="widget_data.chart_data.type = $event.target.value">
-                        <option selected>Select chart type</option>
-                        <template v-for="(item,index) in chart_type_selection" :key="item.id">
-                            <option v-if="child_chart_data.type==item" :value="item" selected>{{item}}</option>
-                            <option v-if="child_chart_data.type!=item" :value="item">{{item}}</option>
+                    <select 
+                    class="form-select p-1" @change="widget_data.chart_data.type = $event.target.value;update_session()">
+                        <option selected>
+                            Select chart type
+                        </option>
+                        <template 
+                        v-for="(item,index) in chart_type_selection" 
+                        :key="item.id">
+                            <option 
+                            v-if="child_chart_data.type==item" 
+                            :value="item" selected>
+                                {{item}}
+                            </option>
+                            <option 
+                            v-if="child_chart_data.type!=item" 
+                            :value="item">
+                                {{item}}
+                            </option>
                         </template>
                     </select>
                 </div>
@@ -62,41 +76,54 @@
                 <div class="data-chart d-block m-0 p-0">
 
                     <div id="chart-title" class="d-block mb-3">
+
                         <label class="form-label mb-2 text-success">Title</label>
+
                         <input 
                         v-model="widget_data.chart_data.title" 
-                        @input="" 
+                        @input="update_session()" 
                         type="text" 
                         class="form-control" 
                         id="title_input" 
                         placeholder="Title">
+
                     </div>
 
                     <div id="show-title" class="d-block mb-3">
                         <div class="form-check ps-4" style="font-size:0.8rem;">
+
                             <input 
                             v-model="widget_data.chart_data.show_title" 
+                            @input="update_session()" 
                             class="form-check-input me-3 fs-6" 
                             type="checkbox" 
                             role="switch" 
                             id="show_title_checkbox">
+
                             <label 
                             class="form-check-label pt-1" 
-                            for="show_title_label">Show Title</label>
+                            for="show_title_label">
+                                Show Title
+                            </label>
                         </div>
                     </div>
 
                     <div id="show-labels" class="d-block mb-3">
                         <div class="form-check ps-4" style="font-size:0.8rem;">
+
                             <input 
                             v-model="widget_data.chart_data.show_labels" 
+                            @input="update_session()" 
                             class="form-check-input me-3 fs-6" 
                             type="checkbox" 
                             role="switch" 
                             id="show_labels_checkbox">
+
                             <label 
                             class="form-check-label pt-1" 
-                            for="show_labels_checkbox">Show Labels</label>
+                            for="show_labels_checkbox">
+                                Show Labels
+                            </label>
                         </div>
                     </div>
 
@@ -105,7 +132,7 @@
                         <label 
                         for="exampleColorInput" 
                         class="form-label mb-2 text-success">
-                            Color theme--{{ widget_data.chart_data.color_theme.b }}
+                            Color theme
                         </label>
                         <input 
                         type="color" 
@@ -140,7 +167,7 @@
                                 <div class="col-4">
                                     <input 
                                     v-model="widget_data.chart_data.data[index].dataset" 
-                                    @input="" 
+                                    @input="update_session()" 
                                     type="number" 
                                     step="any" 
                                     class="form-control" 
@@ -150,7 +177,7 @@
                                 <div class="col-8">
                                     <input 
                                     v-model="widget_data.chart_data.data[index].label" 
-                                    @input="" 
+                                    @input="update_session()" 
                                     type="text" 
                                     class="form-control" 
                                     id="title_input" 
@@ -161,7 +188,7 @@
                     </template>
 
                     <div id="add-dataset" class="d-block text-end mb-5">
-                        <GenericButton @click.prevent="$parent.add_labels_dataset()" label="Add" />
+                        <GenericButton @click.prevent="$parent.add_labels_dataset();update_session()" label="Add" />
                     </div>
 
                 </div>
@@ -205,6 +232,15 @@ export default {
         hide_panel() {
             this.$emit('update-panel', false);
         },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+
+        //
+        //
         hexToRgb(hex){
             // Remove the hash if it's present
             hex = hex.replace('#', '');

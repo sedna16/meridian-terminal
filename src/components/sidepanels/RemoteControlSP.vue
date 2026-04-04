@@ -39,7 +39,8 @@
                 <div id="widget-title" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
-                    v-model="widget_data.name"  
+                    v-model="widget_data.name" 
+                    @input="update_session()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -78,7 +79,8 @@
                                 <div class="array-label d-block mb-3">
                                     <label class="form-label mb-2 text-success">Label</label>
                                     <input 
-                                    v-model="item.label"
+                                    v-model="item.label" 
+                                    @input="update_session()" 
                                     type="text" 
                                     class="form-control" 
                                     placeholder="Label">
@@ -88,7 +90,7 @@
 
                                 <div class="array-request-type d-block mb-3">
                                     <label class="form-label mb-2 text-success">Query Type</label>
-                                    <select class="form-select p-1" @change="update_query_type(index,$event.target.value)">
+                                    <select class="form-select p-1" @change="update_query_type(index,$event.target.value);update_session()">
                                         <option selected>Select query type</option>
                                         <template v-for="(item,index2) in ['GET','POST']" :key="item.id">
                                             <option 
@@ -111,6 +113,7 @@
                                     <label class="form-label mb-2 text-success">URL</label>
                                     <input 
                                     v-model="item.url" 
+                                    @input="update_session()" 
                                     type="text" 
                                     class="form-control" 
                                     placeholder="https://">
@@ -129,6 +132,7 @@
                                             <div class="d-block">
                                                 <input 
                                                 v-model="widget_data.control_array[index].parameters[index2].key" 
+                                                @input="update_session()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="key">
@@ -136,6 +140,7 @@
                                             <div class="d-block">
                                                 <input 
                                                 v-model="widget_data.control_array[index].parameters[index2].value" 
+                                                @input="update_session()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="value">
@@ -166,6 +171,7 @@
                                             <div class="d-block">
                                                 <input 
                                                 v-model="widget_data.control_array[index].headers[index2].key" 
+                                                @input="update_session()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="key">
@@ -173,6 +179,7 @@
                                             <div class="d-block">
                                                 <input 
                                                 v-model="widget_data.control_array[index].headers[index2].value" 
+                                                @input="update_session()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="value">
@@ -203,6 +210,7 @@
                                             <div class="d-block">
                                                 <input 
                                                 v-model="widget_data.control_array[index].payload[index2].key" 
+                                                @input="update_session()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="key">
@@ -210,6 +218,7 @@
                                             <div class="d-block">
                                                 <input 
                                                 v-model="widget_data.control_array[index].payload[index2].value" 
+                                                @input="update_session()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="value">
@@ -275,6 +284,15 @@ export default {
         hide_panel() {
             this.$emit('update-panel', false);
         },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+
+        //
+        //
         get_toggle_status(index){
             
             //
@@ -300,6 +318,9 @@ export default {
             }
 
         },
+
+        //
+        //
         add_button(){
             this.$parent.add_button();
         },

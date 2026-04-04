@@ -45,6 +45,8 @@ v-if="show_panel==true"
 
 <script>
 
+import { createClient } from '@supabase/supabase-js'
+
 import AddWidget from "@/components/elements/AddWidget.vue";
 import AddWidgetSP from "@/components/sidepanels/AddWidgetSP.vue";
 
@@ -64,9 +66,18 @@ import SiteUptimeWidget from "@/components/widgets/SiteUptimeWidget.vue";
 import RemoteControlWidget from "@/components/widgets/RemoteControlWidget.vue";
 
 export default {
-  name: "Dashboard",
+    name: "Dashboard",
+    props: ['prop_samp'],
     data() {
         return {
+
+            session_string: this.random_session_string(),
+
+            supabase_instance: createClient(
+                import.meta.env.VITE_SUPABASE_URL, 
+                import.meta.env.VITE_SUPABASE_ANON_KEY
+            ),
+
             show_panel: false,
             base_time: '',
             widgets_array: [],
@@ -76,9 +87,28 @@ export default {
     created(){
 
         //
-        //
-        if(this.check_if_has_session() == false){
-            this.$router.push('/?session=' + this.random_session_string());
+        // check if has session in url
+        if(this.check_if_url_has_session() == false){
+            var str = this.random_session_string();
+            this.session_string = str;
+            this.$router.push('/?session=' + str);
+            this.save_session(str);
+        }
+        else {
+            
+            //
+            //
+            this.session_string = this.$route.query.session;
+
+            //
+            //
+            if(this.if_session_exists() == true){ 
+                //this.get_session( this.$route.query.session );
+            }
+            else {
+                //this.save_session(this.$route.query.session);
+            }
+
         }
 
         // Update the time immediately on page load
@@ -109,11 +139,18 @@ export default {
             //
             this.show_panel = false;
 
+            //
+            //
+            this.update_session();
+
         },
 
-        check_if_has_session(){
+        //
+        //
+        check_if_url_has_session(){
             if(this.$route.query.session != undefined){ 
-                return this.$route.query.session;
+                return true;
+
             }
             else {
                 return false;
@@ -128,16 +165,97 @@ export default {
             return a + '-' + b + '-' + c + '-' + d;
 
         },
-        save_session(){
+        async save_session(str){
+
+            //
+            //
+            const { data, error } = await this.supabase_instance
+            .from('session') // Your table name
+            .upsert(
+                { 
+                    session_string: str,
+                    session_widgets: this.widgets_array,
+                },
+                { onConflict: 'session_string' }
+            )
+            .select('*');
+
+            //
+            //
+            if (error) {
+                console.error('Error inserting:', error.message);
+                return false;
+            } else {
+                console.log('Success save:', data);
+                return data[0]
+            }
+            
+        },
+        async get_session(str){
+
+            //
+            //
+            const { data, error } = await this.supabase_instance
+                .from('session')
+                .select('*')
+                .eq('session_string', str)
+                .single();
+
+            if (error) {
+                // console.error("Fetch error:", error.message);
+                // error.value = "Record not found.";
+                //console.log(error)
+                return false;
+            } 
+            else {
+                //console.log(data);
+                this.widgets_array = data.session_widgets;
+                return data;
+            } 
 
         },
+        async if_session_exists(){
 
+            //
+            //
+            const { count, error } = await this.supabase_instance
+            .from('session')
+            .select('*', { count: 'exact', head: true }) // 'head: true' means don't return data, just the count
+            .eq('session_string', this.$route.query.session);
+
+            //
+            //
+            if (error) {
+                //console.error("Check failed:", error.message);
+                //console.log(error)
+                return false;
+            } else {
+                //console.log("Does it exist?", exists);
+                if(count == 1){
+                    this.get_session(this.$route.query.session);
+                }
+                else {
+                    this.save_session(this.$route.query.session);
+                }
+            }
+            
+        },
+        update_session(){
+            this.save_session(this.$route.query.session);
+        },
+
+        //
+        //
         update_clock() {
             this.base_time = new Date();
         },
+
+        //
+        //
         add_new_widget(v){
             this.widgets_array.push(v);
             this.show_panel = false;
+            this.update_session();
         },
         move_widget(index,direction){
 
@@ -193,6 +311,21 @@ export default {
                     break;
 
             }
+
+            //
+            //
+            this.update_session();
+
+        },
+        delete_widget(i){
+
+            //
+            //
+            this.widgets_array.splice(i,1);
+
+            //
+            //
+            this.update_session();
 
         },
     },

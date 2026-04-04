@@ -39,7 +39,8 @@
                 <div id="widget-title" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
-                    v-model="widget_data.name"  
+                    v-model="widget_data.name" 
+                    @input="update_session()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -56,6 +57,7 @@
                     <div class="form-check ps-4" style="font-size:0.8rem;">
                         <input 
                         v-model="widget_data.use_proxy" 
+                        @input="update_session()" 
                         class="form-check-input me-3 fs-6" 
                         type="checkbox" 
                         role="switch" 
@@ -66,18 +68,37 @@
                     </div>
                 </div>
 
-                <div id="proxy-url" v-if="widget_data.use_proxy==true" class="d-block mb-3">
-                    <label class="form-label mb-2 text-success">Proxy URL</label>
-                    <select class="form-select p-1" @change="change_proxy_url($event.target.value)">
-                        <option selected>Select proxy url</option>
-                        <template v-for="(item,index) in widget_data.proxy_selections" :key="item.id">
-                            <option v-if="widget_data.proxy_url==item" :value="item" selected>{{item}}</option>
-                            <option v-if="widget_data.proxy_url!=item" :value="item">{{item}}</option>
+                <div 
+                id="proxy-url-true" 
+                v-if="widget_data.use_proxy==true" 
+                class="d-block mb-3">
+                    <label class="form-label mb-2 text-success">
+                        Proxy URL
+                    </label>
+                    <select 
+                    class="form-select p-1" 
+                    @change="change_proxy_url($event.target.value);update_session();">
+                        <option selected>
+                            Select proxy url
+                        </option>
+                        <template 
+                        v-for="(item,index) in widget_data.proxy_selections" 
+                        :key="item.id">
+                            <option 
+                            v-if="widget_data.proxy_url==item" 
+                            :value="item" selected>
+                                {{item}}
+                            </option>
+                            <option 
+                            v-if="widget_data.proxy_url!=item" 
+                            :value="item">
+                                {{item}}
+                            </option>
                         </template>
                     </select>
                 </div>
 
-                <div id="proxy-url" v-if="widget_data.use_proxy==false" class="d-block mb-3">
+                <div id="proxy-url-false" v-if="widget_data.use_proxy==false" class="d-block mb-3">
                     <label class="form-label mb-2 text-muted">Proxy URL</label>
                     <select class="form-select p-1 bg-dark" disabled>
                         <option selected>Select proxy url</option>
@@ -99,7 +120,7 @@
                 </div>
 
                 <div class="d-block text-end mb-3">
-                    <GenericButton @click="change_active_source()" label="Update_News_Now" />
+                    <GenericButton @click="change_active_source();update_session()" label="Update_News_Now" />
                 </div>
 
             </div>
@@ -131,20 +152,32 @@ export default {
         hide_panel() {
             this.$emit('update-panel', false);
         },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+
+        //
+        //
         change_selected_source(source_object){
             this.selected_source = source_object;
+            this.update_session();
         },
         change_active_source(){
             this.$emit(
                 'update-active-source', 
                 this.selected_source
             );
+            this.update_session();
         },
         change_proxy_url(u){
             this.$emit(
                 'update-proxy-url', 
                 u
             );
+            this.update_session();
         },
     },
     components: {

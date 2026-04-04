@@ -40,6 +40,7 @@
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
                     v-model="widget_data.name" 
+                    @input="update_session()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -50,6 +51,7 @@
                     <label class="form-label mb-2 text-success">Stock/Crypto Code</label>
                     <input 
                     v-model="widget_data.code" 
+                    @input="update_session()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -57,7 +59,7 @@
                 </div>
 
                 <div class="d-block text-end mb-3">
-                    <GenericButton @click="$parent.load_chart()" label="Reload" />
+                    <GenericButton @click="$parent.load_chart();update_session()" label="Reload" />
                 </div>
 
             </div>
@@ -94,6 +96,12 @@ export default {
         },
         hide_panel() {
             this.$emit('update-panel', false);
+        },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
         },
     },
     components: {

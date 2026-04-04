@@ -71,22 +71,34 @@ export default {
 
         },
         delete_widget(){
-            this.$parent.widgets_array.splice(this.widget_index,1);
+            this.$parent.delete_widget(this.widget_index);
         },
         update_panel(v) {
             this.$parent.hide_all_panel();
             this.widget_data.show_panel = v;
         },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+
+        //
+        //
         add_url(){
             this.widget_data.url_array.push(
                 'https://www.google.com/'
-            )
+            );
+            this.update_session();
         },
         update_url(index,value){
             this.widget_data.url_array[index] = value;
+            this.update_session();
         },
         remove_url(index){
             this.widget_data.url_array.splice(index,1);
+            this.update_session();
         },
         reload_urls(){
 
@@ -99,6 +111,10 @@ export default {
             setTimeout(() => {
                 this.show_links = true;
             }, 1000);
+
+            //
+            //
+            this.update_session();
 
         },
     },
