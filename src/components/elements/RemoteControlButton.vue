@@ -1,7 +1,7 @@
 <template>
 
     <GenericButton 
-    label="item.label" 
+    :label="label" 
     @click.prevent="send_request()" 
     />
 
@@ -11,9 +11,11 @@
 
 import axios from 'axios';
 
+import GenericButton from "@/components/elements/GenericButton.vue";
+
 export default {
     name: "RemoteControlButton",
-    props: ['control_data'],
+    props: ['label','control_data'],
     data() {
         return {
             show_logs: true, 
@@ -100,7 +102,7 @@ export default {
                 //
                 //
                 return {
-                    params: format_parameters(),
+                    params: this.format_parameters(),
                     headers: this.format_headers()
                 };
             
@@ -126,8 +128,10 @@ export default {
                 //
                 var response = await axios.get(
                     this.control_data.url, 
-                    this.format_config
+                    this.format_config()
                 );
+                console.log(this.format_config())
+                console.log(response)
 
             }
             else if(this.control_data.query_type == 'POST'){
@@ -137,14 +141,17 @@ export default {
                 var response = await axios.post(
                     this.control_data.url, 
                     this.format_payload(), 
-                    this.format_config
+                    this.format_config()
                 );
+                console.log(this.format_config())
+                console.log(response);
                 
             }
 
         },
     },
     components: {
+        GenericButton,
     },
 };
 </script>

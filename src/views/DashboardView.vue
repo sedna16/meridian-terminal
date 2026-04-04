@@ -75,6 +75,12 @@ export default {
     },
     created(){
 
+        //
+        //
+        if(this.check_if_has_session() == false){
+            this.$router.push('/?session=' + this.random_session_string());
+        }
+
         // Update the time immediately on page load
         this.update_clock();
 
@@ -104,6 +110,28 @@ export default {
             this.show_panel = false;
 
         },
+
+        check_if_has_session(){
+            if(this.$route.query.session != undefined){ 
+                return this.$route.query.session;
+            }
+            else {
+                return false;
+            }
+        },
+        random_session_string(){
+            var length = 50;
+            var a = Math.random().toString(36).substring(2, length + 2);
+            var b = Math.random().toString(36).substring(2, length + 2);
+            var c = Math.random().toString(36).substring(2, length + 2);
+            var d = Math.random().toString(36).substring(2, length + 2);
+            return a + '-' + b + '-' + c + '-' + d;
+
+        },
+        save_session(){
+
+        },
+
         update_clock() {
             this.base_time = new Date();
         },

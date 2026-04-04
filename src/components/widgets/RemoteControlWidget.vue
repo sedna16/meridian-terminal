@@ -27,9 +27,9 @@
             v-for="(item,index) in widget_data.control_array" 
             :key="item.id" 
             class="col-6 text-center">
-                <GenericButton 
+                <RemoteControlButton 
                 :label="item.label" 
-                @click.prevent="button_pressed(index)" 
+                :control_data="item" 
                 />
             </div>
         </div>
@@ -53,6 +53,7 @@ import GearSVG from "@/components/svg/GearSVG.vue";
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
 import GenericButton from "@/components/elements/GenericButton.vue";
 import RemoteControlSP from "@/components/sidepanels/RemoteControlSP.vue";
+import RemoteControlButton from "@/components/elements/RemoteControlButton.vue";
 
 export default {
     name: "CalendarWidget",
@@ -126,6 +127,7 @@ export default {
         WidgetHeaderButton,
         GenericButton,
         RemoteControlSP,
+        RemoteControlButton,
     },
 };
 </script>
