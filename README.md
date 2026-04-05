@@ -1,10 +1,21 @@
-# meridian-terminal
+:# Meridian Terminal:
 
-This template should help get you started developing with Vue 3 in Vite.
+## Description
+Meridian Terminal is a minimalist, high-contrast command center designed to centralize your professional workflow. It replaces fragmented notifications with a unified, terminal-inspired interface, keeping you informed on project updates, security alerts, and real-time data without the overhead of a traditional GUI.
+
+---
+
+## Features
+
+(writing...)
+
+---
 
 ## Recommended IDE Setup
 
 [VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+
+---
 
 ## Recommended Browser Setup
 
@@ -14,6 +25,8 @@ This template should help get you started developing with Vue 3 in Vite.
 - Firefox:
   - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
   - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+
+---
 
 ## Customize configuration
 
@@ -35,6 +48,12 @@ npm run dev
 
 ```sh
 npm run build
+```
+
+### Preview App for Production
+
+```sh
+npm run preview
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
