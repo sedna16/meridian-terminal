@@ -247,6 +247,10 @@ export default {
                 'cities': {
                     'na': [
                         {
+                            'name': '24/7 NYC Live Cam | Times Square, skyline, streets, more',
+                            'url': 'https://www.youtube.com/watch?v=VGnFLdQW39A',
+                        },
+                        {
                             'name': 'EarthCam Live: Times Square in 4K',
                             'url': 'https://www.youtube.com/watch?v=rnXIjl_Rzy4',
                         },
@@ -271,6 +275,10 @@ export default {
                     ],
                     'eu': [
                         {
+                            'name': 'London walk: London Street Walk 24/7 live stream',
+                            'url': 'https://www.youtube.com/watch?v=WKGK_hYnlGE',
+                        },
+                        {
                             'name': 'Eiffel - Paris',
                             'url': 'https://www.youtube.com/watch?v=OzYp4NRZlwQ',
                         },
@@ -285,12 +293,20 @@ export default {
                     ],
                     'me': [
                         {
+                            'name': 'LIVE: Middle east LIVE HD Camera Feeds from Israel, Iran and more',
+                            'url': 'https://www.youtube.com/watch?v=JboXN7CuKxc',
+                        },
+                        {
                             'name': 'LIVE: Iran HD Camera Feeds from Tehran, Isfahan and More',
                             'url': 'https://www.youtube.com/watch?v=-zGuR1qVKrU',
                         },
                         {
                             'name': 'Western Wall (Jerusalem, Israel)',
                             'url': 'https://www.youtube.com/watch?v=77akujLn4k8',
+                        },
+                        {
+                            'name': 'Dubai Live 24/7 Grand Walking Tour',
+                            'url': 'https://www.youtube.com/watch?v=3dbe57dbKQw',
                         },
                     ],
                     'afr': [
@@ -303,6 +319,10 @@ export default {
                         {
                             'name': 'Shibuya Scramble Crossing Live Camera',
                             'url': 'https://www.youtube.com/watch?v=8H3nRCFVR6Y',
+                        },
+                        {
+                            'name': 'Tokyo Streets 24/7 Shinjuku, Shibuya, Ikebukuro, etc',
+                            'url': 'https://www.youtube.com/watch?v=L6wO1-U2RTY',
                         },
                         {
                             'name': 'Seoul Station Plaza. Seoul,Korea',
@@ -328,6 +348,10 @@ export default {
                         },
                     ],
                     'beach': [
+                        {
+                            'name': 'Madeira Island Live Rolling Multi-cam Streaming 24/7 – 13 cams and local weather',
+                            'url': 'https://www.youtube.com/watch?v=df7Bb_X389U',
+                        },
                         {
                             'name': 'Crystal Bay Beach Resort | Lamai | Koh Samui | Thailand | Live Beach Webcam | 2160p 4K',
                             'url': 'https://www.youtube.com/watch?v=Fw9hgttWzIg',
@@ -360,6 +384,10 @@ export default {
                             'name': 'LIVE Cam Royal Sea Aquarium Resort | Curacao',
                             'url': 'https://www.youtube.com/watch?v=IAkRcsPDO8w',
                         },
+                        {
+                            'name': 'Live @ Santa Claus Village',
+                            'url': 'https://www.youtube.com/watch?v=Cp4RRAEgpeU',
+                        },
                     ],
                     'farm': [
                         {
@@ -385,7 +413,20 @@ export default {
                             'url': 'https://www.youtube.com/watch?v=SITCpt8_NXo',
                         },
                     ],
-                    'other': [],
+                    'other': [
+                        {
+                            'name': 'Live Global Volcano Monitoring | Multi-Camera | 24/7',
+                            'url': 'https://www.youtube.com/watch?v=S5M-qDFyYxs',
+                        },
+                        {
+                            'name': 'Northern Light Live Kilpisjärvi, Finland. North view',
+                            'url': 'https://www.youtube.com/watch?v=ccTVAhJU5lg',
+                        },
+                        {
+                            'name': 'Fairbanks Aurora Camera powered by EXPLORE.org',
+                            'url': 'https://www.youtube.com/watch?v=O52zDyxg5QI',
+                        },
+                    ],
                 },
                 'transportations': {
                     'train': [
@@ -399,11 +440,19 @@ export default {
                             'name': 'LIVE: Fähre Frisia III - Webcam Norddeich ⇄ Norderney | Blick auf Nordsee & Wattenmeer',
                             'url': 'https://www.youtube.com/watch?v=mn5GITwfwfE',
                         },
+                        {
+                            'name': 'Lighthouse Cam',
+                            'url': 'https://www.youtube.com/watch?v=nCf7X2cPDAY',
+                        },
                     ],
                     'plane': [
                         {
                             'name': 'LAS Vegas Airport LIVE 24/7 with views of 26R & 26L',
                             'url': 'https://www.youtube.com/watch?v=_-Qg5jD-PfA',
+                        },
+                        {
+                            'name': 'LIVE LAX Airport Action Runways',
+                            'url': 'ttps://www.youtube.com/watch?v=UQaSS4_VAV4',
                         },
                     ],
                 },
@@ -418,7 +467,28 @@ export default {
                             'url': 'https://www.youtube.com/watch?v=sWasdbDVNvc',
                         },
                     ],
-                    'telescopes': [],
+                    'telescopes': [
+                        {
+                            'name': 'LIVE from Subaru telescope NAOJ, Hawaii',
+                            'url': 'https://www.youtube.com/watch?v=6g4Fh8K-MhY',
+                        },
+                        {
+                            'name': 'LIVE from Tsukiji Tokyo, JAPAN',
+                            'url': 'https://www.youtube.com/watch?v=8WyPqi1ctM4',
+                        },
+                        {
+                            'name': 'Maunakea Eatern Star Chart, Hawaii',
+                            'url': 'https://www.youtube.com/watch?v=QBEDMEyXKNE',
+                        },
+                        {
+                            'name': 'Live Earthquake Monitoring | GlobalQuake',
+                            'url': 'https://www.youtube.com/watch?v=rvtygG4n6ew',
+                        },
+                        {
+                            'name': 'LIVE: TORNADO WATCH COVERAGE',
+                            'url': 'https://www.youtube.com/watch?v=LZW3HSN3lF8',
+                        },
+                    ],
                 },
                 'animals': {
                     'zoo_wildlife': [
@@ -444,6 +514,10 @@ export default {
                         },
                     ],
                     'aquarium': [
+                        {
+                            'name': 'LIVE Cat TV Aquarium Night Fish Tank for Cats to Watch (4K, No Music)',
+                            'url': 'https://www.youtube.com/watch?v=Nq15FHYn4jI',
+                        },
                         {
                             'name': 'EarthCam Live: Aquarium Cam (Baltimore, Maryland)',
                             'url': 'https://www.youtube.com/watch?v=_5zWp0bMgcI',

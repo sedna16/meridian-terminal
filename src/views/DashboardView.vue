@@ -24,6 +24,8 @@
                     <TradingChartWidget v-if="item.type=='Trading Chart'" :widget_index="index" :widget_data="item" />
                     <SiteUptimeWidget v-if="item.type=='Site Uptime'" :widget_index="index" :widget_data="item" />
                     <RemoteControlWidget v-if="item.type=='Remote Control'" :widget_index="index" :widget_data="item" />
+                    <MarketIndicesWidget v-if="item.type=='Market Indices'" :widget_index="index" :widget_data="item" />
+
                     
                 </div>
               
@@ -64,6 +66,7 @@ import LiveCamWidget from "@/components/widgets/LiveCamWidget.vue";
 import TradingChartWidget from "@/components/widgets/TradingChartWidget.vue";
 import SiteUptimeWidget from "@/components/widgets/SiteUptimeWidget.vue";
 import RemoteControlWidget from "@/components/widgets/RemoteControlWidget.vue";
+import MarketIndicesWidget from "@/components/widgets/MarketIndicesWidget.vue";
 
 export default {
     name: "Dashboard",
@@ -344,6 +347,7 @@ export default {
         TradingChartWidget,
         SiteUptimeWidget,
         RemoteControlWidget,
+        MarketIndicesWidget,
     },
 };
 </script>
