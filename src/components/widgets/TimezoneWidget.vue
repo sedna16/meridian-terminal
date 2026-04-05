@@ -134,7 +134,7 @@ export default {
             // This will create a date object that *behaves* as if it were in the target timezone
             const newDate = new Date(originalTime + offsetDifference);
 
-            const hours = String(newDate.getHours()).padStart(2, '0');
+            const hours = String(newDate.getHours() % 12 || 12 ).padStart(2, '0');
             // hours = hours - 12
             // if(hours < 0){
             //   hours = '0' +hours.toString().replace('-','')
@@ -143,7 +143,7 @@ export default {
             const minutes = String(newDate.getMinutes()).padStart(2, '0');
             const seconds = String(newDate.getSeconds()).padStart(2, '0');
 
-            return (hours-12).toString().replace('-','') + ':' + minutes.toString() + ':' + seconds.toString();
+            return (hours).toString().replace('-','') + ':' + minutes.toString() + ':' + seconds.toString();
 
         },
     },

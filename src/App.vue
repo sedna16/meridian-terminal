@@ -40,12 +40,11 @@ function update_navbar(v){
   xlive youtube webcams
   live youtube news
   ximage
-  weather forecast
+  weather forecast  - https://open-meteo.com/ - https://www.weatherapi.com/pricing.aspx
   travel safety
   xstock prices chart / crypto
   regional/country/continent news feed
-  market indices
-  weather storms
+  xmarket indices - needs improvement
   earthquakes
   layoffs trackers - companies
   ISS location
@@ -53,7 +52,7 @@ function update_navbar(v){
   xsite uptime monitor - multiple (may need improvement)
   trending github repos
   radiation watch
-  photo gallery
+  xphoto gallery - 1 image per widget
   grocery list
   latest movie
   latest anime
@@ -69,10 +68,11 @@ function update_navbar(v){
   seo tools
   gaming and entertainment news - merge this with rss news widget
   buttons, not links - http requests (same below)
-  xwidget with buttons, that triggers http requests                  ** important
+  xwidget with buttons, that triggers http requests, 1 col                  ** important
   widget with form fields with submit button                        ** important
   ai agent chat widget
   anonymous chat room
+  simple table widget
 
 */
 
