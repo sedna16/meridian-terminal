@@ -25,6 +25,9 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/settings">Settings</router-link>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/sedna16/meridian-terminal" target="_blank">Github</a>
+          </li>
         </ul>
       </div>
     </div>

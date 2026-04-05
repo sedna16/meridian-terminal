@@ -26,7 +26,7 @@
             <div 
             v-for="(item,index) in widget_data.control_array" 
             :key="item.id" 
-            class="col-6 text-center">
+            class="col-12 text-start">
                 <RemoteControlButton 
                 :label="item.label" 
                 :control_data="item" 

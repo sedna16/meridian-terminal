@@ -73,6 +73,7 @@ function update_navbar(v){
   ai agent chat widget
   anonymous chat room
   simple table widget
+  excalidraw/draw.io embed
 
 */
 

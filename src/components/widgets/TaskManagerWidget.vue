@@ -129,12 +129,6 @@ export default {
 
             //
             //
-            // if (e.target.innerText !== this.widget_data.task_array[index]['msg']) {
-            //     this.$emit("update:widget_data.task_array[index]['msg']", e.target.innerText)
-            // }
-
-            //
-            //
             this.widget_data.task_array[index].msg = e.target.innerText;
             this.update_session();
 
