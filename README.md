@@ -1,4 +1,6 @@
-: # Meridian Terminal :
+# Meridian Terminal
+
+---
 
 ## Description
 Meridian Terminal is a minimalist, high-contrast command center designed to centralize your professional workflow. It replaces fragmented notifications with a unified, terminal-inspired interface, keeping you informed on project updates, security alerts, and real-time data without the overhead of a traditional GUI.
