@@ -21,6 +21,7 @@
                     <MetricsWidget v-if="item.type=='Metrics'" :widget_index="index" :widget_data="item" />
                     <YoutubeWidget v-if="item.type=='Youtube'" :widget_index="index" :widget_data="item" />
                     <LiveCamWidget v-if="item.type=='Live Webcam'" :widget_index="index" :widget_data="item" />
+                    <LiveNewsWidget v-if="item.type=='Live News'" :widget_index="index" :widget_data="item" />
                     <TradingChartWidget v-if="item.type=='Trading Chart'" :widget_index="index" :widget_data="item" />
                     <SiteUptimeWidget v-if="item.type=='Site Uptime'" :widget_index="index" :widget_data="item" />
                     <RemoteControlWidget v-if="item.type=='Remote Control'" :widget_index="index" :widget_data="item" />
@@ -63,6 +64,7 @@ import NewsWidget from "@/components/widgets/NewsWidget.vue";
 import MetricsWidget from "@/components/widgets/MetricsWidget.vue";
 import YoutubeWidget from "@/components/widgets/YoutubeWidget.vue";
 import LiveCamWidget from "@/components/widgets/LiveCamWidget.vue";
+import LiveNewsWidget from "@/components/widgets/LiveNewsWidget.vue";
 import TradingChartWidget from "@/components/widgets/TradingChartWidget.vue";
 import SiteUptimeWidget from "@/components/widgets/SiteUptimeWidget.vue";
 import RemoteControlWidget from "@/components/widgets/RemoteControlWidget.vue";
@@ -186,10 +188,10 @@ export default {
             //
             //
             if (error) {
-                console.error('Error inserting:', error.message);
+                //console.error('Error inserting:', error.message);
                 return false;
             } else {
-                console.log('Success save:', data);
+                //console.log('Success save:', data);
                 return data[0]
             }
             
@@ -343,7 +345,7 @@ export default {
         ImageWidget,
         NewsWidget,
         MetricsWidget,
-        YoutubeWidget, LiveCamWidget,
+        YoutubeWidget, LiveCamWidget, LiveNewsWidget,
         TradingChartWidget,
         SiteUptimeWidget,
         RemoteControlWidget,

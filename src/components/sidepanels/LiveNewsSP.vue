@@ -1,0 +1,174 @@
+<template>
+
+    <div class="d-block side-panel pt-4">
+
+        <div class="card">
+
+            <div class="card-header text-success p-3 pt-4">
+
+                <h1 class="modal-title fs-6 m-0 p-0 d-inline-block">Live News</h1>
+
+                <button
+                type="button"
+                class="btn btn-close btn-sm btn-success bg-success text-secondary p-1 px-2 me-2 float-end" 
+                style="padding-bottom: 8px !important;" 
+                title="Hide panel" 
+                @click="hide_panel()">
+                    >
+                </button>
+                <button
+                type="button"
+                class="btn btn-close btn-sm btn-danger text-light p-1 px-2 me-2 float-end" 
+                style="padding-bottom: 8px !important;" 
+                title="Delete Widget" 
+                @click="$parent.delete_widget()">
+                    <TrashSVG w="12" h="12" c="var(--bs-success)" />
+                </button>
+
+            </div>
+
+            <hr class="m-0 p-0">
+
+            <div class="card-body text-success p-3">
+
+                <div id="widget-position" class="d-block mb-4">
+                    <label class="form-label mb-2 text-success">Widget Position</label>
+                    <WidgetPosition />
+                </div>
+
+                <div id="widget-title" class="d-block mb-3">
+                    <label class="form-label mb-2 text-success">Widget Title</label>
+                    <input 
+                    v-model="widget_data.name" 
+                    @input="update_session()" 
+                    type="text" 
+                    class="form-control" 
+                    id="title_input" 
+                    placeholder="Widget Title">
+                </div>
+
+                <hr>
+
+                <div id="video-select" class="d-block mb-3">
+                    <label class="form-label mb-2 text-success">Select News</label>
+                    <select 
+                    class="form-select p-1"
+                     @change="update_video($event.target.value);update_session()">
+                        <option selected>Select video</option>
+                        <template 
+                        v-for="(item,index) in livenews_array" :key="item.id">
+                            <option 
+                            v-if="widget_data.active_news.name == item.name" 
+                            :value="index" 
+                            selected>
+                                {{item.name}}--{{ widget_data.active_news.name }}
+                            </option>
+                            <option 
+                            v-if="widget_data.active_news.name != item.name" 
+                            :value="index">
+                                {{item.name}}
+                            </option>
+                        </template>
+                    </select>
+                </div>
+
+                <div id="select-vid" class="d-block mb-3 text-end">
+                    <GenericButton 
+                    @click="reload_vid();update_session()" 
+                    label="Reload" />
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</template>
+
+<script>
+
+import TrashSVG from "@/components/svg/TrashSVG.vue";
+import GenericButton from "@/components/elements/GenericButton.vue";
+import WidgetPosition from "@/components/elements/WidgetPosition.vue";
+
+export default {
+    name: "LiveCamSP",
+    props: ['widget_data'],
+    data() {
+        return {
+            current_category: 'cities',
+            current_sub_category: 'na',
+            livenews_array: [
+                {
+                    'name': 'Bloomberg | Live',
+                    'url': 'https://www.youtube.com/watch?v=iEpJwprxDdk',
+                },
+                {
+                    'name': 'Al Jazeera | Live',
+                    'url': 'https://www.youtube.com/live/gCNeDWCI0vo',
+                },
+                {
+                    'name': 'Fox | Live',
+                    'url': 'https://www.youtube.com/watch?v=C96oohpWBGw',
+                },
+                {
+                    'name': 'Sky News | Live',
+                    'url': 'https://www.youtube.com/watch?v=YDvsBbKfLPA',
+                },
+                {
+                    'name': 'France 24 | Live',
+                    'url': 'https://www.youtube.com/watch?v=Ap-UM1O9RBU',
+                },
+                {
+                    'name': 'DW | Live',
+                    'url': 'https://www.youtube.com/watch?v=LuKwFajn37U',
+                },
+                {
+                    'name': 'NHK World | Live',
+                    'url': 'https://www.youtube.com/watch?v=f0lYkdA-Gtw',
+                },
+                {
+                    'name': 'CNA | Live',
+                    'url': 'https://www.youtube.com/watch?v=XWq5kBlakcQ',
+                },
+                {
+                    'name': 'GGTN | Live',
+                    'url': 'https://www.youtube.com/watch?v=BOy2xDU1LC8',
+                },
+            ],
+        }
+    },
+    methods: {
+        move_widget(direction){
+            this.$parent.move_widget(direction)
+        },
+        hide_panel() {
+            this.$emit('update-panel', false);
+        },
+
+        //
+        //
+        update_session(){
+            this.$parent.update_session();
+        },
+
+        //
+        //
+        update_video(index){
+            this.$parent.update_video(
+                this.livenews_array[index]
+            );
+        },
+
+    },
+    components: {
+        TrashSVG,
+        GenericButton,
+        WidgetPosition,
+    },
+};
+</script>
+
+<style scoped>
+</style>

@@ -50,12 +50,17 @@
                 <hr>
 
                 <div id="main-category" class="d-block mb-3">
-                    <label class="form-label mb-2 text-success">Main Category</label>
-                    <select class="form-select p-1" @change="current_category=$event.target.value;current_sub_category='';update_session()">
+                    <label 
+                    class="form-label mb-2 text-success">
+                        Main Category
+                    </label>
+                    <select 
+                    class="form-select p-1" 
+                    @change="widget_data.category=$event.target.value;widget_data.sub_category='';update_session()">
                         <option selected>Select category</option>
                         <template v-for="(item,index) in categories" :key="item.id">
-                            <option v-if="item.value == current_category" :value="item.value" selected>{{item.name}}</option>
-                            <option v-if="item.value != current_category" :value="item.value">{{item.name}}</option>
+                            <option v-if="item.value == widget_data.category" :value="item.value" selected>{{item.name}}</option>
+                            <option v-if="item.value != widget_data.category" :value="item.value">{{item.name}}</option>
                         </template>
                     </select>
                 </div>
@@ -64,17 +69,17 @@
                     <label class="form-label mb-2 text-success">Sub Category</label>
                     <select 
                     class="form-select p-1" 
-                    @change="current_sub_category=$event.target.value;update_session()">
+                    @change="widget_data.sub_category=$event.target.value;update_session()">
                         <option selected>Select sub-category</option>
                         <template 
-                        v-for="(item,index) in categories[get_main_index(current_category)]['sub-categories']" :key="item.id">
+                        v-for="(item,index) in categories[get_main_index(widget_data.category)]['sub-categories']" :key="item.id">
                             <option 
-                            v-if="item.value == current_sub_category" 
+                            v-if="item.value == widget_data.sub_category" 
                             :value="item.value" selected>
                                 {{item.name}}
                             </option>
                             <option 
-                            v-if="item.value != current_sub_category" 
+                            v-if="item.value != widget_data.sub_category" 
                             :value="item.value">
                                 {{item.name}}
                             </option>
@@ -89,8 +94,15 @@
                      @change="update_video($event.target.value);update_session()">
                         <option selected>Select video</option>
                         <template 
-                        v-for="(item,index) in livecam_array[current_category][current_sub_category]" :key="item.id">
-                            <option :value="index" selected>
+                        v-for="(item,index) in livecam_array[widget_data.category][widget_data.sub_category]" :key="item.id">
+                            <option 
+                            v-if="widget_data.active_cam.name == item.name" 
+                            :value="index" selected>
+                                {{item.name}}
+                            </option>
+                            <option 
+                            v-if="widget_data.active_cam.name != item.name" 
+                            :value="index">
                                 {{item.name}}
                             </option>
                         </template>
@@ -133,8 +145,6 @@ export default {
     props: ['widget_data'],
     data() {
         return {
-            current_category: 'cities',
-            current_sub_category: 'na',
             categories: [
                 {
                     'name': 'Cities',
@@ -226,6 +236,10 @@ export default {
                             'name': '(ISS) International Space Station',
                             'value': 'iss',
                         },
+                        {
+                            'name': 'Telescopes & Global Monitoring',
+                            'value': 'telescopes',
+                        },
                     ],
                 },
                 {
@@ -290,6 +304,18 @@ export default {
                             'name': 'Greece with relaxing music and Map',
                             'url': 'https://www.youtube.com/watch?v=5p-s-1453Us',
                         },
+                        {
+                            'name': 'Live Worldwide Webcam Tour Watch 500 random cams',
+                            'url': 'https://www.youtube.com/watch?v=HVGwLboIdYc',
+                        },
+                        {
+                            'name': 'Yakutsk: The Coldest Places on Earth',
+                            'url': 'https://www.youtube.com/watch?v=HIPJoZTKCXI',
+                        },
+                        {
+                            'name': 'SnowCam Europe Snow Storm Blizzard',
+                            'url': 'https://www.youtube.com/watch?v=WVgh0UxTyE8',
+                        },
                     ],
                     'me': [
                         {
@@ -308,6 +334,10 @@ export default {
                             'name': 'Dubai Live 24/7 Grand Walking Tour',
                             'url': 'https://www.youtube.com/watch?v=3dbe57dbKQw',
                         },
+                        {
+                            'name': 'Turkish Cozy Street Food & Relaxing Pedestrian',
+                            'url': 'https://www.youtube.com/watch?v=uxMumUu4Y3o',
+                        },
                     ],
                     'afr': [
                         {
@@ -325,14 +355,38 @@ export default {
                             'url': 'https://www.youtube.com/watch?v=L6wO1-U2RTY',
                         },
                         {
+                            'name': 'LIVE 2024 Tokyo Shinjuku',
+                            'url': 'https://www.youtube.com/watch?v=6dp-bvQ7RWo',
+                        },
+                        {
                             'name': 'Seoul Station Plaza. Seoul,Korea',
                             'url': 'https://www.youtube.com/watch?v=DSgn-lTHJzM',
+                        },
+                        {
+                            'name': 'LIVE Tokyo Shinjuku JR Live Cam',
+                            'url': 'https://www.youtube.com/watch?v=GLQhbRGv5qU',
+                        },
+                        {
+                            'name': 'Live PTZ camera , Agdao Bus Stop & Flyover, Davao City',
+                            'url': 'https://www.youtube.com/watch?v=d2sfGzRE14g',
+                        },
+                        {
+                            'name': 'Sukhumvit Road | Bangkok | Thailand | Live Street Webcam',
+                            'url': 'https://www.youtube.com/watch?v=Q71sLS8h9a4',
+                        },
+                        {
+                            'name': 'NLEX SCTEX Live Stream',
+                            'url': 'https://www.youtube.com/watch?v=pDdXBinUXPM',
                         },
                     ],
                     'oc': [
                         {
                             'name': 'WebcamSydney 1 Live Stream of Harbour 24/7 (~4K)',
                             'url': 'https://www.youtube.com/watch?v=5uZa3-RMFos',
+                        },
+                        {
+                            'name': 'The World Live - Original Version | earthTV',
+                            'url': 'https://www.youtube.com/watch?v=HfgIFGbdGJ0',
                         },
                     ],
                 },
@@ -359,6 +413,10 @@ export default {
                         {
                             'name': 'LIVE Surf Cams 24/7 | Hawaii, California, Bali & More',
                             'url': 'https://www.youtube.com/watch?v=hm9iAviOZ20',
+                        },
+                        {
+                            'name': 'House of Sanskara · Koh Phangan, Thailand',
+                            'url': 'https://www.youtube.com/watch?v=FBYUkqutqzE',
                         },
                     ],
                     'mountain': [
@@ -434,6 +492,14 @@ export default {
                             'name': 'The Best Of Norways Railway WINTER Cab Views',
                             'url': 'https://www.youtube.com/watch?v=tAWFO8_O_7M',
                         },
+                        {
+                            'name': 'Laramie, Wyoming, USA | LIVE Train Camera',
+                            'url': 'https://www.youtube.com/watch?v=LRTTZdNTW_0',
+                        },
+                        {
+                            'name': 'Tokyo Shinjuku JR Live Cam',
+                            'url': 'https://www.youtube.com/watch?v=GLQhbRGv5qU',
+                        },
                     ],
                     'ship': [
                         {
@@ -443,6 +509,10 @@ export default {
                         {
                             'name': 'Lighthouse Cam',
                             'url': 'https://www.youtube.com/watch?v=nCf7X2cPDAY',
+                        },
+                        {
+                            'name': 'LIVE: Vancouver Live Cam | Cruise Ships, Vancouver Harbour, Seawall',
+                            'url': 'https://www.youtube.com/watch?v=rxyNjFKwzJA',
                         },
                     ],
                     'plane': [
@@ -560,7 +630,7 @@ export default {
                 
                 //
                 //
-                if(this.categories[i].value == this.current_category){
+                if(this.categories[i].value == this.widget_data.category){
                     return i;
                 }
                 
@@ -569,7 +639,7 @@ export default {
         },
         update_video(index){
             this.$parent.update_video(
-                this.livecam_array[this.current_category][this.current_sub_category][index]
+                this.livecam_array[this.widget_data.category][this.widget_data.sub_category][index]
             );
         },
 

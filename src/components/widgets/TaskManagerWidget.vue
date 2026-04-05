@@ -51,7 +51,10 @@
                     class="form-check d-flex ps-4 mb-3 fade-effect">
                         <input @change="remove_task(index)" class="form-check-input checkbox-size" type="checkbox" value="">
                         <label class="form-check-label pt-1 px-3 task-size text-success" for="flexCheckDefault">
-                            <span contenteditable="true" @input="update_task_item(index,$event)">
+                            <span 
+                            contenteditable="true" 
+                            v-once 
+                            @input="update_task_item(index,$event)">
                                 {{item.msg}}
                             </span>
                         </label>

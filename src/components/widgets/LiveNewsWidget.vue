@@ -21,7 +21,7 @@
             <iframe 
             v-if="show_video==true" 
             style="width:100% !important;height:100% !important;" 
-            :src="base_url + get_youtube_id() + '?autoplay=1&mute=1&loop=1'" 
+            :src="base_url + get_youtube_id() + '?autoplay=1&mute=1'" 
             frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
             referrerpolicy="no-referrer-when-downgrade" 
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-<LiveCamSP 
+<LiveNewsSP 
 v-if="widget_data.show_panel==true" 
 @update-panel="update_panel" 
 :widget_data="widget_data" 
@@ -42,10 +42,10 @@ v-if="widget_data.show_panel==true"
 
 import GearSVG from "@/components/svg/GearSVG.vue";
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
-import LiveCamSP from "@/components/sidepanels/LiveCamSP.vue";
+import LiveNewsSP from "@/components/sidepanels/LiveNewsSP.vue";
 
 export default {
-    name: "LiveCamWidget",
+    name: "LiveNewsWidget",
     props: ['widget_index','widget_data'],
     data() {
         return {
@@ -81,7 +81,7 @@ export default {
 
             //
             // e.g. 'https://www.youtube.com/watch?v=ewx1aoA4FwQ&t=1627s';
-            var yt = this.widget_data.active_cam.url.split('?')[1].split('&')
+            var yt = this.widget_data.active_news.url.split('?')[1].split('&')
 
             //
             //
@@ -97,7 +97,7 @@ export default {
 
         },
         update_video(v){
-            this.widget_data.active_cam = v;
+            this.widget_data.active_news = v;
         },
         reload_video(){
 
@@ -116,7 +116,7 @@ export default {
     components: {
         GearSVG,
         WidgetHeaderButton,
-        LiveCamSP,
+        LiveNewsSP,
     },
 };
 </script>

@@ -154,12 +154,6 @@ export default {
                     },
                 },
                 {
-                    'type': 'Youtube',
-                    'name': 'Visual_Recon',
-                    'show_panel': false,
-                    'url': 'https://www.youtube.com/watch?v=d0GAsYpxvlo',
-                },
-                {
                     'type': 'Trading Chart',
                     'name': 'Market_Recon',
                     'show_panel': false,
@@ -175,12 +169,29 @@ export default {
                     ],
                 },
                 {
+                    'type': 'Youtube',
+                    'name': 'Visual_Recon',
+                    'show_panel': false,
+                    'url': 'https://www.youtube.com/watch?v=d0GAsYpxvlo',
+                },
+                {
                     'type': 'Live Webcam',
                     'name': 'Remote_Optics',
                     'show_panel': false,
+                    'category': 'animals',
+                    'sub_category': 'aquarium',
                     'active_cam': {
                         'name': 'EarthCam Live: Aquarium Cam (Baltimore, Maryland)',
                         'url': 'https://www.youtube.com/watch?v=_5zWp0bMgcI',
+                    },
+                },
+                {
+                    'type': 'Live News',
+                    'name': 'Recon_update',
+                    'show_panel': false,
+                    'active_news': {
+                        'name': 'Bloomberg | Live',
+                        'url': 'https://www.youtube.com/watch?v=iEpJwprxDdk',
                     },
                 },
                 {

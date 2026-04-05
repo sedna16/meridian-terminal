@@ -20,7 +20,7 @@
 
             <iframe 
             style="width:100% !important;height:100% !important;" 
-            :src="base_url + get_youtube_id() + '?autoplay=1&mute=1'" 
+            :src="base_url + get_youtube_id() + '?autoplay=1&mute=1&loop=1'" 
             frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
             referrerpolicy="no-referrer-when-downgrade" 
