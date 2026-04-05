@@ -190,6 +190,38 @@ export default {
                                     'pubDate': el.children[ 5 ].textContent,
                                 })
                                 break;
+
+                            case 'the_nyt':
+                                feedItems.push({
+                                    'title': el.children[ 0 ].textContent,
+                                    'link': el.children[ 1 ].textContent,
+                                    'pubDate': el.children[ 6 ].textContent,
+                                })
+                                break;
+
+                            case 'wired':
+                                feedItems.push({
+                                    'title': el.children[ 0 ].textContent,
+                                    'link': el.children[ 1 ].textContent,
+                                    'pubDate': el.children[ 3 ].textContent,
+                                })
+                                break;
+
+                            case 'entrepreneur':
+                                feedItems.push({
+                                    'title': el.children[ 0 ].textContent,
+                                    'link': el.children[ 7 ].textContent,
+                                    'pubDate': el.children[ 2 ].textContent,
+                                })
+                                break;
+
+                            case 'techcrunch':
+                                feedItems.push({
+                                    'title': el.children[ 0 ].textContent,
+                                    'link': el.children[ 1 ].textContent,
+                                    'pubDate': el.children[ 3 ].textContent,
+                                })
+                                break;
                         
                         }
 

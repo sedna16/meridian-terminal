@@ -61,7 +61,7 @@
                             v-if="widget_data.active_news.name == item.name" 
                             :value="index" 
                             selected>
-                                {{item.name}}--{{ widget_data.active_news.name }}
+                                {{item.name}}
                             </option>
                             <option 
                             v-if="widget_data.active_news.name != item.name" 

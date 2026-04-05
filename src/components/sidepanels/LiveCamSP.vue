@@ -276,6 +276,10 @@ export default {
                             'name': 'Los Angeles Live Cam · Venice Beach · Venice V Hotel · Live Camera Stream',
                             'url': 'https://www.youtube.com/watch?v=EO_1LWqsCNE',
                         },
+                        {
+                            'name': 'Live Beach Cam Hollywood Beach Broadwalk, Florida',
+                            'url': 'https://www.youtube.com/watch?v=cmkAbDUEoyA',
+                        },
                     ],
                     'sa': [
                         {
@@ -403,7 +407,11 @@ export default {
                     ],
                     'beach': [
                         {
-                            'name': 'Madeira Island Live Rolling Multi-cam Streaming 24/7 – 13 cams and local weather',
+                            'name': 'Live Beach Cam Hollywood Beach Broadwalk, Florida',
+                            'url': 'https://www.youtube.com/watch?v=cmkAbDUEoyA',
+                        },
+                        {
+                            'name': 'Madeira Island Live Rolling Multi-cam Streaming 24/7 - 13 cams and local weather',
                             'url': 'https://www.youtube.com/watch?v=df7Bb_X389U',
                         },
                         {
@@ -491,6 +499,10 @@ export default {
                         {
                             'name': 'The Best Of Norways Railway WINTER Cab Views',
                             'url': 'https://www.youtube.com/watch?v=tAWFO8_O_7M',
+                        },
+                        {
+                            'name': 'Tram Drivers View · 24/7 POV Cabview',
+                            'url': 'https://www.youtube.com/watch?v=QRicd-vzRaI',
                         },
                         {
                             'name': 'Laramie, Wyoming, USA | LIVE Train Camera',

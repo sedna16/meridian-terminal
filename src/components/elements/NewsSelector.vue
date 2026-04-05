@@ -51,6 +51,30 @@ export default {
                     'format': 'entry',
                     'value_map': 'the_verge',
                 },
+                {
+                    'text': 'The New York Times',
+                    'url': 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
+                    'format': 'item',
+                    'value_map': 'the_nyt',
+                },
+                {
+                    'text': 'WIRED',
+                    'url': 'https://www.wired.com/feed/rss',
+                    'format': 'item',
+                    'value_map': 'wired',
+                },
+                {
+                    'text': 'Entrepreneur.com',
+                    'url': 'https://www.entrepreneur.com/rss-feed/latest',
+                    'format': 'item',
+                    'value_map': 'entrepreneur',
+                },
+                {
+                    'text': 'TechCrunch',
+                    'url': 'https://techcrunch.com/feed/',
+                    'format': 'item',
+                    'value_map': 'techcrunch',
+                },
             ],
         }
     },
