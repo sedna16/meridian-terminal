@@ -1,9 +1,20 @@
-# Meridian Terminal
+# Meridian Terminal v1.0 (Customizable Personal Dashboard)
+[Demo](https://meridian-terminal.onrender.com/)
 
 ---
 
 ## Description
-Meridian Terminal is a minimalist, high-contrast command center designed to centralize your professional workflow. It replaces fragmented notifications with a unified, terminal-inspired interface, keeping you informed on project updates, security alerts, and real-time data without the overhead of a traditional GUI.
+Meridian Terminal is an open source dashboard/command center designed to centralize your professional workflow. It replaces fragmented notifications with a unified, terminal-inspired interface, keeping you informed on project updates, security alerts, and real-time data without the overhead of a traditional GUI.
+
+Everything that you need on 1 single page. Development is still in the early stages.
+
+When customizing your dashboard, account is not needed. 
+Your widgets are saved via sessions. 
+Open the dashboard, then bookmark to save it.
+
+**DO NOT**
+
+I repeat, do not post any **sensitive information** on the dashboard.
 
 ---
 
