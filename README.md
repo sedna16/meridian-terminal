@@ -51,6 +51,14 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 npm install
 ```
 
+### Environment variables
+
+```sh
+VITE_SUPABASE_URL
+VITE_SUPABASE_ANON_KEY
+VITE_RAPIDAPI_KEY  ([Subscribe to this API](https://rapidapi.com/rapidapi-org1-rapidapi-org-default/api/yahoo-finance187))
+```
+
 ### Compile and Hot-Reload for Development
 
 ```sh
