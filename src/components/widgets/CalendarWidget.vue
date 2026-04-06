@@ -180,7 +180,7 @@ export default {
 <style scoped>
 
     .text-faded {
-        opacity: 0.5 !important;
+        opacity: 0 !important;
     }
 
     .current-date {

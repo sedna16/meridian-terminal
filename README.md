@@ -1,85 +1,55 @@
-# Meridian Terminal v1.0 (Customizable Personal Dashboard)
-[Demo](https://meridian-terminal.onrender.com/)
+# Meridian Terminal v1.0
+**A terminal-style personal dashboard for your professional workflow.**
+
+[**Live Demo**](https://meridian-terminal.onrender.com/)
 
 ---
 
-## Description
-Meridian Terminal is an open source dashboard/command center designed to centralize your professional workflow. It replaces fragmented notifications with a unified, terminal-inspired interface, keeping you informed on project updates, security alerts, and real-time data without the overhead of a traditional GUI.
+## What is it?
+Meridian Terminal is an open-source, single-page command center. It pulls your project updates, security alerts, and real-time data into one clean, terminal-inspired interface.
 
-Everything that you need on 1 single page. Development is still in the early stages.
+* **No account needed:** Your layout is saved to your browser session.
+* **Easy Setup:** Just configure your widgets and bookmark the page to save your progress.
+* **Privacy Warning:** Do **not** post sensitive or private information on the dashboard.
 
-When customizing your dashboard, account is not needed. 
-Your widgets are saved via sessions. 
-Open the dashboard, then bookmark to save it.
-
-**DO NOT**
-
-I repeat, do not post any **sensitive information** on the dashboard.
-
----
-
-## Features
-
-(writing...)
+## Key Features
+* **Unified View:** Everything you need on one single page.
+* **Lightweight:** Minimalist design without the bloat of a traditional GUI.
+* **Fast Customization:** Changes are saved via sessions; no database login required.
 
 ---
 
-## Recommended IDE Setup
+## Getting Started
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### 1. Project Setup
+`npm install`
+
+### 2. Environment Variables
+Create a `.env` file and add your keys:
+* `VITE_SUPABASE_URL`
+* `VITE_SUPABASE_ANON_KEY`
+* `VITE_RAPIDAPI_KEY` (Subscribe to [Yahoo Finance API](https://rapidapi.com/rapidapi-org1-rapidapi-org-default/api/yahoo-finance187))
+
+### 3. Development
+* **Start dev server:** `npm run dev`
+* **Build for production:** `npm run build`
+* **Preview production build:** `npm run preview`
 
 ---
 
-## Recommended Browser Setup
+## Recommended Setup
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+### IDE
+* **VS Code** + [**Vue (Official)**](https://marketplace.visualstudio.com/items?itemName=Vue.volar) extension.
+* *Note: Disable Vetur to avoid conflicts.*
+
+### Browser Extensions
+To make development easier, install the **Vue.js devtools** for your browser and enable **Custom Object Formatters** in your DevTools settings.
 
 ---
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Environment variables
-
-```sh
-VITE_SUPABASE_URL
-VITE_SUPABASE_ANON_KEY
-VITE_RAPIDAPI_KEY  
-```
-([Subscribe to this API](https://rapidapi.com/rapidapi-org1-rapidapi-org-default/api/yahoo-finance187))
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Preview App for Production
-
-```sh
-npm run preview
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+## Technical Details
+* **Framework:** Vue.js
+* **Styling:** Bootstrap
+* **Build Tool:** Vite
+* **Linting:** ESLint

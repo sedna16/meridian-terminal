@@ -355,6 +355,10 @@ export default {
                             'url': 'https://www.youtube.com/watch?v=8H3nRCFVR6Y',
                         },
                         {
+                            'name': 'Tokyo Now! LIVE - Cams, Trains, Traffic, Weather, Earthquakes',
+                            'url': 'https://www.youtube.com/watch?v=bLME9s6gycw',
+                        },
+                        {
                             'name': 'Tokyo Streets 24/7 Shinjuku, Shibuya, Ikebukuro, etc',
                             'url': 'https://www.youtube.com/watch?v=L6wO1-U2RTY',
                         },
@@ -555,8 +559,12 @@ export default {
                             'url': 'https://www.youtube.com/watch?v=6g4Fh8K-MhY',
                         },
                         {
-                            'name': 'LIVE from Tsukiji Tokyo, JAPAN',
+                            'name': 'Meteor shower and night sky LIVE from Tsukiji Tokyo, JAPAN',
                             'url': 'https://www.youtube.com/watch?v=8WyPqi1ctM4',
+                        },
+                        {
+                            'name': 'Tokyo Now! LIVE - Cams, Trains, Traffic, Weather, Earthquakes',
+                            'url': 'https://www.youtube.com/watch?v=bLME9s6gycw',
                         },
                         {
                             'name': 'Maunakea Eatern Star Chart, Hawaii',
