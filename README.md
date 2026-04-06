@@ -1,7 +1,7 @@
 # Meridian Terminal v1.0
 **A terminal-style personal dashboard for your professional workflow.**
 
-[**Live Demo**](https://meridian-terminal.onrender.com/)
+[**Live Demo**](http://localhost:5173/?session=demo-n81ji5cu2h9-99pmq0rcazo-41zlamv253a-luynkpjj92)
 
 ---
 

@@ -119,10 +119,10 @@ export default {
                         'https://api.thebugging.com/cors-proxy?url=',
                     ],
                     'active_source': {
-                        'text': 'The Manila Times',
-                        'url': 'https://www.manilatimes.net/news/feed/',
+                        'text': 'TechCrunch',
+                        'url': 'https://techcrunch.com/feed/',
                         'format': 'item',
-                        'value_map': 'manila_times',
+                        'value_map': 'techcrunch',
                     },
                 },
                 {
