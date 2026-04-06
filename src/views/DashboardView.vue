@@ -245,8 +245,33 @@ export default {
             }
             
         },
-        update_session(){
-            this.save_session(this.$route.query.session);
+        async update_session(){
+            //this.save_session(this.$route.query.session);
+
+            //
+            //
+            const { data, error } = await this.supabase_instance
+            .from('session') // Your table name
+            .update(
+                { 
+                    session_string: str,
+                    session_widgets: this.widgets_array,
+                }
+                //{ onConflict: 'session_string' }
+            )
+            .eq('session_string', this.$route.query.session);
+            //.select('*');
+
+            //
+            //
+            if (error) {
+                //console.error('Error inserting:', error.message);
+                return false;
+            } else {
+                //console.log('Success update:', data);
+                return data[0]
+            }
+
         },
 
         //
