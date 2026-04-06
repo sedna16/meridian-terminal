@@ -505,6 +505,10 @@ export default {
                             'url': 'https://www.youtube.com/watch?v=tAWFO8_O_7M',
                         },
                         {
+                            'name': '24/7: Dutch Train Cab Rides on Europe’s Busiest Rail Network',
+                            'url': 'https://www.youtube.com/watch?v=4_BBHXSNvoM',
+                        },
+                        {
                             'name': 'Tram Drivers View · 24/7 POV Cabview',
                             'url': 'https://www.youtube.com/watch?v=QRicd-vzRaI',
                         },
