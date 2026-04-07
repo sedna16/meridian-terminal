@@ -106,7 +106,7 @@ export default {
                 },
                 {
                     'name': 'Al Jazeera | Live',
-                    'url': 'https://www.youtube.com/live/gCNeDWCI0vo',
+                    'url': 'https://www.youtube.com/watch?v=gCNeDWCI0vo',
                 },
                 {
                     'name': 'Fox | Live',

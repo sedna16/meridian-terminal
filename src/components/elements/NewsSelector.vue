@@ -22,12 +22,6 @@ export default {
         return {
             rss_sources: [
                 {
-                    'text': 'The Manila Times',
-                    'url': 'https://www.manilatimes.net/news/feed/',
-                    'format': 'item',
-                    'value_map': 'manila_times',
-                },
-                {
                     'text': 'BBC News World',
                     'url': 'https://feeds.bbci.co.uk/news/rss.xml',
                     'format': 'item',
@@ -74,6 +68,12 @@ export default {
                     'url': 'https://techcrunch.com/feed/',
                     'format': 'item',
                     'value_map': 'techcrunch',
+                },
+                {
+                    'text': 'The Manila Times',
+                    'url': 'https://www.manilatimes.net/news/feed/',
+                    'format': 'item',
+                    'value_map': 'manila_times',
                 },
             ],
         }

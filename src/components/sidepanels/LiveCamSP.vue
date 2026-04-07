@@ -355,8 +355,8 @@ export default {
                             'url': 'https://www.youtube.com/watch?v=8H3nRCFVR6Y',
                         },
                         {
-                            'name': 'Tokyo Now! LIVE - Cams, Trains, Traffic, Weather, Earthquakes',
-                            'url': 'https://www.youtube.com/watch?v=bLME9s6gycw',
+                            'name': 'Japan Now',
+                            'url': 'https://www.youtube.com/watch?v=B8iK5cX8DKY',
                         },
                         {
                             'name': 'Tokyo Streets 24/7 Shinjuku, Shibuya, Ikebukuro, etc',
@@ -395,6 +395,10 @@ export default {
                         {
                             'name': 'The World Live - Original Version | earthTV',
                             'url': 'https://www.youtube.com/watch?v=HfgIFGbdGJ0',
+                        },
+                        {
+                            'name': 'New Zealand Now',
+                            'url': 'https://www.youtube.com/watch?v=nmDtEa9aSiY',
                         },
                     ],
                 },

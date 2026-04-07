@@ -108,7 +108,7 @@ export default {
             //
             //
             if(this.if_session_exists() == true){ 
-                //this.get_session( this.$route.query.session );
+                //this.get_session(this.$route.query.session);
             }
             else {
                 //this.save_session(this.$route.query.session);
@@ -238,39 +238,41 @@ export default {
                 //console.log("Does it exist?", exists);
                 if(count == 1){
                     this.get_session(this.$route.query.session);
+                    return true;
                 }
                 else {
                     this.save_session(this.$route.query.session);
+                    return false;
                 }
             }
             
         },
         async update_session(){
-            //this.save_session(this.$route.query.session);
+            this.save_session(this.$route.query.session);
 
             //
             //
-            const { data, error } = await this.supabase_instance
-            .from('session') // Your table name
-            .update(
-                { 
-                    session_string: str,
-                    session_widgets: this.widgets_array,
-                }
-                //{ onConflict: 'session_string' }
-            )
-            .eq('session_string', this.$route.query.session);
-            //.select('*');
+            // const { data, error } = await this.supabase_instance
+            // .from('session') // Your table name
+            // .update(
+            //     { 
+            //         session_string: str,
+            //         session_widgets: this.widgets_array,
+            //     }
+            //     //{ onConflict: 'session_string' }
+            // )
+            // .eq('session_string', this.$route.query.session);
+            // //.select('*');
 
-            //
-            //
-            if (error) {
-                //console.error('Error inserting:', error.message);
-                return false;
-            } else {
-                //console.log('Success update:', data);
-                return data[0]
-            }
+            // //
+            // //
+            // if (error) {
+            //     //console.error('Error inserting:', error.message);
+            //     return false;
+            // } else {
+            //     //console.log('Success update:', data);
+            //     return data[0]
+            // }
 
         },
 
