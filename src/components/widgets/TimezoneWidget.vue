@@ -1,45 +1,47 @@
 <template>
 
-  <div class="card app-widget bg-transparent">
+    <div class="card app-widget bg-transparent">
 
-      <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-header d-flex justify-content-between align-items-center">
 
-          <h6 id="widget-name" class="m-0 pb-0 mb-0 d-inline-block overflow-x-hidden">
-              {{widget_index + 1}} - {{widget_data.name.replace(' ','_')}}
-          </h6>
+            <h6 id="widget-name" class="m-0 pb-0 mb-0 d-inline-block overflow-x-hidden">
+                {{widget_index + 1}} - {{widget_data.name.replace(' ','_')}}
+            </h6>
 
-          <div class="btn-group float-end">
+            <div class="btn-group float-end">
 
-            <WidgetHeaderButton @click="update_panel(true)">
-                <GearSVG w="12" h="12" c="var(--bs-light)" />
-            </WidgetHeaderButton>
+                <WidgetHeaderButton @click="$parent.open_panel(widget_data.id)">
+                    <GearSVG w="12" h="12" c="var(--bs-light)" />
+                </WidgetHeaderButton>
 
-          </div>
+            </div>
 
-      </div>
+        </div>
 
-      <div class="card-body p-3">
-          <div class="row">
-              <template v-for="(item, index) in widget_data.active_timezones" :key="item.id">
+        <div class="card-body p-3">
+            <div class="row">
+                <template v-for="(item, index) in widget_data.widget_data.active_timezones" :key="item.id">
 
-                  <div class="col-6 mb-4 hide-overflow">
-                        <div class="d-block truncate mb-1">
-                            <small class="text-primary" style="font-size: 0.6rem;">{{item.text}}</small>
-                        </div>
-                        <span class="fs-3 text-success text-glow" style="font-weight: 900 !important;">{{convert_timezone(item.offset)}}</span>
-                  </div>
+                    <div class="col-6 mb-4 hide-overflow">
+                            <div class="d-block truncate mb-1">
+                                <small class="text-primary" style="font-size: 0.6rem;">{{item.text}}</small>
+                            </div>
+                            <span class="fs-3 text-success text-glow" style="font-weight: 900 !important;">
+                                {{convert_timezone(item.offset)}}
+                            </span>
+                    </div>
 
-              </template>
-          </div>
-      </div>
+                </template>
+            </div>
+        </div>
 
-  </div>
+    </div>
 
-<TimezoneSP 
-v-if="widget_data.show_panel==true" 
-@update-panel="update_panel" 
-:widget_data="widget_data" 
-/>
+    <TimezoneSP 
+    v-if="show_panel==true" 
+    @hide-panel="hide_panel" 
+    :widget_data="widget_data" 
+    />
 
 </template>
 
@@ -50,17 +52,53 @@ import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
 import TimezoneSP from "@/components/sidepanels/TimezoneSP.vue";
 
 export default {
-    name: "TimeWidget",
-    props: ['widget_index','widget_data','base_time'],
+    name: "TimezoneWidget",
+    props: ['widget_index','widget_data','base_time','show_panel'],
     data() {
         return {
-            
+
+            is_updated: false,
+
         }
     },
     created(){
 
+        //this.verify_widget();
+
+    },
+    watch: {
+
+        //
+        //
+        is_updated(new_value, old_value) {
+
+            //
+            //
+            if(old_value == false && new_value == true){
+
+                //
+                // update widget variables only after 3 seconds, to avoid db dumping
+                setTimeout(() => {
+                    
+                    //
+                    //
+                    this.$parent.update_widget(this.widget_data.id);
+
+                    //
+                    //
+                    this.is_updated = false; // reset variable value
+
+                }, 3000); // 3 seconds
+
+            }
+
+        },
+
     },
     methods: {
+
+        //
+        //
         move_widget(direction){
 
             //
@@ -69,17 +107,14 @@ export default {
 
         },
         delete_widget(){
-            this.$parent.delete_widget(this.widget_index);
-        },
-        update_panel(v) {
-            this.$parent.hide_all_panel();
-            this.widget_data.show_panel = v;
-        },
 
-        //
-        //
-        update_session(){
-            this.$parent.update_session();
+            //
+            //
+            this.$parent.delete_widget(this.widget_index);
+
+        },
+        hide_panel(v) {
+            this.$parent.hide_panel();
         },
 
         //
@@ -88,7 +123,7 @@ export default {
 
             //
             // add default timezone to array
-            this.widget_data.active_timezones.push({
+            this.widget_data.widget_data.active_timezones.push({
                 "value": "Japan Standard Time",
                 "abbr": "JST",
                 "offset": 9,
@@ -109,12 +144,12 @@ export default {
 
         },
         update_timezone(index,new_value){
-            this.widget_data.active_timezones[index] = new_value;
-            this.update_session();
+            this.widget_data.widget_data.active_timezones[index] = new_value;
+            this.$parent.update_widget(this.widget_data.id);
         },
         remove_timezone(index){
-            this.widget_data.active_timezones.splice(index,1);
-            this.update_session();
+            this.widget_data.widget_data.active_timezones.splice(index,1);
+            this.$parent.update_widget(this.widget_data.id);
         },
         convert_timezone(utc_offset){
 

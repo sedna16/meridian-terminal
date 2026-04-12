@@ -74,6 +74,8 @@ function update_navbar(v){
   anonymous chat room
   simple table widget
   excalidraw/draw.io embed
+  large text widget - heading
+  ai enrichment node (think https://www.nodepad.space/) - reads what you write and enriches it with AI — no prompting, no chat. Just capture your thinking and let the structure emerge. No chat · No prompts · AI that augments your thinking
 
 */
 

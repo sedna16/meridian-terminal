@@ -65,7 +65,7 @@
 
                 </div>
 
-                <template v-for="(item, index) in widget_data.active_timezones" :key="item.id">
+                <template v-for="(item, index) in widget_data.widget_data.active_timezones" :key="item.id">
 
                     <div class="row gx-0 mb-3">
 
@@ -113,14 +113,11 @@ export default {
         move_widget(direction){
             this.$parent.move_widget(direction)
         },
-        hide_panel() {
-            this.$emit('update-panel', false);
+        update_widget(){
+            this.$parent.is_updated = true;
         },
-
-        //
-        //
-        update_session(){
-            this.$parent.update_session();
+        hide_panel() {
+            this.$emit('hide-panel', false);
         },
 
         //
