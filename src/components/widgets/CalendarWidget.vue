@@ -1,68 +1,72 @@
 <template>
 
-  <div class="card app-widget bg-transparent">
-    <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card app-widget bg-transparent">
+        <div class="card-header d-flex justify-content-between align-items-center">
 
-      <h6 class="m-0 pb-0 mb-0 d-inline-block">
-        {{widget_index + 1}} - {{widget_data.name.replace(' ','_')}}
-      </h6>
+            <h6 class="m-0 pb-0 mb-0 d-inline-block">
+                {{widget_index + 1}} - {{widget_data.name.replace(' ','_')}}
+            </h6>
 
-      <div class="btn-group float-end">
+            <div class="btn-group float-end">
 
-        <WidgetHeaderButton @click="update_panel(true)">
-          <GearSVG w="12" h="12" c="var(--bs-light)" />
-        </WidgetHeaderButton>
+                <WidgetHeaderButton @click="open_panel()">
+                    <GearSVG w="12" h="12" c="var(--bs-light)" />
+                </WidgetHeaderButton>
 
-      </div>
+            </div>
 
+        </div>
+        <div class="card-body p-3">
+        
+            <div class="calendar-header row gx-0 d-flex justify-content-between align-items-center">
+                <div class="col text-center">Sun</div>
+                <div class="col text-center">Mon</div>
+                <div class="col text-center">Tue</div>
+                <div class="col text-center">Wed</div>
+                <div class="col text-center">Thu</div>
+                <div class="col text-center">Fri</div>
+                <div class="col text-center">Sat</div>
+            </div>
+
+            <div 
+            v-for="(week,index) in calendar_array" 
+            :key="week.id" 
+            class="calendar-header row gx-0 d-flex justify-content-between align-items-center">
+
+                <template 
+                v-for="(day,index) in week" 
+                :key="day.id">
+
+                    <div 
+                    v-if="day[0]== 'c' && current_day==day[1]" 
+                    class="col text-center p-2 current-date">
+                        {{day[1]}}
+                    </div>
+
+                    <div 
+                    v-if="day[0]== 'c' && current_day!=day[1]" 
+                    class="col text-center p-2">
+                        {{day[1]}}
+                    </div>
+
+                    <div 
+                    v-if="day[0]!= 'c' && current_day!=day[1]" 
+                    class="col text-center p-2 text-faded">
+                        {{day[1]}}
+                    </div>
+
+                </template>
+
+            </div>
+
+        </div>
     </div>
-    <div class="card-body p-3">
-      
-      <div class="calendar-header row gx-0 d-flex justify-content-between align-items-center">
-        <div class="col text-center">Sun</div>
-        <div class="col text-center">Mon</div>
-        <div class="col text-center">Tue</div>
-        <div class="col text-center">Wed</div>
-        <div class="col text-center">Thu</div>
-        <div class="col text-center">Fri</div>
-        <div class="col text-center">Sat</div>
-      </div>
 
-      <div 
-      v-for="(week,index) in calendar_array" 
-      :key="week.id" 
-      class="calendar-header row gx-0 d-flex justify-content-between align-items-center">
-
-        <template 
-        v-for="(day,index) in week" 
-        :key="day.id">
-
-        <div 
-        v-if="day[0]== 'c' && current_day==day[1]" 
-        class="col text-center p-2 current-date">
-          {{day[1]}}
-        </div>
-
-        <div 
-        v-if="day[0]== 'c' && current_day!=day[1]" 
-        class="col text-center p-2">
-          {{day[1]}}
-        </div>
-
-        <div 
-        v-if="day[0]!= 'c' && current_day!=day[1]" 
-        class="col text-center p-2 text-faded">
-          {{day[1]}}
-        </div>
-
-        </template>
-
-      </div>
-
-    </div>
-  </div>
-
-<CalendarSP v-if="widget_data.show_panel==true" @update-panel="update_panel" :widget_data="widget_data" />
+    <CalendarSP 
+    v-if="show_panel==true" 
+    @hide-panel="hide_panel" 
+    :widget_data="widget_data" 
+    />
 
 </template>
 
@@ -74,7 +78,7 @@ import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
 
 export default {
     name: "CalendarWidget",
-    props: ['widget_index','widget_data','base_time'],
+    props: ['widget_index','widget_data','base_time','show_panel'],
     data() {
         return {
             calendar_array: [],
@@ -87,6 +91,9 @@ export default {
 
     },
     methods: {
+
+        //
+        //
         move_widget(direction){
 
             //
@@ -94,12 +101,17 @@ export default {
             this.$parent.move_widget(this.widget_index,direction);
 
         },
+        update_widget(){
+            this.$parent.update_widget(this.widget_data.id);
+        },
         delete_widget(){
             this.$parent.delete_widget(this.widget_index);
         },
-        update_panel(v) {
-            this.$parent.hide_all_panel();
-            this.widget_data.show_panel = v;
+        open_panel(){
+            this.$parent.open_panel(this.widget_data.id);
+        },
+        hide_panel(v) {
+            this.$parent.hide_panel();
         },
 
         //

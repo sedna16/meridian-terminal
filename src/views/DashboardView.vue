@@ -3,13 +3,13 @@
         <div class="widgets-area p-0">
             <div class="row m-0 gx-0 widget-container">
                 <div class="col-12 widget-box">
-                    <!-- <WorldMap /> -->
-                </div>{{ widgets_data }}------{{ widgets }}<br><br><br>
+                    <WorldMap />
+                </div>
 
                 <div 
                 v-for="(widget_id,index) in widgets" 
                 :key="widget_id.id" 
-                class="col-lg-3 widget-box">
+                class="col-lg-3 widget-box">{{ widget_id }}
 
                     <TimezoneWidget 
                     v-if="widgets_data[widget_id].type=='Local Timezones'" 
@@ -18,15 +18,27 @@
                     :base_time="base_time" 
                     :show_panel="widget_control[widget_id].show_panel" 
                     />
-                    <!-- <CalendarWidget 
-                    v-if="item.type=='Calendar'" 
+                    <CalendarWidget 
+                    v-if="widgets_data[widget_id].type=='Calendar'" 
                     :widget_index="index" 
                     :widget_data="widgets_data[widget_id]" 
                     :base_time="base_time" 
                     :show_panel="widget_control[widget_id].show_panel" 
                     />
-                    <QuicklinksWidget v-if="item.type=='Quicklinks'" :widget_index="index" :widget_data="item" />
-                    <TaskManagerWidget v-if="item.type=='Task Manager'" :widget_index="index" :widget_data="item" />
+                    <QuicklinksWidget 
+                    v-if="widgets_data[widget_id].type=='Quicklinks'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :base_time="base_time" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <!-- <TaskManagerWidget 
+                    v-if="widgets_data[widget_id].type=='Task Manager'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :base_time="base_time" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
                     <NotesWidget v-if="item.type=='Notes'" :widget_index="index" :widget_data="item" />
                     <ImageWidget v-if="item.type=='Image'" :widget_index="index" :widget_data="item" />
                     <NewsWidget v-if="item.type=='RSS News'" :widget_index="index" :widget_data="item" />
@@ -128,6 +140,40 @@ export default {
         setInterval(this.update_clock, 1000);
 
     },
+    watch: {
+
+        //
+        //
+        widget_update(new_value, old_value) {
+            
+            //
+            //
+            if(old_value == false && new_value == true){
+
+                //
+                // update widget variables only after 3 seconds, to avoid db dumping
+                setTimeout(() => {
+
+                    //
+                    // update widget on db
+                    this.change_widget(this.updated_widget_id);
+
+                    //
+                    //
+                    // save session
+                    this.save_session();
+
+                    //
+                    //
+                    this.widget_update = false; // reset variable value
+
+                }, 3000); // 3 seconds
+
+            }
+
+        },
+
+    },
     methods: {
 
         //
@@ -142,10 +188,6 @@ export default {
             for (const [key, value] of Object.entries(this.widget_control)) {
                 this.widget_control[key].show_panel = false;
             }
-
-            //
-            //
-            //this.update_session();
 
         },
 
@@ -266,7 +308,7 @@ export default {
             .upsert(
                 {
                     session_string: this.session_string,
-                    widgets: this.widgets,
+                    widget_array: this.widgets,
                 },
                 { onConflict: 'session_string' }
             )
@@ -275,10 +317,10 @@ export default {
             //
             //
             if (error) {
-                console.error('Error inserting:', error.message);
+                console.error('Error saving session:', error.message);
                 return false;
             } else {
-                console.log('Success save:', data);
+                console.log('Session saved:', data);
                 return data[0]
             }
             
@@ -290,18 +332,23 @@ export default {
             //
             const { data, error } = await this.supabase_instance
                 .from('sessions')
-                .select('*,widgets(*)')
+                .select('*,widget_array,widgets!inner(*)')
                 .eq('session_string', this.session_string)
                 .single();
 
             //
             //
             if (error) {
-                console.error("Fetch error:", error.message);
+
+                console.error("Fetching session error:", error.message);
                 return false;
+
             } 
             else {
-                console.log(data)
+                
+                console.log('Session retrieved');
+                console.log(data);
+                
                 //
                 // get the array of widget ids from db
                 if(data.widgets == null || data.widgets.length < 1) {
@@ -315,43 +362,76 @@ export default {
 
                     //
                     //
-                    //this.widgets = data.widgets;
+                    // console.log('current widget array');
+                    // console.log(this.widgets);
+                    this.widgets = data.widget_array;
 
                     //
                     //
-                    for (let i = 0; i < data.widgets.length; i++) {
+                    for (let i = 0; i < this.widgets.length; i++) {
 
                         //
                         //
-                        this.widgets.push( data.widgets[i].widget_string );
+                        for (let i2 = 0; i2 < data.widgets.length; i2++) {
 
-                        //
-                        //
-                        this.widgets_data[ data.widgets[i].widget_string ] = {
-                            'id': data.widgets[i].widget_string,
-                            'name': data.widgets[i].name,
-                            'type': data.widgets[i].type,
-                            'widget_data': data.widgets[i].data,
+                            //
+                            //
+                            if( this.widgets[i] == data.widgets[i2].widget_string ) {
+
+                                //
+                                //
+                                this.widgets_data[ data.widgets[i2].widget_string ] = {
+                                    'id': this.widgets[i],
+                                    'name': data.widgets[i2].name,
+                                    'type': data.widgets[i2].type,
+                                    'widget_data': data.widgets[i2].data,
+                                }
+
+                                //
+                                //
+                                this.widget_control[ data.widgets[i2].widget_string ] = {
+                                    show_panel: false,
+                                }
+
+                            }
+                            
                         }
-
-                        //
-                        //
-                        this.widget_control[ data.widgets[i].widget_string ] = {
-                            show_panel: false,
-                        }
-
+ 
                     }
 
+                    //
+                    //
+                    // for (let i = 0; i < data.widgets.length; i++) {
+
+                    //     //
+                    //     //
+                    //     this.widgets.push( data.widgets[i].widget_string );
+
+                    //     //
+                    //     //
+                    //     this.widgets_data[ data.widgets[i].widget_string ] = {
+                    //         'id': data.widgets[i].widget_string,
+                    //         'name': data.widgets[i].name,
+                    //         'type': data.widgets[i].type,
+                    //         'widget_data': data.widgets[i].data,
+                    //     }
+
+                    //     //
+                    //     //
+                    //     this.widget_control[ data.widgets[i].widget_string ] = {
+                    //         show_panel: false,
+                    //     }
+
+                    // }
+
                 }
-                console.log(this.widgets);
-                console.log(this.widgets_data);
-                console.log(this.widget_control);
+                // console.log(this.widgets);
+                // console.log('widget_data');
+                // console.log(this.widgets_data);
+                // console.log('widget_control');
+                // console.log(this.widget_control);
 
             } 
-
-        },
-        async update_session(){
-            this.save_session();
 
         },
 
@@ -412,7 +492,7 @@ export default {
 
         },
         move_widget(index,direction){
-
+            console.log('moving')
             //
             //
             switch (direction) {
@@ -475,13 +555,8 @@ export default {
 
             //
             //
-            // update widget on db
-            this.change_widget(id);
-
-            //
-            //
-            // save session
-            this.save_session();
+            this.updated_widget_id = id;
+            this.widget_update = true; // will only update every 3 secs
 
         },
         delete_widget(i){
@@ -525,10 +600,18 @@ export default {
             //
             //
             if(error) {
-                console.log(error.message)
+
+                //
+                //
+                console.log('Error saving widget');
+                console.log(error.message);
                 return error;
             }
             else {
+
+                //
+                //
+                console.log('Widget saved');
                 console.log(data)
                 return data;
             }
@@ -538,7 +621,7 @@ export default {
 
             //
             //
-            const { qdata, error } = await this.supabase_instance
+            const { data, error } = await this.supabase_instance
             .from('widgets')
             .update({ 
                 name: this.widgets_data[id].name,
@@ -550,10 +633,18 @@ export default {
             //
             //
             if(error) {
+                
+                //
+                //
+                console.log('Error updating widget')
                 console.log(error.message)
                 return error;
             }
             else {
+                
+                //
+                //
+                console.log('Widget updated')
                 console.log(data)
                 return data;
             }
@@ -572,14 +663,22 @@ export default {
             //
             //
             if(error){
-                //console.log(error.message);
+                
+                //
+                //
+                console.log('Error deleting widget');
+                console.log(error.message);
                 return false;
             }
             else if (data.length === 0) {
-                //console.log(error.message);
+
+                //
+                //
+                console.log('Error widget not found, cannot delete');
                 return false;
             }
             else {
+                console.log('Widget deleted')
                 return true;
             }
 

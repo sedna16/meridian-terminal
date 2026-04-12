@@ -10,7 +10,7 @@
 
             <div class="btn-group float-end">
 
-                <WidgetHeaderButton @click="$parent.open_panel(widget_data.id)">
+                <WidgetHeaderButton @click="open_panel()">
                     <GearSVG w="12" h="12" c="var(--bs-light)" />
                 </WidgetHeaderButton>
 
@@ -63,37 +63,6 @@ export default {
     },
     created(){
 
-        //this.verify_widget();
-
-    },
-    watch: {
-
-        //
-        //
-        is_updated(new_value, old_value) {
-
-            //
-            //
-            if(old_value == false && new_value == true){
-
-                //
-                // update widget variables only after 3 seconds, to avoid db dumping
-                setTimeout(() => {
-                    
-                    //
-                    //
-                    this.$parent.update_widget(this.widget_data.id);
-
-                    //
-                    //
-                    this.is_updated = false; // reset variable value
-
-                }, 3000); // 3 seconds
-
-            }
-
-        },
-
     },
     methods: {
 
@@ -106,12 +75,14 @@ export default {
             this.$parent.move_widget(this.widget_index,direction);
 
         },
+        update_widget(){
+            this.$parent.update_widget(this.widget_data.id);
+        },
         delete_widget(){
-
-            //
-            //
             this.$parent.delete_widget(this.widget_index);
-
+        },
+        open_panel(){
+            this.$parent.open_panel(this.widget_data.id);
         },
         hide_panel(v) {
             this.$parent.hide_panel();
@@ -140,7 +111,7 @@ export default {
 
             //
             //
-            this.update_session();
+            this.$parent.update_widget(this.widget_data.id);
 
         },
         update_timezone(index,new_value){

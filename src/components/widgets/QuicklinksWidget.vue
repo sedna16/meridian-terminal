@@ -8,7 +8,7 @@
 
             <div class="btn-group float-end">
 
-                <WidgetHeaderButton @click.prevent="update_panel(true)">
+                <WidgetHeaderButton @click.prevent="open_panel()">
                     <GearSVG w="12" h="12" c="var(--bs-light)" />
                 </WidgetHeaderButton>
 
@@ -18,7 +18,7 @@
         <div class="card-body p-3">
 
             <a 
-            v-if="widget_data.qlinks_array.length < 1" 
+            v-if="widget_data.widget_data.qlinks_array.length < 1" 
             @click.prevent="update_panel(true)" 
             href="#" 
             class="text-success text-decoration-none">
@@ -26,10 +26,10 @@
             </a>
 
             <template 
-            v-if="widget_data.qlinks_array.length > 0">
+            v-if="widget_data.widget_data.qlinks_array.length > 0">
 
                 <template 
-                v-for="(item,index) in widget_data.qlinks_array" 
+                v-for="(item,index) in widget_data.widget_data.qlinks_array" 
                 :key="item.id">
                     <a 
                     class="d-block mb-3 text-success text-decoration-none truncate link-item"
@@ -45,10 +45,10 @@
   </div>
 
 <QuicklinksSP 
-v-if="widget_data.show_panel==true" 
-@update-panel="update_panel" 
+v-if="show_panel==true" 
+@hide-panel="hide_panel" 
 :widget_data="widget_data" 
-:qlinks_array="widget_data.qlinks_array" 
+:qlinks_array="widget_data.widget_data.qlinks_array" 
 />
 
 </template>
@@ -61,7 +61,7 @@ import QuicklinksSP from "@/components/sidepanels/QuicklinksSP.vue";
 
 export default {
     name: "QuicklinksWidget",
-    props: ['widget_index','widget_data','base_time'],
+    props: ['widget_index','widget_data','base_time','show_panel'],
     data() {
         return {
 
@@ -71,6 +71,9 @@ export default {
 
     },
     methods: {
+
+        //
+        //
         move_widget(direction){
 
             //
@@ -78,36 +81,35 @@ export default {
             this.$parent.move_widget(this.widget_index,direction);
 
         },
+        update_widget(){
+            this.$parent.update_widget(this.widget_data.id);
+        },
         delete_widget(){
             this.$parent.delete_widget(this.widget_index);
         },
-        update_panel(v) {
-            this.$parent.hide_all_panel();
-            this.widget_data.show_panel = v;
+        open_panel(){
+            this.$parent.open_panel(this.widget_data.id);
         },
-
-        //
-        //
-        update_session(){
-            this.$parent.update_session();
+        hide_panel(v) {
+            this.$parent.hide_panel();
         },
 
         //
         //
         add_link(){
-            this.widget_data.qlinks_array.push({
+            this.widget_data.widget_data.qlinks_array.push({
                 'name': 'Google',
                 'link': 'https://www.google.com/',
             })
-            this.update_session();
+            this.$parent.update_widget(this.widget_data.id);
         },
         remove_link(index){
-            this.widget_data.qlinks_array.splice(index,1);
-            this.update_session();
+            this.widget_data.widget_data.qlinks_array.splice(index,1);
+            this.$parent.update_widget(this.widget_data.id);
         },
         update_link(index,key,new_value){
-            this.widget_data.qlinks_array[index][key] = new_value;
-            this.update_session();
+            this.widget_data.widget_data.qlinks_array[index][key] = new_value;
+            this.$parent.update_widget(this.widget_data.id);
         },
 
     },
