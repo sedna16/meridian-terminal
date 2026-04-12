@@ -21,7 +21,7 @@
                 class="btn btn-close btn-sm btn-danger text-light p-1 px-2 me-2 float-end" 
                 style="padding-bottom: 8px !important;" 
                 title="Delete Widget" 
-                @click="$parent.delete_widget()">
+                @click="delete_widget()">
                     <TrashSVG w="12" h="12" c="var(--bs-success)" />
                 </button>
 
@@ -40,7 +40,7 @@
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
                     v-model="widget_data.name" 
-                    @input="update_session()" 
+                    @input="update_widget()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -52,7 +52,7 @@
                 <div id="chart-type" class="d-block mb-4">
                     <label class="form-label mb-2 text-success">Chart Type</label>
                     <select 
-                    class="form-select p-1" @change="widget_data.chart_data.type = $event.target.value;update_session()">
+                    class="form-select p-1" @change="widget_data.widget_data.chart_data.type = $event.target.value;update_widget()">
                         <option selected>
                             Select chart type
                         </option>
@@ -80,8 +80,8 @@
                         <label class="form-label mb-2 text-success">Title</label>
 
                         <input 
-                        v-model="widget_data.chart_data.title" 
-                        @input="update_session()" 
+                        v-model="widget_data.widget_data.chart_data.title" 
+                        @input="widget_update()" 
                         type="text" 
                         class="form-control" 
                         id="title_input" 
@@ -93,8 +93,8 @@
                         <div class="form-check ps-4" style="font-size:0.8rem;">
 
                             <input 
-                            v-model="widget_data.chart_data.show_title" 
-                            @input="update_session()" 
+                            v-model="widget_data.widget_data.chart_data.show_title" 
+                            @input="widget_update()" 
                             class="form-check-input me-3 fs-6" 
                             type="checkbox" 
                             role="switch" 
@@ -112,8 +112,8 @@
                         <div class="form-check ps-4" style="font-size:0.8rem;">
 
                             <input 
-                            v-model="widget_data.chart_data.show_labels" 
-                            @input="update_session()" 
+                            v-model="widget_data.widget_data.chart_data.show_labels" 
+                            @input="widget_data()" 
                             class="form-check-input me-3 fs-6" 
                             type="checkbox" 
                             role="switch" 
@@ -140,11 +140,11 @@
                         id="exampleColorInput" 
                         title="Choose color theme" 
                         :value="convert_rgbtohex(
-                            widget_data.chart_data.color_theme.r,
-                            widget_data.chart_data.color_theme.g,
-                            widget_data.chart_data.color_theme.b
+                            widget_data.widget_data.chart_data.color_theme.r,
+                            widget_data.widget_data.chart_data.color_theme.g,
+                            widget_data.widget_data.chart_data.color_theme.b
                         )" 
-                        @input="widget_data.chart_data.color_theme = hexToRgb($event.target.value)">
+                        @input="widget_data.widget_data.chart_data.color_theme = hexToRgb($event.target.value);update_widget()">
                         (<a 
                         href="#" 
                         class="text-success text-decoration-none"
@@ -159,15 +159,15 @@
                     </div>
 
                     <template 
-                    v-for="(item,index) in widget_data.chart_data.data" 
+                    v-for="(item,index) in widget_data.widget_data.chart_data.data" 
                     :key="item.id">
                         <div class="d-block mb-3 ps-4">
                             <label class="form-label mb-2 text-success">{{index + 1}}</label>
                             <div class="row g-0 m-0 p-0">
                                 <div class="col-4">
                                     <input 
-                                    v-model="widget_data.chart_data.data[index].dataset" 
-                                    @input="update_session()" 
+                                    v-model="widget_data.widget_data.chart_data.data[index].dataset" 
+                                    @input="update_widget()" 
                                     type="number" 
                                     step="any" 
                                     class="form-control" 
@@ -176,8 +176,8 @@
                                 </div>
                                 <div class="col-8">
                                     <input 
-                                    v-model="widget_data.chart_data.data[index].label" 
-                                    @input="update_session()" 
+                                    v-model="widget_data.widget_data.chart_data.data[index].label" 
+                                    @input="update_widget()" 
                                     type="text" 
                                     class="form-control" 
                                     id="title_input" 
@@ -188,7 +188,7 @@
                     </template>
 
                     <div id="add-dataset" class="d-block text-end mb-5">
-                        <GenericButton @click.prevent="$parent.add_labels_dataset();update_session()" label="Add" />
+                        <GenericButton @click.prevent="$parent.add_labels_dataset()" label="Add" />
                     </div>
 
                 </div>
@@ -220,23 +220,26 @@ export default {
                 'doughnut',
                 'text'
             ],
-            child_chart_data: this.widget_data.chart_data,
+            child_chart_data: this.widget_data.widget_data.chart_data,
         }
     },
     mounted(){
     },
     methods: {
-        move_widget(direction){
-            this.$parent.move_widget(direction)
-        },
-        hide_panel() {
-            this.$emit('update-panel', false);
-        },
 
         //
         //
-        update_session(){
-            this.$parent.update_session();
+        move_widget(direction){
+            this.$parent.move_widget(direction)
+        },
+        update_widget(){
+            this.$parent.update_widget();
+        },
+        delete_widget(){
+            this.$parent.delete_widget()
+        },
+        hide_panel() {
+            this.$emit('hide-panel');
         },
 
         //

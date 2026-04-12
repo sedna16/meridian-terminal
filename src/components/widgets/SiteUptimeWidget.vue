@@ -9,7 +9,7 @@
 
         <div class="btn-group float-end">
 
-            <WidgetHeaderButton @click="update_panel(true)">
+            <WidgetHeaderButton @click="open_panel()">
                 <GearSVG w="12" h="12" c="var(--bs-light)" />
             </WidgetHeaderButton>
 
@@ -24,7 +24,7 @@
 
             <div v-if="show_links==true" class="d-block">
                 <template 
-                v-for="(item,index) in widget_data.url_array">
+                v-for="(item,index) in widget_data.widget_data.url_array">
                     <UptimeLink :queue_gap="queue_gap" :url="item" />
                 </template>
             </div>  
@@ -33,8 +33,8 @@
     </div>
 
 <SiteUptimeSP 
-v-if="widget_data.show_panel==true" 
-@update-panel="update_panel" 
+v-if="show_panel==true" 
+@hide-panel="hide_panel" 
 :widget_data="widget_data" 
 />
 
@@ -49,7 +49,7 @@ import UptimeLink from "@/components/elements/UptimeLink.vue";
 
 export default {
     name: "SiteUptimeWidget",
-    props: ['widget_index','widget_data'],
+    props: ['widget_index','widget_data','show_panel'],
     data() {
         return {
             show_links: true,
@@ -63,42 +63,40 @@ export default {
 
     },
     methods: {
+
+        //
+        //
         move_widget(direction){
-
-            //
-            //
             this.$parent.move_widget(this.widget_index,direction);
-
+        },
+        update_widget(){
+            this.$parent.update_widget(this.widget_data.id);
         },
         delete_widget(){
             this.$parent.delete_widget(this.widget_index);
         },
-        update_panel(v) {
-            this.$parent.hide_all_panel();
-            this.widget_data.show_panel = v;
+        open_panel(){
+            this.$parent.open_panel(this.widget_data.id);
         },
-
-        //
-        //
-        update_session(){
-            this.$parent.update_session();
+        hide_panel(v) {
+            this.$parent.hide_panel();
         },
 
         //
         //
         add_url(){
-            this.widget_data.url_array.push(
+            this.widget_data.widget_data.url_array.push(
                 'https://www.google.com/'
             );
-            this.update_session();
+            this.update_widget();
         },
         update_url(index,value){
-            this.widget_data.url_array[index] = value;
-            this.update_session();
+            this.widget_data.widget_data.url_array[index] = value;
+            this.update_widget();
         },
         remove_url(index){
-            this.widget_data.url_array.splice(index,1);
-            this.update_session();
+            this.widget_data.widget_data.url_array.splice(index,1);
+            this.update_widget();
         },
         reload_urls(){
 
@@ -114,7 +112,7 @@ export default {
 
             //
             //
-            this.update_session();
+            this.update_widget();
 
         },
     },

@@ -21,7 +21,7 @@
                 class="btn btn-close btn-sm btn-danger text-light p-1 px-2 me-2 float-end" 
                 style="padding-bottom: 8px !important;" 
                 title="Delete Widget" 
-                @click="$parent.delete_widget()">
+                @click="delete_widget()">
                     <TrashSVG w="12" h="12" c="var(--bs-success)" />
                 </button>
 
@@ -40,7 +40,7 @@
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
                     v-model="widget_data.name" 
-                    @input="update_session()" 
+                    @input="update_widget()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -70,18 +70,22 @@ export default {
         }
     },
     methods: {
-        move_widget(direction){
-            this.$parent.move_widget(direction)
-        },
-        hide_panel() {
-            this.$emit('update-panel', false);
-        },
 
         //
         //
-        update_session(){
-            this.$parent.update_session();
+        move_widget(direction){
+            this.$parent.move_widget(direction)
         },
+        update_widget(){
+            this.$parent.update_widget();
+        },
+        delete_widget(){
+            this.$parent.delete_widget()
+        },
+        hide_panel() {
+            this.$emit('hide-panel');
+        },
+
     },
     components: {
         TrashSVG,

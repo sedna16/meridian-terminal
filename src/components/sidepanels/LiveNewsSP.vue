@@ -21,7 +21,7 @@
                 class="btn btn-close btn-sm btn-danger text-light p-1 px-2 me-2 float-end" 
                 style="padding-bottom: 8px !important;" 
                 title="Delete Widget" 
-                @click="$parent.delete_widget()">
+                @click="delete_widget()">
                     <TrashSVG w="12" h="12" c="var(--bs-success)" />
                 </button>
 
@@ -40,7 +40,7 @@
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
                     v-model="widget_data.name" 
-                    @input="update_session()" 
+                    @input="update_widget()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -53,18 +53,18 @@
                     <label class="form-label mb-2 text-success">Select News</label>
                     <select 
                     class="form-select p-1"
-                     @change="update_video($event.target.value);update_session()">
+                     @change="update_video($event.target.value)">
                         <option selected>Select video</option>
                         <template 
                         v-for="(item,index) in livenews_array" :key="item.id">
                             <option 
-                            v-if="widget_data.active_news.name == item.name" 
+                            v-if="widget_data.widget_data.active_news.name == item.name" 
                             :value="index" 
                             selected>
                                 {{item.name}}
                             </option>
                             <option 
-                            v-if="widget_data.active_news.name != item.name" 
+                            v-if="widget_data.widget_data.active_news.name != item.name" 
                             :value="index">
                                 {{item.name}}
                             </option>
@@ -74,7 +74,7 @@
 
                 <div id="select-vid" class="d-block mb-3 text-end">
                     <GenericButton 
-                    @click="reload_vid();update_session()" 
+                    @click="reload_video()" 
                     label="Reload" />
                 </div>
 
@@ -140,17 +140,20 @@ export default {
         }
     },
     methods: {
-        move_widget(direction){
-            this.$parent.move_widget(direction)
-        },
-        hide_panel() {
-            this.$emit('update-panel', false);
-        },
 
         //
         //
-        update_session(){
-            this.$parent.update_session();
+        move_widget(direction){
+            this.$parent.move_widget(direction)
+        },
+        update_widget(){
+            this.$parent.update_widget();
+        },
+        delete_widget(){
+            this.$parent.delete_widget()
+        },
+        hide_panel() {
+            this.$emit('hide-panel');
         },
 
         //
@@ -159,6 +162,9 @@ export default {
             this.$parent.update_video(
                 this.livenews_array[index]
             );
+        },
+        reload_video(){
+            this.$parent.reload_video();
         },
 
     },

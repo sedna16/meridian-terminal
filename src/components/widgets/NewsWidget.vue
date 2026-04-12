@@ -3,14 +3,14 @@
     <div class="card app-widget bg-transparent">
         <div class="card-header d-flex justify-content-between align-items-center">
 
-        <h6 class="m-0 pb-0 mb-0 d-inline-block">
+        <h6 class="m-0 pb-0 mb-0 d-inline-block">{{ widget_data.widget_data }}
             {{widget_index + 1}} - {{widget_data.name.replace(' ','_')}} 
-            <small style="font-size:0.55rem;">({{widget_data.active_source.text}})</small>
+            <small style="font-size:0.55rem;">({{widget_data.widget_data.active_source.text}})</small>
         </h6>
 
         <div class="btn-group float-end">
 
-            <WidgetHeaderButton @click="show_panel=true">
+            <WidgetHeaderButton @click="open_panel()">
                 <GearSVG w="12" h="12" c="var(--bs-light)" />
             </WidgetHeaderButton>
 
@@ -23,16 +23,16 @@
 
             <NewsLoop 
             v-if="show_news_feed==true && use_proxy==true" 
-            :rss_url="widget_data.proxy_url + widget_data.active_source.url" 
-            :rss_source="widget_data.active_source" 
-            :widget_data="widget_data" 
+            :rss_url="widget_data.proxy_url + widget_data.widget_data.active_source.url" 
+            :rss_source="widget_data.widget_data.active_source" 
+            :widget_data="widget_data.widget_data" 
             />
 
             <NewsLoop 
             v-if="show_news_feed==true && use_proxy==false" 
-            :rss_url="widget_data.proxy_url + widget_data.active_source.url" 
-            :rss_source="widget_data.active_source" 
-            :widget_data="widget_data" 
+            :rss_url="widget_data.widget_data.proxy_url + widget_data.widget_data.active_source.url" 
+            :rss_source="widget_data.widget_data.active_source" 
+            :widget_data="widget_data.widget_data" 
             />
 
         </div>
@@ -40,7 +40,7 @@
 
 <NewsSP 
 v-if="show_panel==true" 
-@update-panel="update_panel" 
+@hide-panel="hide_panel" 
 @update-active-source="update_source" 
 @update-proxy-url="update_proxy" 
 :widget_data="widget_data" />
@@ -56,10 +56,9 @@ import NewsSP from "@/components/sidepanels/NewsSP.vue";
 
 export default {
     name: "NewsWidget",
-    props: ['widget_index','widget_data'],
+    props: ['widget_index','widget_data','show_panel'],
     data() {
         return {
-            show_panel: false,
             show_news_feed: false,
             use_proxy: false,
             proxy_url: 'https://api.codetabs.com/v1/proxy?quest=', //'https://corsproxy.io/?url=', //'https://api.allorigins.win/raw?url=', //
@@ -74,7 +73,7 @@ export default {
     created(){
 
         //
-        //
+        // show news feed after 1.5 secs have passed
         setTimeout(() => {
             this.show_news_feed = true;
         }, 1500);
@@ -83,24 +82,23 @@ export default {
 
     },
     methods: {
+
+        //
+        //
         move_widget(direction){
-
-            //
-            //
             this.$parent.move_widget(this.widget_index,direction);
-
+        },
+        update_widget(){
+            this.$parent.update_widget(this.widget_data.id);
         },
         delete_widget(){
             this.$parent.delete_widget(this.widget_index);
         },
-        update_panel(v) {
-            this.show_panel = v;
+        open_panel(){
+            this.$parent.open_panel(this.widget_data.id);
         },
-
-        //
-        //
-        update_session(){
-            this.$parent.update_session();
+        hide_panel(v) {
+            this.$parent.hide_panel();
         },
 
         //
@@ -109,7 +107,8 @@ export default {
 
             //
             //
-            this.widget_data.active_source = v;
+            this.widget_data.widget_data.active_source = v;
+            this.$parent.update_widget(this.widget_data.id);
 
             //
             //
@@ -117,14 +116,11 @@ export default {
             setTimeout(() => {
                 this.show_news_feed = true;
             }, 500);
-            // this.show_panel = false; // no need to hide for now
+
         },
         update_proxy(u){
-
-            //
-            //
-            this.widget_data.proxy_url = u;
-
+            this.widget_data.widget_data.proxy_url = u;
+            this.$parent.update_widget(this.widget_data.id);
         },
     },
     components: {

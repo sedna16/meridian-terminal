@@ -9,7 +9,7 @@
 
         <div class="btn-group float-end">
 
-            <WidgetHeaderButton @click="widget_data.show_panel=true">
+            <WidgetHeaderButton @click="open_panel()">
                 <GearSVG w="12" h="12" c="var(--bs-light)" />
             </WidgetHeaderButton>
 
@@ -18,14 +18,14 @@
         </div>
         <div class="card-body p-3">
 
-            <ChartVisualizer :chart_data="widget_data.chart_data" />
+            <ChartVisualizer :chart_data="widget_data.widget_data.chart_data" />
 
         </div>
     </div>
 
 <MetricsSP 
-v-if="widget_data.show_panel==true" 
-@update-panel="update_panel" 
+v-if="show_panel==true" 
+@hide-panel="hide_panel" 
 @update-chart-data="update_chart_data" 
 :widget_data="widget_data" 
 />
@@ -41,7 +41,7 @@ import ChartVisualizer from "@/components/elements/ChartVisualizer.vue";
 
 export default {
     name: "MetricsWidget",
-    props: ['widget_index','widget_data'],
+    props: ['widget_index','widget_data','show_panel'],
     data() {
         return {
             // chart_data: {
@@ -70,42 +70,39 @@ export default {
         }
     },
     methods: {
+
+        //
+        //
         move_widget(direction){
-
-            //
-            //
             this.$parent.move_widget(this.widget_index,direction);
-
+        },
+        update_widget(){
+            this.$parent.update_widget(this.widget_data.id);
         },
         delete_widget(){
             this.$parent.delete_widget(this.widget_index);
         },
-        update_panel(v) {
-            this.$parent.hide_all_panel();
-            this.widget_data.show_panel = v;
+        open_panel(){
+            this.$parent.open_panel(this.widget_data.id);
         },
-
-        //
-        //
-        update_session(){
-            this.$parent.update_session();
+        hide_panel(v) {
+            this.$parent.hide_panel();
         },
 
         //
         //
         update_chart_data(d){
-            this.widget_data.chart_data = d;
+            this.widget_data.widget_data.chart_data = d;
+            this.$parent.update_widget(this.widget_data.id);
         },
         add_labels_dataset(){
-            
-            //
-            //
-            this.widget_data.chart_data.data.push(
+            this.widget_data.widget_data.chart_data.data.push(
                 {
                     'label': 'Label',
                     'dataset': 10,
                 }
-            )
+            );
+            this.$parent.update_widget(this.widget_data.id);
         },
     },
     components: {

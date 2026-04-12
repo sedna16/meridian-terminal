@@ -9,7 +9,7 @@
 
         <div class="btn-group float-end">
 
-            <WidgetHeaderButton @click="update_panel(true)">
+            <WidgetHeaderButton @click="open_panel()">
                 <GearSVG w="12" h="12" c="var(--bs-light)" />
             </WidgetHeaderButton>
 
@@ -30,8 +30,8 @@
     </div>
 
 <YoutubeSP 
-v-if="widget_data.show_panel==true" 
-@update-panel="update_panel" 
+v-if="show_panel==true" 
+@hide-panel="hide_panel" 
 :widget_data="widget_data" 
 />
 
@@ -45,26 +45,30 @@ import YoutubeSP from "@/components/sidepanels/YoutubeSP.vue";
 
 export default {
     name: "YoutubeWidget",
-    props: ['widget_index','widget_data'],
+    props: ['widget_index','widget_data','show_panel'],
     data() {
         return {
             base_url: 'https://www.youtube.com/embed/',
         }
     },
     methods: {
+
+        //
+        //
         move_widget(direction){
-
-            //
-            //
             this.$parent.move_widget(this.widget_index,direction);
-
+        },
+        update_widget(){
+            this.$parent.update_widget(this.widget_data.id);
         },
         delete_widget(){
-            this.$parent.widgets_array.splice(this.widget_index,1);
+            this.$parent.delete_widget(this.widget_index);
         },
-        update_panel(v) {
-            this.$parent.hide_all_panel();
-            this.widget_data.show_panel = v;
+        open_panel(){
+            this.$parent.open_panel(this.widget_data.id);
+        },
+        hide_panel(v) {
+            this.$parent.hide_panel();
         },
 
         //
@@ -79,7 +83,7 @@ export default {
 
             //
             // e.g. 'https://www.youtube.com/watch?v=ewx1aoA4FwQ&t=1627s';
-            var yt = this.widget_data.url.split('?')[1].split('&')
+            var yt = this.widget_data.widget_data.url.split('?')[1].split('&')
 
             //
             //

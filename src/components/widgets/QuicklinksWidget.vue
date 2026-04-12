@@ -48,7 +48,6 @@
 v-if="show_panel==true" 
 @hide-panel="hide_panel" 
 :widget_data="widget_data" 
-:qlinks_array="widget_data.widget_data.qlinks_array" 
 />
 
 </template>

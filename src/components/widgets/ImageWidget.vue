@@ -9,7 +9,7 @@
 
       <div class="btn-group float-end">
 
-        <WidgetHeaderButton @click="update_panel(true)">
+        <WidgetHeaderButton @click="open_panel()">
           <GearSVG w="12" h="12" c="var(--bs-light)" />
         </WidgetHeaderButton>
 
@@ -18,12 +18,16 @@
     </div>
     <div class="card-body p-3">
       
-      <img :src="widget_data.url" style="object-fit: cover;width: 100% !important;height: auto;">
+      <img :src="widget_data.widget_data.url" style="object-fit: cover;width: 100% !important;height: auto;">
 
     </div>
   </div>
 
-<ImageSP v-if="widget_data.show_panel==true" @update-panel="update_panel" :widget_data="widget_data" />
+<ImageSP 
+v-if="show_panel==true" 
+@hide-panel="hide_panel" 
+:widget_data="widget_data" 
+/>
 
 </template>
 
@@ -35,7 +39,7 @@ import ImageSP from "@/components/sidepanels/ImageSP.vue";
 
 export default {
     name: "CalendarWidget",
-    props: ['widget_index','widget_data'],
+    props: ['widget_index','widget_data','show_panel'],
     data() {
         return {
 
@@ -45,25 +49,23 @@ export default {
 
     },
     methods: {
+
+        //
+        //
         move_widget(direction){
-
-            //
-            //
             this.$parent.move_widget(this.widget_index,direction);
-
+        },
+        update_widget(){
+            this.$parent.update_widget(this.widget_data.id);
         },
         delete_widget(){
             this.$parent.delete_widget(this.widget_index);
         },
-        update_panel(v) {
-            this.$parent.hide_all_panel();
-            this.widget_data.show_panel = v;
+        open_panel(){
+            this.$parent.open_panel(this.widget_data.id);
         },
-
-        //
-        //
-        update_session(){
-            this.$parent.update_session();
+        hide_panel(v) {
+            this.$parent.hide_panel();
         },
         
     },

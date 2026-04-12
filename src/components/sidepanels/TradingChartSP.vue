@@ -21,7 +21,7 @@
                 class="btn btn-close btn-sm btn-danger text-light p-1 px-2 me-2 float-end" 
                 style="padding-bottom: 8px !important;" 
                 title="Delete Widget" 
-                @click="$parent.delete_widget()">
+                @click="delete_widget()">
                     <TrashSVG w="12" h="12" c="var(--bs-success)" />
                 </button>
 
@@ -40,7 +40,7 @@
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
                     v-model="widget_data.name" 
-                    @input="update_session()" 
+                    @input="update_widget()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -50,8 +50,8 @@
                 <div id="widget-title" class="d-block mb-3">
                     <label class="form-label mb-2 text-success">Stock/Crypto Code</label>
                     <input 
-                    v-model="widget_data.code" 
-                    @input="update_session()" 
+                    v-model="widget_data.widget_data.code" 
+                    @input="update_widget()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="d-block text-end mb-3">
-                    <GenericButton @click="$parent.load_chart();update_session()" label="Reload" />
+                    <GenericButton @click="$parent.load_chart();update_widget()" label="Reload" />
                 </div>
 
             </div>
@@ -81,28 +81,27 @@ export default {
     props: ['widget_data'],
     data() {
         return {
-            //alpaca_key: import.meta.env.VITE_ALPACA_API_KEY,     // not needed for now
         }
     },
     created(){
-
-        // const apiKey = import.meta.env.VITE_ALPACA_API_KEY;
-        // console.log(apiKey);
-
     },
     methods: {
+
+        //
+        //
         move_widget(direction){
             this.$parent.move_widget(direction)
         },
+        update_widget(){
+            this.$parent.update_widget();
+        },
+        delete_widget(){
+            this.$parent.delete_widget()
+        },
         hide_panel() {
-            this.$emit('update-panel', false);
+            this.$emit('hide-panel');
         },
 
-        //
-        //
-        update_session(){
-            this.$parent.update_session();
-        },
     },
     components: {
         TrashSVG,

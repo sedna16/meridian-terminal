@@ -9,7 +9,7 @@
 
       <div class="btn-group float-end">
 
-        <WidgetHeaderButton @click="update_panel(true)">
+        <WidgetHeaderButton @click="open_panel()">
           <GearSVG w="12" h="12" c="var(--bs-light)" />
         </WidgetHeaderButton>
 
@@ -18,12 +18,16 @@
     </div>
     <div class="card-body p-3">
       
-        <MarketIndexList :widget_data="widget_data" />
+        <MarketIndexList :widget_data="widget_data.widget_data" />
 
     </div>
   </div>
 
-<MarketIndicesSP v-if="widget_data.show_panel==true" @update-panel="update_panel" :widget_data="widget_data" />
+<MarketIndicesSP 
+v-if="show_panel==true" 
+@hide-panel="hide_panel" 
+:widget_data="widget_data" 
+/>
 
 </template>
 
@@ -36,7 +40,7 @@ import MarketIndexList from "@/components/elements/MarketIndexList.vue";
 
 export default {
     name: "MarketIndicesWidget",
-    props: ['widget_index','widget_data','base_time'],
+    props: ['widget_index','widget_data','show_panel'],
     data() {
         return {
             sample_data: [],
@@ -46,29 +50,24 @@ export default {
 
     },
     methods: {
+
+        //
+        //
         move_widget(direction){
-
-            //
-            //
             this.$parent.move_widget(this.widget_index,direction);
-
+        },
+        update_widget(){
+            this.$parent.update_widget(this.widget_data.id);
         },
         delete_widget(){
             this.$parent.delete_widget(this.widget_index);
         },
-        update_panel(v) {
-            this.$parent.hide_all_panel();
-            this.widget_data.show_panel = v;
+        open_panel(){
+            this.$parent.open_panel(this.widget_data.id);
         },
-
-        //
-        //
-        update_session(){
-            this.$parent.update_session();
+        hide_panel(v) {
+            this.$parent.hide_panel();
         },
-
-        //
-        //
         
     },
     components: {

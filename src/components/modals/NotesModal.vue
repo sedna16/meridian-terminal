@@ -21,7 +21,6 @@
                         <label for="title_input" class="form-label">Title</label>
                         <input 
                         v-model="title" 
-                        @input="update_session()" 
                         type="text" 
                         class="form-control" 
                         id="title_input" 
@@ -32,7 +31,6 @@
                         <label for="content_input" class="form-label">Content</label>
                         <textarea 
                         v-model="content" 
-                        @input="update_session()" 
                         class="form-control" 
                         id="content_input" 
                         rows="4"></textarea>
@@ -56,7 +54,6 @@
                         <label for="title_input" class="form-label">Title</label>
                         <input 
                         v-model="note.title" 
-                        @input="update_session()" 
                         type="text" 
                         class="form-control" 
                         id="title_input" 
@@ -67,7 +64,6 @@
                         <label for="content_input" class="form-label">Content</label>
                         <textarea 
                         v-model="note.content" 
-                        @input="update_session()" 
                         class="form-control" 
                         id="content_input" 
                         rows="4"></textarea>
@@ -75,10 +71,10 @@
 
                 </div>
                 <div class="modal-footer">
-                    <GenericButton v-if="mode=='add'" @click="add_note();update_session();" label="Save" />
+                    <GenericButton v-if="mode=='add'" @click="add_note();update_widget();" label="Save" />
                     <GenericButton v-if="mode=='read'" @click="switch_mode()" label="Edit" />
-                    <GenericButton v-if="mode=='edit'" @click="edit_note();update_session();" label="Save" />
-                    <GenericButton v-if="mode!='add'" @click="remove_note();update_session();" label="Delete" />
+                    <GenericButton v-if="mode=='edit'" @click="edit_note();update_widget();" label="Save" />
+                    <GenericButton v-if="mode!='add'" @click="remove_note();update_widget();" label="Delete" />
                 </div>
             </div>
         </div>
@@ -106,8 +102,8 @@ export default {
 
         //
         //
-        update_session(){
-            this.$parent.update_session();
+        update_widget(){
+            this.$parent.update_widget();
         },
 
         //

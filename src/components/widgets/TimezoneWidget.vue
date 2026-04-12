@@ -57,8 +57,6 @@ export default {
     data() {
         return {
 
-            is_updated: false,
-
         }
     },
     created(){
@@ -69,11 +67,7 @@ export default {
         //
         //
         move_widget(direction){
-
-            //
-            //
             this.$parent.move_widget(this.widget_index,direction);
-
         },
         update_widget(){
             this.$parent.update_widget(this.widget_data.id);

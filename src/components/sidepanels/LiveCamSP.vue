@@ -40,7 +40,7 @@
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
                     v-model="widget_data.name" 
-                    @input="update_session()" 
+                    @input="update_widget()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -56,11 +56,11 @@
                     </label>
                     <select 
                     class="form-select p-1" 
-                    @change="widget_data.category=$event.target.value;widget_data.sub_category='';update_session()">
+                    @change="update_main_cateogry($event)">
                         <option selected>Select category</option>
                         <template v-for="(item,index) in categories" :key="item.id">
-                            <option v-if="item.value == widget_data.category" :value="item.value" selected>{{item.name}}</option>
-                            <option v-if="item.value != widget_data.category" :value="item.value">{{item.name}}</option>
+                            <option v-if="item.value == widget_data.widget_data.category" :value="item.value" selected>{{item.name}}</option>
+                            <option v-if="item.value != widget_data.widget_data.category" :value="item.value">{{item.name}}</option>
                         </template>
                     </select>
                 </div>
@@ -69,17 +69,17 @@
                     <label class="form-label mb-2 text-success">Sub Category</label>
                     <select 
                     class="form-select p-1" 
-                    @change="widget_data.sub_category=$event.target.value;update_session()">
+                    @change="update_sub_category($event)">
                         <option selected>Select sub-category</option>
                         <template 
-                        v-for="(item,index) in categories[get_main_index(widget_data.category)]['sub-categories']" :key="item.id">
+                        v-for="(item,index) in categories[get_main_index(widget_data.widget_data.category)]['sub-categories']" :key="item.id">
                             <option 
-                            v-if="item.value == widget_data.sub_category" 
+                            v-if="item.value == widget_data.widget_data.sub_category" 
                             :value="item.value" selected>
                                 {{item.name}}
                             </option>
                             <option 
-                            v-if="item.value != widget_data.sub_category" 
+                            v-if="item.value != widget_data.widget_data.sub_category" 
                             :value="item.value">
                                 {{item.name}}
                             </option>
@@ -91,17 +91,17 @@
                     <label class="form-label mb-2 text-success">Select Cam</label>
                     <select 
                     class="form-select p-1"
-                     @change="update_video($event.target.value);update_session()">
+                     @change="update_video($event.target.value)">
                         <option selected>Select video</option>
                         <template 
-                        v-for="(item,index) in livecam_array[widget_data.category][widget_data.sub_category]" :key="item.id">
+                        v-for="(item,index) in livecam_array[widget_data.widget_data.category][widget_data.widget_data.sub_category]" :key="item.id">
                             <option 
-                            v-if="widget_data.active_cam.name == item.name" 
+                            v-if="widget_data.widget_data.active_cam.name == item.name" 
                             :value="index" selected>
                                 {{item.name}}
                             </option>
                             <option 
-                            v-if="widget_data.active_cam.name != item.name" 
+                            v-if="widget_data.widget_data.active_cam.name != item.name" 
                             :value="index">
                                 {{item.name}}
                             </option>
@@ -111,7 +111,7 @@
 
                 <div id="select-vid" class="d-block mb-3 text-end">
                     <GenericButton 
-                    @click="reload_vid();update_session()" 
+                    @click="reload_video()" 
                     label="Reload" />
                 </div>
 
@@ -635,21 +635,27 @@ export default {
         }
     },
     methods: {
+
+        //
+        //
         move_widget(direction){
             this.$parent.move_widget(direction)
         },
+        update_widget(){
+            this.$parent.update_widget();
+        },
+        delete_widget(){
+            this.$parent.delete_widget()
+        },
         hide_panel() {
-            this.$emit('update-panel', false);
+            this.$emit('hide-panel');
         },
 
         //
         //
-        update_session(){
-            this.$parent.update_session();
+        reload_video(){
+            this.$parent.reload_video();
         },
-
-        //
-        //
         get_main_index(value){
 
             //
@@ -658,16 +664,25 @@ export default {
                 
                 //
                 //
-                if(this.categories[i].value == this.widget_data.category){
+                if(this.categories[i].value == this.widget_data.widget_data.category){
                     return i;
                 }
                 
             }
             
         },
+        update_main_cateogry(e){
+            this.widget_data.widget_data.category = e.target.value;
+            this.widget_data.widget_data.sub_category = '';
+            this.update_widget();
+        },
+        update_sub_category(e){
+            this.widget_data.widget_data.sub_category = e.target.value;
+            this.update_widget();
+        },
         update_video(index){
             this.$parent.update_video(
-                this.livecam_array[this.widget_data.category][this.widget_data.sub_category][index]
+                this.livecam_array[this.widget_data.widget_data.category][this.widget_data.widget_data.sub_category][index]
             );
         },
 

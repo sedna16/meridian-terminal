@@ -1,5 +1,7 @@
 <template>
+
     <section class="dashboard">
+
         <div class="widgets-area p-0">
             <div class="row m-0 gx-0 widget-container">
                 <div class="col-12 widget-box">
@@ -9,7 +11,7 @@
                 <div 
                 v-for="(widget_id,index) in widgets" 
                 :key="widget_id.id" 
-                class="col-lg-3 widget-box">{{ widget_id }}
+                class="col-lg-3 widget-box">
 
                     <TimezoneWidget 
                     v-if="widgets_data[widget_id].type=='Local Timezones'" 
@@ -29,27 +31,80 @@
                     v-if="widgets_data[widget_id].type=='Quicklinks'" 
                     :widget_index="index" 
                     :widget_data="widgets_data[widget_id]" 
-                    :base_time="base_time" 
                     :show_panel="widget_control[widget_id].show_panel" 
                     />
-                    <!-- <TaskManagerWidget 
+                    <TaskManagerWidget 
                     v-if="widgets_data[widget_id].type=='Task Manager'" 
                     :widget_index="index" 
                     :widget_data="widgets_data[widget_id]" 
-                    :base_time="base_time" 
                     :show_panel="widget_control[widget_id].show_panel" 
                     />
-                    <NotesWidget v-if="item.type=='Notes'" :widget_index="index" :widget_data="item" />
-                    <ImageWidget v-if="item.type=='Image'" :widget_index="index" :widget_data="item" />
-                    <NewsWidget v-if="item.type=='RSS News'" :widget_index="index" :widget_data="item" />
-                    <MetricsWidget v-if="item.type=='Metrics'" :widget_index="index" :widget_data="item" />
-                    <YoutubeWidget v-if="item.type=='Youtube'" :widget_index="index" :widget_data="item" />
-                    <LiveCamWidget v-if="item.type=='Live Webcam'" :widget_index="index" :widget_data="item" />
-                    <LiveNewsWidget v-if="item.type=='Live News'" :widget_index="index" :widget_data="item" />
-                    <TradingChartWidget v-if="item.type=='Trading Chart'" :widget_index="index" :widget_data="item" />
-                    <SiteUptimeWidget v-if="item.type=='Site Uptime'" :widget_index="index" :widget_data="item" />
-                    <RemoteControlWidget v-if="item.type=='Remote Control'" :widget_index="index" :widget_data="item" />
-                    <MarketIndicesWidget v-if="item.type=='Market Indices'" :widget_index="index" :widget_data="item" /> -->
+                    <NotesWidget 
+                    v-if="widgets_data[widget_id].type=='Notes'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <ImageWidget 
+                    v-if="widgets_data[widget_id].type=='Image'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <NewsWidget 
+                    v-if="widgets_data[widget_id].type=='RSS News'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <MetricsWidget 
+                    v-if="widgets_data[widget_id].type=='Metrics'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <TradingChartWidget 
+                    v-if="widgets_data[widget_id].type=='Trading Chart'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <SiteUptimeWidget 
+                    v-if="widgets_data[widget_id].type=='Site Uptime'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <YoutubeWidget 
+                    v-if="widgets_data[widget_id].type=='Youtube'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <LiveCamWidget 
+                    v-if="widgets_data[widget_id].type=='Live Webcam'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <LiveNewsWidget 
+                    v-if="widgets_data[widget_id].type=='Live News'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <RemoteControlWidget 
+                    v-if="widgets_data[widget_id].type=='Remote Control'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <MarketIndicesWidget 
+                    v-if="widgets_data[widget_id].type=='Market Indices'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
 
                     
                 </div>
@@ -151,7 +206,7 @@ export default {
             if(old_value == false && new_value == true){
 
                 //
-                // update widget variables only after 3 seconds, to avoid db dumping
+                // update widget variables only after 2 seconds, to avoid db dumping
                 setTimeout(() => {
 
                     //
@@ -167,7 +222,7 @@ export default {
                     //
                     this.widget_update = false; // reset variable value
 
-                }, 3000); // 3 seconds
+                }, 2000); // 2 seconds
 
             }
 

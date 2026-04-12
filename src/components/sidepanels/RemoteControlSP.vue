@@ -40,7 +40,7 @@
                     <label class="form-label mb-2 text-success">Widget Title</label>
                     <input 
                     v-model="widget_data.name" 
-                    @input="update_session()" 
+                    @input="update_widget()" 
                     type="text" 
                     class="form-control" 
                     id="title_input" 
@@ -52,7 +52,7 @@
                 <p class="d-block text-center">(Does not parse results)</p>
 
                 <template 
-                v-for="(item,index) in widget_data.control_array" 
+                v-for="(item,index) in widget_data.widget_data.control_array" 
                 :key="item.id">
                     <div class="d-block mb-4">
 
@@ -80,7 +80,7 @@
                                     <label class="form-label mb-2 text-success">Label</label>
                                     <input 
                                     v-model="item.label" 
-                                    @input="update_session()" 
+                                    @input="update_widget()" 
                                     type="text" 
                                     class="form-control" 
                                     placeholder="Label">
@@ -90,16 +90,16 @@
 
                                 <div class="array-request-type d-block mb-3">
                                     <label class="form-label mb-2 text-success">Query Type</label>
-                                    <select class="form-select p-1" @change="update_query_type(index,$event.target.value);update_session()">
+                                    <select class="form-select p-1" @change="update_query_type(index,$event.target.value);update_widget()">
                                         <option selected>Select query type</option>
                                         <template v-for="(item,index2) in ['GET','POST']" :key="item.id">
                                             <option 
-                                            v-if="item == widget_data.control_array[index].query_type" 
+                                            v-if="item == widget_data.widget_data.control_array[index].query_type" 
                                             :value="item" selected>
                                                 {{item}}
                                             </option>
                                             <option 
-                                            v-if="item != widget_data.control_array[index].query_type" 
+                                            v-if="item != widget_data.widget_data.control_array[index].query_type" 
                                             :value="item">
                                                 {{item}}
                                             </option>
@@ -113,7 +113,7 @@
                                     <label class="form-label mb-2 text-success">URL</label>
                                     <input 
                                     v-model="item.url" 
-                                    @input="update_session()" 
+                                    @input="update_widget()" 
                                     type="text" 
                                     class="form-control" 
                                     placeholder="https://">
@@ -125,22 +125,22 @@
                                     <label class="form-label mb-2 text-success">Parameters</label>
 
                                     <div 
-                                    v-for="(item,index2) in widget_data.control_array[index].parameters" 
+                                    v-for="(item,index2) in widget_data.widget_data.control_array[index].parameters" 
                                     :key="item.id" 
                                     class="row g-0 m-0 mb-3 p-0 d-flex justify-content-between align-items-center">
                                         <div class="col pe-2">
                                             <div class="d-block">
                                                 <input 
-                                                v-model="widget_data.control_array[index].parameters[index2].key" 
-                                                @input="update_session()" 
+                                                v-model="widget_data.widget_data.control_array[index].parameters[index2].key" 
+                                                @input="update_widget()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="key">
                                             </div>
                                             <div class="d-block">
                                                 <input 
-                                                v-model="widget_data.control_array[index].parameters[index2].value" 
-                                                @input="update_session()" 
+                                                v-model="widget_data.widget_data.control_array[index].parameters[index2].value" 
+                                                @input="update_widget()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="value">
@@ -164,22 +164,22 @@
                                     <label class="form-label mb-2 text-success">Headers</label>
 
                                     <div 
-                                    v-for="(item,index2) in widget_data.control_array[index].headers" 
+                                    v-for="(item,index2) in widget_data.widget_data.control_array[index].headers" 
                                     :key="item.id" 
                                     class="row g-0 m-0 mb-3 p-0 d-flex justify-content-between align-items-center">
                                         <div class="col pe-2">
                                             <div class="d-block">
                                                 <input 
-                                                v-model="widget_data.control_array[index].headers[index2].key" 
-                                                @input="update_session()" 
+                                                v-model="widget_data.widget_data.control_array[index].headers[index2].key" 
+                                                @input="update_widget()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="key">
                                             </div>
                                             <div class="d-block">
                                                 <input 
-                                                v-model="widget_data.control_array[index].headers[index2].value" 
-                                                @input="update_session()" 
+                                                v-model="widget_data.widget_data.control_array[index].headers[index2].value" 
+                                                @input="update_widget()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="value">
@@ -200,25 +200,25 @@
                                 <hr />
 
                                 <div class="array-payload d-block mb-5">
-                                    <label class="form-label mb-2 text-success">Paylaod</label>
+                                    <label class="form-label mb-2 text-success">Payload</label>
 
                                     <div 
-                                    v-for="(item,index2) in widget_data.control_array[index].payload" 
+                                    v-for="(item,index2) in widget_data.widget_data.control_array[index].payload" 
                                     :key="item.id" 
                                     class="row g-0 m-0 mb-3 p-0 d-flex justify-content-between align-items-center">
                                         <div class="col pe-2">
                                             <div class="d-block">
                                                 <input 
-                                                v-model="widget_data.control_array[index].payload[index2].key" 
-                                                @input="update_session()" 
+                                                v-model="widget_data.widget_data.control_array[index].payload[index2].key" 
+                                                @input="update_widget()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="key">
                                             </div>
                                             <div class="d-block">
                                                 <input 
-                                                v-model="widget_data.control_array[index].payload[index2].value" 
-                                                @input="update_session()" 
+                                                v-model="widget_data.widget_data.control_array[index].payload[index2].value" 
+                                                @input="update_widget()" 
                                                 type="text" 
                                                 class="form-control" 
                                                 placeholder="value">
@@ -278,17 +278,20 @@ export default {
         }
     },
     methods: {
-        move_widget(direction){
-            this.$parent.move_widget(direction)
-        },
-        hide_panel() {
-            this.$emit('update-panel', false);
-        },
 
         //
         //
-        update_session(){
-            this.$parent.update_session();
+        move_widget(direction){
+            this.$parent.move_widget(direction)
+        },
+        update_widget(){
+            this.$parent.update_widget();
+        },
+        delete_widget(){
+            this.$parent.delete_widget()
+        },
+        hide_panel() {
+            this.$emit('hide-panel');
         },
 
         //
@@ -325,10 +328,12 @@ export default {
             this.$parent.add_button();
         },
         remove_button(i){
-            this.widget_data.control_array.splice(i,1);
+            this.widget_data.widget_data.control_array.splice(i,1);
+            this.update_widget();
         },
         update_query_type(i,v){
-            this.widget_data.control_array[i]['query_type'] = v;
+            this.widget_data.widget_data.control_array[i]['query_type'] = v;
+            this.update_widget();
         },
         add_parameters(i){
             this.$parent.add_parameters(i);

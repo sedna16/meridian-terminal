@@ -12,7 +12,7 @@
             <WidgetHeaderButton @click="show_modal='add'" title="Add note">
                 <PlusSVG w="12" h="12" c="var(--bs-light)" />
             </WidgetHeaderButton>
-            <WidgetHeaderButton @click="update_panel(true)">
+            <WidgetHeaderButton @click="open_panel()">
                 <GearSVG w="12" h="12" c="var(--bs-light)" />
             </WidgetHeaderButton>
 
@@ -21,15 +21,15 @@
         </div>
         <div class="card-body p-3">
 
-            <template v-if="widget_data.notes_array.length < 1">
+            <template v-if="widget_data.widget_data.notes_array.length < 1">
 
                 <p>Add a note</p>
 
             </template>
         
-            <template v-if="widget_data.notes_array.length > 0">
+            <template v-if="widget_data.widget_data.notes_array.length > 0">
                 <template 
-                v-for="(item,index) in widget_data.notes_array" 
+                v-for="(item,index) in widget_data.widget_data.notes_array" 
                 :key="item.id">
 
                     <a 
@@ -44,29 +44,29 @@
     </div>
 
 <NotesModal 
- v-if="show_modal=='add'" 
- @update-modal="update_modal" 
- :mode="'add'" 
- index="0" 
- note="" />
+v-if="show_modal=='add'" 
+@update-modal="update_modal" 
+:mode="'add'" 
+index="0" 
+note="" />
 
 <NotesModal 
- v-if="show_modal=='read'" 
- @update-modal="update_modal" 
- :mode="'read'" 
- :index="modal_index" 
- :note="modal_note" />
+v-if="show_modal=='read'" 
+@update-modal="update_modal" 
+:mode="'read'" 
+:index="modal_index" 
+:note="modal_note" />
 
 <NotesModal 
- v-if="show_modal=='edit'" 
- @update-modal="update_modal" 
- :mode="'edit'" 
- :index="modal_index" 
- :note="modal_note" />
+v-if="show_modal=='edit'" 
+@update-modal="update_modal" 
+:mode="'edit'" 
+:index="modal_index" 
+:note="modal_note" />
 
 <NotesSP 
-v-if="widget_data.show_panel==true" 
-@update-panel="update_panel" 
+v-if="show_panel==true" 
+@hide-panel="hide_panel" 
 :widget_data="widget_data" 
 />
 
@@ -82,7 +82,7 @@ import NotesSP from "@/components/sidepanels/NotesSP.vue";
 
 export default {
     name: "NotesWidget",
-    props: ['widget_index','widget_data'],
+    props: ['widget_index','widget_data','show_panel'],
     data() {
         return {
             show_modal: 'hide',
@@ -94,39 +94,40 @@ export default {
 
     },
     methods: {
+
+        //
+        //
+        update_modal(v) {
+            this.show_modal = v;
+        },
+
+        //
+        //
         move_widget(direction){
-
-            //
-            //
             this.$parent.move_widget(this.widget_index,direction);
-
+        },
+        update_widget(){
+            this.$parent.update_widget(this.widget_data.id);
         },
         delete_widget(){
             this.$parent.delete_widget(this.widget_index);
         },
-        update_modal(newData) {
-            this.show_modal = newData;
+        open_panel(){
+            this.$parent.open_panel(this.widget_data.id);
         },
-        update_panel(v) {
-            this.$parent.hide_all_panel();
-            this.widget_data.show_panel = v;
-        },
-
-        //
-        //
-        update_session(){
-            this.$parent.update_session();
+        hide_panel(v) {
+            this.$parent.hide_panel();
         },
 
         //
         //
         add_note(t,c){
-            this.widget_data.notes_array.push({
+            this.widget_data.widget_data.notes_array.push({
                 'title': t,
                 'content': c,
             })
             this.show_modal = 'hide';
-            this.$parent.update_session();
+            this.$parent.update_widget(this.widget_data.id);
         },
         switch_to_edit_mode(){
 
@@ -134,20 +135,18 @@ export default {
 
         },
         read_note(i,n){
-
             this.modal_index = i;
             this.modal_note = n;
             this.show_modal = 'read';
-
         },
         edit_note(){
             this.show_modal = 'hide';
-            this.$parent.update_session();
+            this.$parent.update_widget(this.widget_data.id);
         },
         remove_note(i){
-            this.widget_data.notes_array.splice(i,1);
+            this.widget_data.widget_data.notes_array.splice(i,1);
             this.show_modal = 'hide';
-            this.$parent.update_session();
+            this.$parent.update_widget(this.widget_data.id);
         },
     },
     components: {

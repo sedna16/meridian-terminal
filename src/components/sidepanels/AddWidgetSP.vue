@@ -96,7 +96,6 @@ export default {
                     'id': '',
                     'type': 'Quicklinks',
                     'name': 'Access_Points',
-                    'show_panel': false,
                     'widget_data': {
                         'qlinks_array': [],
                     },
@@ -105,7 +104,6 @@ export default {
                     'id': '',
                     'type': 'Task Manager',
                     'name': 'Task_Operations',
-                    'show_panel': false,
                     'widget_data': {
                         'task_array': [],
                     },
@@ -114,7 +112,6 @@ export default {
                     'id': '',
                     'type': 'Notes',
                     'name': 'Mission_Dossier',
-                    'show_panel': false,
                     'widget_data': {
                         'notes_array': [],
                     },
@@ -123,7 +120,6 @@ export default {
                     'id': '',
                     'type': 'RSS News',
                     'name': 'Global_Intel',
-                    'show_panel': false,
                     'widget_data': {
                         'use_proxy': true,
                         'proxy_url': 'https://api.codetabs.com/v1/proxy?quest=',
@@ -145,7 +141,6 @@ export default {
                     'id': '',
                     'type': 'Metrics',
                     'name': 'Telemetry',
-                    'show_panel': false,
                     'widget_data': {
                         'chart_data': {
                             'type': 'doughnut',
@@ -176,7 +171,6 @@ export default {
                     'id': '',
                     'type': 'Trading Chart',
                     'name': 'Market_Recon',
-                    'show_panel': false,
                     'widget_data': {
                         'code': 'NASDAQ:AAPL',
                     },
@@ -185,7 +179,6 @@ export default {
                     'id': '',
                     'type': 'Site Uptime',
                     'name': 'Signal_Pulse',
-                    'show_panel': false,
                     'widget_data': {
                         'query_interval': 1, // 1 hr
                         'url_array': [
@@ -197,7 +190,6 @@ export default {
                     'id': '',
                     'type': 'Youtube',
                     'name': 'Visual_Recon',
-                    'show_panel': false,
                     'widget_data': {
                         'url': 'https://www.youtube.com/watch?v=d0GAsYpxvlo',
                     },
@@ -206,7 +198,6 @@ export default {
                     'id': '',
                     'type': 'Live Webcam',
                     'name': 'Remote_Optics',
-                    'show_panel': false,
                     'widget_data': {
                         'category': 'animals',
                         'sub_category': 'aquarium',
@@ -220,7 +211,6 @@ export default {
                     'id': '',
                     'type': 'Live News',
                     'name': 'Recon_update',
-                    'show_panel': false,
                     'widget_data': {
                         'active_news': {
                             'name': 'Bloomberg | Live',
@@ -232,7 +222,6 @@ export default {
                     'id': '',
                     'type': 'Image',
                     'name': 'PhotInt',
-                    'show_panel': false,
                     'widget_data': {
                         'url': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4FichgawfwrnY9Iqrg8W7piwIlxkc-DSthg&s',
                     },
@@ -241,7 +230,6 @@ export default {
                     'id': '',
                     'type': 'Remote Control',
                     'name': 'Override_Console',
-                    'show_panel': false,
                     'widget_data': {
                         'control_array': [
                             {
@@ -259,7 +247,6 @@ export default {
                     'id': '',
                     'type': 'Market Indices',
                     'name': 'Market_telemetry',
-                    'show_panel': false,
                     'widget_data': {
                         'symbol_array': [
                             '^SNP',
