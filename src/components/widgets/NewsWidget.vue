@@ -3,7 +3,7 @@
     <div class="card app-widget bg-transparent">
         <div class="card-header d-flex justify-content-between align-items-center">
 
-        <h6 class="m-0 pb-0 mb-0 d-inline-block">{{ widget_data.widget_data }}
+        <h6 class="m-0 pb-0 mb-0 d-inline-block">
             {{widget_index + 1}} - {{widget_data.name.replace(' ','_')}} 
             <small style="font-size:0.55rem;">({{widget_data.widget_data.active_source.text}})</small>
         </h6>
