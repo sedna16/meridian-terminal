@@ -242,9 +242,11 @@ export default {
                     'name': 'Satcom',
                     'widget_data': {
                         'url': 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&Request=GetTile&Version=1.0.0&layer=MODIS_Terra_CorrectedReflectance_TrueColor&tilematrixset=250m&TileMatrix=6&TileCol=60&TileRow=24&TIME=2025-04-14&style=default&Format=image%2Fjpeg',
-                        'column': '60',
-                        'row': '24',
-                        'date': '2025-03-15',
+                        'column': 60,
+                        'row': 24,
+                        'year': 2025,
+                        'month': '03',
+                        'day': 15,
                     },
                 },
                 {

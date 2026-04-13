@@ -73,6 +73,13 @@ export default {
 
         //
         //
+        update_month(v){
+            this.widget_data.widget_data.month = v;
+            this.update_widget();
+        },
+
+        //
+        //
         buildNasaGibsUrl(column, row, date, zoomLevel) {
             const baseUrl = "https://gibs.earthdata.nasa.gov/wmts";
             
@@ -88,19 +95,14 @@ export default {
         url_builder(){
 
             //
-            // reference
-            // https://nasa-gibs.github.io/gibs-api-docs/access-basics/#service-endpoints_2
-
-            //
             //
             var c = this.widget_data.widget_data.column;
             var r = this.widget_data.widget_data.row;
-            var d = this.widget_data.widget_data.date;
-            //var url = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&Request=GetTile&Version=1.0.0&layer=MODIS_Terra_CorrectedReflectance_TrueColor&tilematrixset=250m&TileMatrix=6&TileCol=' + c + '&TileRow=' + r + '&TIME=' + d + '&style=default&Format=image%2Fjpeg';
+            var y = this.widget_data.widget_data.year;
+            var m = this.widget_data.widget_data.month;
+            var d = this.widget_data.widget_data.day;
 
-            var url = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_CorrectedReflectance_TrueColor/default/' + d + '/250m/7/' + r + '/' + c + '.jpg';
-
-            //var url = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?TIME=default&layer=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual&style=default&tilematrixset=31.25m&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fjpeg&TileMatrix=3&TileCol=' + c + '&TileRow=' + r + '&TIME=' + d;
+            var url = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_CorrectedReflectance_TrueColor/default/' + y + '-' + m + '-' + d + '/250m/7/' + r + '/' + c + '.jpg';
 
             //
             //

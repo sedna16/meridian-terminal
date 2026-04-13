@@ -162,7 +162,9 @@
                     v-for="(item,index) in widget_data.widget_data.chart_data.data" 
                     :key="item.id">
                         <div class="d-block mb-3 ps-4">
-                            <label class="form-label mb-2 text-success">{{index + 1}}</label>
+                            <label class="form-label mb-2 text-success">
+                                Data {{index + 1}} (<a @click.prevent="remove_labels_dataset(index)" href="#" class="text-danger" title="Remove data">Remove</a>)
+                            </label>
                             <div class="row g-0 m-0 p-0">
                                 <div class="col-4">
                                     <input 
@@ -172,7 +174,7 @@
                                     step="any" 
                                     class="form-control" 
                                     id="title_input" 
-                                    placeholder="Data">
+                                    placeholder="Add Data">
                                 </div>
                                 <div class="col-8">
                                     <input 
@@ -181,14 +183,14 @@
                                     type="text" 
                                     class="form-control" 
                                     id="title_input" 
-                                    placeholder="Label">
+                                    placeholder="Add Label">
                                 </div>
                             </div>
                         </div>
                     </template>
 
                     <div id="add-dataset" class="d-block text-end mb-5">
-                        <GenericButton @click.prevent="$parent.add_labels_dataset()" label="Add" />
+                        <GenericButton @click.prevent="add_labels_dataset()" label="Add" />
                     </div>
 
                 </div>
@@ -240,6 +242,15 @@ export default {
         },
         hide_panel() {
             this.$emit('hide-panel');
+        },
+
+        //
+        //
+        add_labels_dataset(){
+            this.$parent.add_labels_dataset();
+        },
+        remove_labels_dataset(i){
+            this.$parent.remove_labels_dataset(i);
         },
 
         //

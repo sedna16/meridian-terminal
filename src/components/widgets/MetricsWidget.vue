@@ -93,7 +93,7 @@ export default {
         //
         update_chart_data(d){
             this.widget_data.widget_data.chart_data = d;
-            this.$parent.update_widget(this.widget_data.id);
+            this.update_widget();
         },
         add_labels_dataset(){
             this.widget_data.widget_data.chart_data.data.push(
@@ -102,7 +102,11 @@ export default {
                     'dataset': 10,
                 }
             );
-            this.$parent.update_widget(this.widget_data.id);
+            this.update_widget();
+        },
+        remove_labels_dataset(i){
+            this.widget_data.widget_data.chart_data.data.splice(i,1);
+            this.update_widget();
         },
     },
     components: {
