@@ -11,7 +11,7 @@
                 <div 
                 v-for="(widget_id,index) in widgets" 
                 :key="widget_id.id" 
-                class="col-lg-3 widget-box">
+                class="col-sm-12 col-md-6 col-lg-3 col-xl-3 widget-box">
 
                     <TimezoneWidget 
                     v-if="widgets_data[widget_id].type=='Local Timezones'" 
@@ -53,6 +53,12 @@
                     />
                     <ImageWidget 
                     v-if="widgets_data[widget_id].type=='Image'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
+                    <EarthWidget 
+                    v-if="widgets_data[widget_id].type=='Earth'" 
                     :widget_index="index" 
                     :widget_data="widgets_data[widget_id]" 
                     :show_panel="widget_control[widget_id].show_panel" 
@@ -146,6 +152,7 @@ import QuicklinksWidget from "@/components/widgets/QuicklinksWidget.vue";
 import TaskManagerWidget from "@/components/widgets/TaskManagerWidget.vue";
 import NotesWidget from "@/components/widgets/NotesWidget.vue";
 import ImageWidget from "@/components/widgets/ImageWidget.vue";
+import EarthWidget from "@/components/widgets/EarthWidget.vue";
 import NewsWidget from "@/components/widgets/NewsWidget.vue";
 import MetricsWidget from "@/components/widgets/MetricsWidget.vue";
 import YoutubeWidget from "@/components/widgets/YoutubeWidget.vue";
@@ -756,6 +763,7 @@ export default {
         TaskManagerWidget,
         NotesWidget,
         ImageWidget,
+        EarthWidget,
         NewsWidget,
         MetricsWidget,
         YoutubeWidget, LiveCamWidget, LiveNewsWidget,
