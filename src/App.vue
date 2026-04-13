@@ -31,7 +31,7 @@ function update_navbar(v){
   xtask manager
   xyoutube embed
   spotify playlist
-  emails - ***could be dangerous***
+  emails - ***could be dangerous*** - dont
   youtube live news -- can be done via youtube embed, but takes work to find videos
   job openings
   latest hacking/data breach/cyber security news

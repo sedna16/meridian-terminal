@@ -94,6 +94,16 @@ export default {
                 },
                 {
                     'id': '',
+                    'type': 'Header',
+                    'name': 'ROOT_ACCESS_BANNER',
+                    'widget_data': {
+                        'size': 'h1',
+                        'text': 'Header',
+                        'position': 'left', // left/center/right
+                    },
+                },
+                {
+                    'id': '',
                     'type': 'Quicklinks',
                     'name': 'Access_Points',
                     'widget_data': {

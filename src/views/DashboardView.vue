@@ -27,6 +27,12 @@
                     :base_time="base_time" 
                     :show_panel="widget_control[widget_id].show_panel" 
                     />
+                    <HeaderWidget 
+                    v-if="widgets_data[widget_id].type=='Header'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
                     <QuicklinksWidget 
                     v-if="widgets_data[widget_id].type=='Quicklinks'" 
                     :widget_index="index" 
@@ -135,6 +141,7 @@ import AddWidgetSP from "@/components/sidepanels/AddWidgetSP.vue";
 import WorldMap from "@/components/widgets/WorldMap.vue";
 import TimezoneWidget from "@/components/widgets/TimezoneWidget.vue";
 import CalendarWidget from "@/components/widgets/CalendarWidget.vue";
+import HeaderWidget from "@/components/widgets/HeaderWidget.vue";
 import QuicklinksWidget from "@/components/widgets/QuicklinksWidget.vue";
 import TaskManagerWidget from "@/components/widgets/TaskManagerWidget.vue";
 import NotesWidget from "@/components/widgets/NotesWidget.vue";
@@ -744,6 +751,7 @@ export default {
         WorldMap,
         TimezoneWidget,
         CalendarWidget,
+        HeaderWidget,
         QuicklinksWidget,
         TaskManagerWidget,
         NotesWidget,
