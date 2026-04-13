@@ -55,7 +55,7 @@
 
                 <div id="location" class="d-block mb-3 text-center">
                     <label class="form-label mb-2 text-success mb-3">Column/Row Position ({{widget_data.widget_data.column}},{{widget_data.widget_data.row}})</label>
-                    <div class="row g-0 m-0 p-0">
+                    <div class="row g-0 m-0 p-0 mb-3">
                         <div class="col"></div>
                         <div class="col">
                             <a @click.prevent="go_up()" href="#" class="btn">
@@ -65,14 +65,14 @@
                         <div class="col"></div>
                     </div>
 
-                    <div class="row g-0 m-0 p-0">
-                        <div class="col">
+                    <div class="row g-0 m-0 p-0 mb-3">
+                        <div class="col text-end">
                             <a @click.prevent="go_left()" href="#" class="btn">
                                 <ChevronLeftSVG w="12" h="12" c="var(--bs-success)" />
                             </a>
                         </div>
                         <div class="col"></div>
-                        <div class="col">
+                        <div class="col text-start">
                             <a @click.prevent="go_right()" href="#" class="btn">
                                 <ChevronRightSVG w="12" h="12" c="var(--bs-success)" />
                             </a>
