@@ -1,6 +1,6 @@
 <template>
 
-    <div class="row g-0 m-0 p-0">{{ widget_data }}
+    <div class="row g-0 m-0 p-0">
 
         <div v-if="query_status=='idle'" class="d-block mb-3">
             <p>Static_buzz...</p>

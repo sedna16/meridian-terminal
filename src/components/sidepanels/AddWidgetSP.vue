@@ -133,12 +133,6 @@ export default {
                     'widget_data': {
                         'use_proxy': true,
                         'proxy_url': 'https://api.codetabs.com/v1/proxy?quest=',
-                        'proxy_selections': [
-                            'https://api.codetabs.com/v1/proxy?quest=',
-                            'https://cors-anywhere.com/',
-                            'https://api.allorigins.win/get?url=',
-                            'https://api.thebugging.com/cors-proxy?url=',
-                        ],
                         'active_source': {
                             'text': 'TechCrunch',
                             'url': 'https://techcrunch.com/feed/',

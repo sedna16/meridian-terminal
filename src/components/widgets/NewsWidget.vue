@@ -118,9 +118,13 @@ export default {
             }, 500);
 
         },
+        update_use_proxy(){
+            this.widget_data.widget_data.use_proxy != this.widget_data.widget_data.use_proxy;
+            this.update_widget();
+        },
         update_proxy(u){
             this.widget_data.widget_data.proxy_url = u;
-            this.$parent.update_widget(this.widget_data.id);
+            this.update_widget();
         },
     },
     components: {

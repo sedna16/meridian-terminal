@@ -57,7 +57,7 @@
                     <div class="form-check ps-4" style="font-size:0.8rem;">
                         <input 
                         v-model="widget_data.widget_data.use_proxy" 
-                        @input="update_widget()" 
+                        @click="update_use_proxy()" 
                         class="form-check-input me-3 fs-6" 
                         type="checkbox" 
                         role="switch" 
@@ -77,12 +77,12 @@
                     </label>
                     <select 
                     class="form-select p-1" 
-                    @change="change_proxy_url($event.target.value);">
+                    @change="change_proxy_url($event.target.value)">
                         <option selected>
                             Select proxy url
                         </option>
                         <template 
-                        v-for="(item,index) in widget_data.widget_data.proxy_selections" 
+                        v-for="(item,index) in proxy_selection" 
                         :key="item.id">
                             <option 
                             v-if="widget_data.widget_data.proxy_url==item" 
@@ -102,7 +102,7 @@
                     <label class="form-label mb-2 text-muted">Proxy URL</label>
                     <select class="form-select p-1 bg-dark" disabled>
                         <option selected>Select proxy url</option>
-                        <template v-for="(item,index) in widget_data.widget_data.proxy_selections" :key="item.id">
+                        <template v-for="(item,index) in proxy_selection" :key="item.id">
                             <option v-if="widget_data.widget_data.proxy_url==item" :value="item" selected>{{item}}</option>
                             <option v-if="widget_data.widget_data.proxy_url!=item" :value="item">{{item}}</option>
                         </template>
@@ -120,7 +120,7 @@
                 </div>
 
                 <div class="d-block text-end mb-3">
-                    <GenericButton @click="change_active_source();" label="Update_News_Now" />
+                    <GenericButton @click="change_active_source()" label="Update_News_Now" />
                 </div>
 
             </div>
@@ -143,6 +143,13 @@ export default {
     props: ['widget_data'],
     data() {
         return {
+            selected_source: '',
+            proxy_selection: [
+                'https://api.codetabs.com/v1/proxy?quest=',
+                'https://cors-anywhere.com/',
+                'https://api.allorigins.win/get?url=',
+                'https://api.thebugging.com/cors-proxy?url=',
+            ],
         }
     },
     methods: {
@@ -164,6 +171,9 @@ export default {
 
         //
         //
+        update_use_proxy(){
+            this.$parent.update_use_proxy();
+        },
         change_selected_source(source_object){
             this.selected_source = source_object;
         },
@@ -174,6 +184,7 @@ export default {
             );
         },
         change_proxy_url(u){
+            console.log(u);
             this.$emit(
                 'update-proxy-url', 
                 u
