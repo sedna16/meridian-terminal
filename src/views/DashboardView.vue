@@ -191,6 +191,10 @@ export default {
                 },
             },
             base_time: '',
+
+            //
+            //
+            show_logs: false,
             
         }
     },
@@ -386,10 +390,14 @@ export default {
             //
             //
             if (error) {
-                console.error('Error saving session:', error.message);
+                if(this.show_logs==true){
+                    console.error('Error saving session:', error.message);
+                }
                 return false;
             } else {
-                console.log('Session saved:', data);
+                if(this.show_logs==true){
+                    console.log('Session saved:', data);
+                }
                 return data[0]
             }
             
@@ -408,16 +416,21 @@ export default {
             //
             //
             if (error) {
-
-                console.error("Fetching session error:", error.message);
+                if(this.show_logs==true){
+                    console.error("Fetching session error:", error.message);
+                }
                 return false;
 
             } 
             else {
-                
-                console.log('Session retrieved');
-                console.log(data);
-                
+
+                //
+                //
+                if(this.show_logs==true){
+                    console.log('Session retrieved');
+                    console.log(data);
+                }
+
                 //
                 // get the array of widget ids from db
                 if(data.widgets == null || data.widgets.length < 1) {
@@ -431,8 +444,6 @@ export default {
 
                     //
                     //
-                    // console.log('current widget array');
-                    // console.log(this.widgets);
                     this.widgets = data.widget_array;
 
                     //
@@ -468,37 +479,17 @@ export default {
  
                     }
 
-                    //
-                    //
-                    // for (let i = 0; i < data.widgets.length; i++) {
-
-                    //     //
-                    //     //
-                    //     this.widgets.push( data.widgets[i].widget_string );
-
-                    //     //
-                    //     //
-                    //     this.widgets_data[ data.widgets[i].widget_string ] = {
-                    //         'id': data.widgets[i].widget_string,
-                    //         'name': data.widgets[i].name,
-                    //         'type': data.widgets[i].type,
-                    //         'widget_data': data.widgets[i].data,
-                    //     }
-
-                    //     //
-                    //     //
-                    //     this.widget_control[ data.widgets[i].widget_string ] = {
-                    //         show_panel: false,
-                    //     }
-
-                    // }
-
                 }
-                // console.log(this.widgets);
-                // console.log('widget_data');
-                // console.log(this.widgets_data);
-                // console.log('widget_control');
-                // console.log(this.widget_control);
+
+                //
+                //
+                if(this.show_logs==true){
+                    console.log(this.widgets);
+                    console.log('widget_data');
+                    console.log(this.widgets_data);
+                    console.log('widget_control');
+                    console.log(this.widget_control);
+                }
 
             } 
 
@@ -672,16 +663,20 @@ export default {
 
                 //
                 //
-                console.log('Error saving widget');
-                console.log(error.message);
+                if(this.show_logs==true){
+                    console.log('Error saving widget');
+                    console.log(error.message);
+                }
                 return error;
             }
             else {
 
                 //
                 //
-                console.log('Widget saved');
-                console.log(data)
+                if(this.show_logs==true){
+                    console.log('Widget saved');
+                    console.log(data);
+                }
                 return data;
             }
 
@@ -705,16 +700,20 @@ export default {
                 
                 //
                 //
-                console.log('Error updating widget')
-                console.log(error.message)
+                if(this.show_logs==true){
+                    console.log('Error updating widget');
+                    console.log(error.message);
+                }
                 return error;
             }
             else {
                 
                 //
                 //
-                console.log('Widget updated')
-                console.log(data)
+                if(this.show_logs==true){
+                    console.log('Widget updated');
+                    console.log(data);
+                }
                 return data;
             }
 
@@ -735,19 +734,25 @@ export default {
                 
                 //
                 //
-                console.log('Error deleting widget');
-                console.log(error.message);
+                if(this.show_logs==true){
+                    console.log('Error deleting widget');
+                    console.log(error.message);
+                }
                 return false;
             }
             else if (data.length === 0) {
 
                 //
                 //
-                console.log('Error widget not found, cannot delete');
+                if(this.show_logs==true){
+                    console.log('Error widget not found, cannot delete');
+                }
                 return false;
             }
             else {
-                console.log('Widget deleted')
+                if(this.show_logs==true){
+                    console.log('Widget deleted');
+                }
                 return true;
             }
 
