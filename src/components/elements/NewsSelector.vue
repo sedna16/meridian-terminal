@@ -17,7 +17,7 @@
 
 export default {
     name: "NewsSelector",
-    props: ['widget_data','current_source'],
+    props: ['widget_data'],
     data() {
         return {
             rss_sources: [

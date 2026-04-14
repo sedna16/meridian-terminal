@@ -46,7 +46,7 @@ export default {
     props: ['widget_data'],
     data() {
         return {
-            show_logs: true,
+            show_logs: false,
             query_status: 'idle',
             feed_loop: [],
         }
