@@ -280,6 +280,14 @@ export default {
                         ],
                     },
                 },
+                {
+                    'id': '',
+                    'type': 'Github Trending Repositories',
+                    'name': 'ACTIVE_INTEL_REPOS',
+                    'widget_data': {
+                        'keyword': 'ai',
+                    },
+                },
             ],
             selected_widget_index: 0,
         }

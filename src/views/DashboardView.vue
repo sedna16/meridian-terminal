@@ -117,7 +117,12 @@
                     :widget_data="widgets_data[widget_id]" 
                     :show_panel="widget_control[widget_id].show_panel" 
                     />
-
+                    <GithubRepoWidget 
+                    v-if="widgets_data[widget_id].type=='Github Trending Repositories'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
                     
                 </div>
               
@@ -162,6 +167,7 @@ import TradingChartWidget from "@/components/widgets/TradingChartWidget.vue";
 import SiteUptimeWidget from "@/components/widgets/SiteUptimeWidget.vue";
 import RemoteControlWidget from "@/components/widgets/RemoteControlWidget.vue";
 import MarketIndicesWidget from "@/components/widgets/MarketIndicesWidget.vue";
+import GithubRepoWidget from "@/components/widgets/GithubRepoWidget.vue";
 
 export default {
     name: "Dashboard",
@@ -776,6 +782,7 @@ export default {
         SiteUptimeWidget,
         RemoteControlWidget,
         MarketIndicesWidget,
+        GithubRepoWidget,
     },
 };
 </script>

@@ -48,9 +48,9 @@ function update_navbar(v){
   earthquakes
   layoffs trackers - companies
   ISS location
-  nasa images/data
+  xnasa images/data
   xsite uptime monitor - multiple (may need improvement)
-  trending github repos
+  xtrending github repos
   radiation watch
   xphoto gallery - 1 image per widget
   grocery list
