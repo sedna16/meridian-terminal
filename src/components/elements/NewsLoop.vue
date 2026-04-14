@@ -1,6 +1,6 @@
 <template>
 
-    <div class="row g-0 m-0 p-0">
+    <div class="row g-0 m-0 p-0">{{ widget_data }}
 
         <div v-if="query_status=='idle'" class="d-block mb-3">
             <p>Static_buzz...</p>
@@ -46,7 +46,7 @@ export default {
     props: ['widget_data'],
     data() {
         return {
-            show_logs: false,
+            show_logs: true,
             query_status: 'idle',
             feed_loop: [],
         }
@@ -100,12 +100,11 @@ export default {
                 // If the string starts with a literal quote, it's definitely JSON-encoded
                 if (typeof response_data === 'string' && response_data.trim().startsWith('"')) {
 
+                    //
+                    //
                     try {
-
                         response_data = JSON.parse(response_data);
-
                     } catch (e) {
-
                         //Fallback: manual unescape if JSON.parse fails
                         response_data = response_data
                             .replace(/\\"/g, '"')    // Fix escaped quotes
@@ -114,7 +113,6 @@ export default {
                             .replace(/\\r/g, '\r')   // Fix escaped carriage returns
                             .replace(/\\t/g, '\r')   // Fix escaped tabs returns
                             .replace(/^"|"$/g, '');  // Remove the wrapping quotes
-
                     }
 
                 }
@@ -260,7 +258,8 @@ export default {
             }
 
 
-        }
+        },
+
     },
     components: {
         
