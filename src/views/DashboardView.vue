@@ -123,6 +123,12 @@
                     :widget_data="widgets_data[widget_id]" 
                     :show_panel="widget_control[widget_id].show_panel" 
                     />
+                    <WeatherWidget 
+                    v-if="widgets_data[widget_id].type=='Weather Map'" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
                     
                 </div>
               
@@ -168,6 +174,7 @@ import SiteUptimeWidget from "@/components/widgets/SiteUptimeWidget.vue";
 import RemoteControlWidget from "@/components/widgets/RemoteControlWidget.vue";
 import MarketIndicesWidget from "@/components/widgets/MarketIndicesWidget.vue";
 import GithubRepoWidget from "@/components/widgets/GithubRepoWidget.vue";
+import WeatherWidget from "@/components/widgets/WeatherWidget.vue";
 
 export default {
     name: "Dashboard",
@@ -783,6 +790,7 @@ export default {
         RemoteControlWidget,
         MarketIndicesWidget,
         GithubRepoWidget,
+        WeatherWidget,
     },
 };
 </script>

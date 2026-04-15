@@ -40,7 +40,7 @@ function update_navbar(v){
   xlive youtube webcams
   live youtube news
   ximage
-  weather forecast  - https://open-meteo.com/ - https://www.weatherapi.com/pricing.aspx
+  xweather forecast  - https://open-meteo.com/ - https://www.weatherapi.com/pricing.aspx -- became weather map
   travel safety
   xstock prices chart / crypto
   regional/country/continent news feed
