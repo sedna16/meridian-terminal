@@ -81,7 +81,7 @@
 
                         <input 
                         v-model="widget_data.widget_data.chart_data.title" 
-                        @input="widget_update()" 
+                        @input="update_widget()" 
                         type="text" 
                         class="form-control" 
                         id="title_input" 
@@ -94,7 +94,7 @@
 
                             <input 
                             v-model="widget_data.widget_data.chart_data.show_title" 
-                            @input="widget_update()" 
+                            @input="update_widget()" 
                             class="form-check-input me-3 fs-6" 
                             type="checkbox" 
                             role="switch" 
@@ -113,7 +113,7 @@
 
                             <input 
                             v-model="widget_data.widget_data.chart_data.show_labels" 
-                            @input="widget_data()" 
+                            @input="update_widget()" 
                             class="form-check-input me-3 fs-6" 
                             type="checkbox" 
                             role="switch" 

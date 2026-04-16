@@ -1,6 +1,6 @@
 <template>
 
-    <div class="d-block" style="opacity: 1.0 !important;">
+    <div class="d-block w-100 h-100 d-flex align-items-center">
 
         <Line
             id="my-chart-id"
@@ -65,6 +65,7 @@ export default {
             },
             chartOptions: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         display: false

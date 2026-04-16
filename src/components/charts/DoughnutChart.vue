@@ -1,6 +1,6 @@
 <template>
 
-    <div class="d-block py-0 px-5">
+    <div class="d-block w-100 h-100 py-0 px-5 d-flex align-items-center">
 
         <Doughnut
             id="my-chart-id"

@@ -1,6 +1,6 @@
 <template>
 
-    <div class="d-block">
+    <div class="d-block w-100 h-100 d-flex align-items-center">
 
         <Bar
             id="my-chart-id"

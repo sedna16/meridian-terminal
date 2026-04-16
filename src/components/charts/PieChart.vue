@@ -1,6 +1,6 @@
 <template>
 
-    <div class="d-block py-0 px-5">
+    <div class="d-block py-0 px-5 w-100 h-100 d-flex align-items-center">
 
         <Pie
             id="my-chart-id"

@@ -64,7 +64,7 @@ function update_navbar(v){
   crime rates
   military conflicts
   random quote
-  coundown timers
+  countdown timers -counter timer
   seo tools
   gaming and entertainment news - merge this with rss news widget
   buttons, not links - http requests (same below)
@@ -76,6 +76,10 @@ function update_navbar(v){
   excalidraw/draw.io embed
   large text widget - heading
   ai enrichment node (think https://www.nodepad.space/) - reads what you write and enriches it with AI — no prompting, no chat. Just capture your thinking and let the structure emerge. No chat · No prompts · AI that augments your thinking
+  progress bar widget
+  trending apps on appstore and playstore - api widget
+  random string generator
+  password generator
 
 */
 
