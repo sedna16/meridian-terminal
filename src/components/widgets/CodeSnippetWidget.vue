@@ -63,15 +63,6 @@
     :index="modal_index" 
     snippet="" />
 
-    <!-- <CodeSnippetModal 
-    v-if="show_modal=='read'" 
-    @update-modal="update_modal" 
-    :supabase_instance="supabase_instance" 
-    :widget_id="widget_data.id" 
-    :mode="'read'" 
-    :index="modal_index" 
-    :snippet="modal_snippet" /> -->
-
     <CodeSnippetModal 
     v-if="show_modal=='edit'" 
     @update-modal="update_modal" 
