@@ -40,17 +40,6 @@
                     </div>
 
                 </div>
-                <div v-if="mode=='read'" class="modal-body">
-
-                    <div class="d-block mb-3">
-                        <h6>{{ snippet.title }}</h6>
-                    </div>
-
-                    <div class="d-block h-100">
-                        <CodeBlock :code_snippet="snippet.code" />
-                    </div>
-
-                </div>
                 <div v-if="mode=='edit'" class="modal-body">
 
                     <div class="d-block mb-3">
@@ -72,7 +61,6 @@
                 <div class="modal-footer">
                     <GenericButton v-if="mode!='add'" @click="delete_snippet()" label="Delete" />
                     <GenericButton v-if="mode=='add'" @click="add_snippet()" label="Save" />
-                    <GenericButton v-if="mode=='read'" @click="switch_mode()" label="Edit" />
                     <GenericButton v-if="mode=='edit'" @click="edit_snippet()" label="Save" />
                 </div>
             </div>
@@ -114,9 +102,6 @@ export default {
         //
         update_from_code_editor(c){
             this.code = c;
-        },
-        switch_mode(){
-            this.$parent.switch_to_edit_mode()
         },
         
         //

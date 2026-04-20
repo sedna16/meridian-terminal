@@ -35,7 +35,7 @@
                 :key="item.id">
 
                     <a 
-                    @click.prevent="read_snippet(index,item)" 
+                    @click.prevent="open_snippet(index,item)" 
                     href="#" 
                     class="d-block mb-3 text-success snippet-bullet">{{item.title}}</a>
 
@@ -63,14 +63,14 @@
     :index="modal_index" 
     snippet="" />
 
-    <CodeSnippetModal 
+    <!-- <CodeSnippetModal 
     v-if="show_modal=='read'" 
     @update-modal="update_modal" 
     :supabase_instance="supabase_instance" 
     :widget_id="widget_data.id" 
     :mode="'read'" 
     :index="modal_index" 
-    :snippet="modal_snippet" />
+    :snippet="modal_snippet" /> -->
 
     <CodeSnippetModal 
     v-if="show_modal=='edit'" 
@@ -142,18 +142,10 @@ export default {
 
         //
         //
-        switch_to_edit_mode(){
-
-            this.show_modal = 'edit'
-
-        },
-
-        //
-        //
-        read_snippet(i,n){
+        open_snippet(i,n){
             this.modal_index = i;
             this.modal_snippet = n;
-            this.show_modal = 'read';
+            this.show_modal = 'edit';
         },
 
         //
