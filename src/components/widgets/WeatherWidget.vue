@@ -42,6 +42,50 @@
 
 <script>
 
+/*
+
+radar - Radar
+satellite - Satellite
+wind - Wind
+rain - Rain
+temp - Temperature
+clouds - Clouds
+waves - Waves
+ranAccu - Rain Accumulation
+gust - Wind Gust
+gustAccu - Wind Accumulation
+turbulence - Clear Air Turbulence
+icing - Icing Severity
+snowAccu - New Snow
+snowcover - Snow depth
+ptype - Precipitation type
+thunder - Thunderstorms
+dewpoint - Dew point
+rh - Humidity
+deg0 - Freezing altitude
+webulb - Wet bulb temperature
+solarpower - Solar Power
+uvindex - UV Index
+hclouds - High Clouds
+mclouds - Medium Clouds
+lclouds - Low Clouds
+fog - Fog
+cloudtop - Cloud tops
+cbase - Cloud base
+visibility - Visibility
+cape - CAPE Index
+ccl - Thermals
+swell1 - Swell
+swell2 - Swell 2
+swell3 - Swell 3
+wwaves - Wind waves
+sst - Sea temperatures
+currents - Currents
+currentsTide - Tidal Currents
+no2 - NO2
+
+*/
+
 import GearSVG from "@/components/svg/GearSVG.vue";
 import WidgetHeaderButton from "@/components/elements/WidgetHeaderButton.vue";
 import WeatherSP from "@/components/sidepanels/WeatherSP.vue";

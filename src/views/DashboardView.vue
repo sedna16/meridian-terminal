@@ -129,6 +129,13 @@
                     :widget_data="widgets_data[widget_id]" 
                     :show_panel="widget_control[widget_id].show_panel" 
                     />
+                    <CodeSnippetWidget 
+                    v-if="widgets_data[widget_id].type=='Code Snippet'" 
+                    :supabase_instance="supabase_instance" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
                     
                 </div>
               
@@ -175,6 +182,7 @@ import RemoteControlWidget from "@/components/widgets/RemoteControlWidget.vue";
 import MarketIndicesWidget from "@/components/widgets/MarketIndicesWidget.vue";
 import GithubRepoWidget from "@/components/widgets/GithubRepoWidget.vue";
 import WeatherWidget from "@/components/widgets/WeatherWidget.vue";
+import CodeSnippetWidget from "@/components/widgets/CodeSnippetWidget.vue";
 
 export default {
     name: "Dashboard",
@@ -510,25 +518,6 @@ export default {
 
         //
         //
-        // async get_widgets(){
-
-        //     //
-        //     //
-        //     const { data, error } = await this.supabase_instance
-        //         .from('widgets')
-        //         .select('*')
-        //         .eq('session_string', this.session_string)
-        //         .single();
-
-        //     if (error) {
-        //         console.error("Fetch error:", error.message);
-        //         //return false;
-        //     }
-        //     else {
-        //         console.log(data)
-        //     }
-
-        // },
         add_new_widget(v){
 
             //
@@ -791,6 +780,7 @@ export default {
         MarketIndicesWidget,
         GithubRepoWidget,
         WeatherWidget,
+        CodeSnippetWidget,
     },
 };
 </script>

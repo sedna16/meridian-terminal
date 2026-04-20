@@ -71,10 +71,10 @@
 
                 </div>
                 <div class="modal-footer">
+                    <GenericButton v-if="mode!='add'" @click="remove_note();update_widget();" label="Delete" />
                     <GenericButton v-if="mode=='add'" @click="add_note();update_widget();" label="Save" />
                     <GenericButton v-if="mode=='read'" @click="switch_mode()" label="Edit" />
                     <GenericButton v-if="mode=='edit'" @click="edit_note();update_widget();" label="Save" />
-                    <GenericButton v-if="mode!='add'" @click="remove_note();update_widget();" label="Delete" />
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
 import GenericButton from "@/components/elements/GenericButton.vue";
 
 export default {
-    name: "TimeModal",
+    name: "NotesModal",
     props: ['mode','index','note'],
     data() {
         return {
