@@ -409,7 +409,7 @@ a {
   border: 1px solid var(--bs-border-color);
 }
 
-.normal-case {
+.normal-case, .normal-case h1, .normal-case h2, .normal-case h3, .normal-case h4, .normal-case h5, .normal-case h6, .normal-case p, .normal-case strong, .normal-case b, .normal-case span {
   text-transform: none !important;
 }
 

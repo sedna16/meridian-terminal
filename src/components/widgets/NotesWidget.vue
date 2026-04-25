@@ -44,25 +44,12 @@
     </div>
 
 <NotesModal 
-v-if="show_modal=='add'" 
+v-if="show_modal!='hide'" 
 @update-modal="update_modal" 
-:mode="'add'" 
+:mode="show_modal" 
 index="0" 
-note="" />
-
-<NotesModal 
-v-if="show_modal=='read'" 
-@update-modal="update_modal" 
-:mode="'read'" 
-:index="modal_index" 
-:note="modal_note" />
-
-<NotesModal 
-v-if="show_modal=='edit'" 
-@update-modal="update_modal" 
-:mode="'edit'" 
-:index="modal_index" 
-:note="modal_note" />
+:widget_data="widget_data" 
+/>
 
 <NotesSP 
 v-if="show_panel==true" 
@@ -82,7 +69,7 @@ import NotesSP from "@/components/sidepanels/NotesSP.vue";
 
 export default {
     name: "NotesWidget",
-    props: ['widget_index','widget_data','show_panel'],
+    props: ['supabase_instance','widget_index','widget_data','show_panel'],
     data() {
         return {
             show_modal: 'hide',

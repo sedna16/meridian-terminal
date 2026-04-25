@@ -72,7 +72,6 @@
 <script>
 
 import GenericButton from "@/components/elements/GenericButton.vue";
-import CodeBlock from "@/components/elements/CodeBlock.vue";
 import CodeEditor from "@/components/elements/CodeEditor.vue";
 
 export default {
@@ -268,7 +267,6 @@ export default {
     },
     components: {
         GenericButton,
-        CodeBlock,
         CodeEditor,
     },
 };

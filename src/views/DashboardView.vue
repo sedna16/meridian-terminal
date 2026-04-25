@@ -47,6 +47,7 @@
                     />
                     <NotesWidget 
                     v-if="widgets_data[widget_id].type=='Notes'" 
+                    :supabase_instance="supabase_instance" 
                     :widget_index="index" 
                     :widget_data="widgets_data[widget_id]" 
                     :show_panel="widget_control[widget_id].show_panel" 

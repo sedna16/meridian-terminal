@@ -1,7 +1,7 @@
 <template>
 
     <div class="modal d-block" style="background-color: rgb(0,0,0,0.65);">
-        <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header p-2">
                     <h1 class="modal-title fs-6 p-0 d-inline-block" id="staticBackdropLabel">Note</h1>
@@ -15,7 +15,7 @@
                     </button>
                     
                 </div>
-                <div v-if="mode=='add'" class="modal-body">
+                <div class="modal-body">
 
                     <div class="d-block mb-3">
                         <label for="title_input" class="form-label">Title</label>
@@ -28,48 +28,42 @@
                     </div>
 
                     <div class="d-block mb-3">
-                        <label for="content_input" class="form-label">Content</label>
+                        <label for="content_input" class="form-label">
+                            Content
+                            <span v-if="type_area=='text'">
+                                <a 
+                                @click.prevent="type_area='markdown'" 
+                                class="text-success" 
+                                href="#" 
+                                title="Preview in markdown">
+                                    (Preview)
+                                </a>
+                            </span>
+                            <span v-if="type_area=='markdown'">
+                                <a 
+                                @click.prevent="type_area='text'" 
+                                class="text-success" 
+                                href="#" 
+                                title="Preview in markdown">
+                                    (Edit)
+                                </a>
+                            </span>
+                        </label>
+                        
+                        <MarkdownBlock 
+                        v-if="type_area=='markdown'" 
+                        :content="content" />
+
                         <textarea 
+                        v-if="type_area=='text'" 
                         v-model="content" 
-                        class="form-control" 
+                        class="form-control normal-case" 
                         id="content_input" 
-                        rows="4"></textarea>
+                        style="height: 400px;"></textarea>
                     </div>
 
                 </div>
-                <div v-if="mode=='read'" class="modal-body">
 
-                    <div class="d-block mb-3">
-                        <h6>{{ note.title }}</h6>
-                    </div>
-
-                    <div class="d-block mb-3">
-                        <p>{{ note.content }}</p>
-                    </div>
-
-                </div>
-                <div v-if="mode=='edit'" class="modal-body">
-
-                    <div class="d-block mb-3">
-                        <label for="title_input" class="form-label">Title</label>
-                        <input 
-                        v-model="note.title" 
-                        type="text" 
-                        class="form-control" 
-                        id="title_input" 
-                        placeholder="Note Title">
-                    </div>
-
-                    <div class="d-block mb-3">
-                        <label for="content_input" class="form-label">Content</label>
-                        <textarea 
-                        v-model="note.content" 
-                        class="form-control" 
-                        id="content_input" 
-                        rows="4"></textarea>
-                    </div>
-
-                </div>
                 <div class="modal-footer">
                     <GenericButton v-if="mode!='add'" @click="remove_note();update_widget();" label="Delete" />
                     <GenericButton v-if="mode=='add'" @click="add_note();update_widget();" label="Save" />
@@ -85,15 +79,33 @@
 <script>
 
 import GenericButton from "@/components/elements/GenericButton.vue";
+import MarkdownBlock from "@/components/elements/MarkdownBlock.vue";
 
 export default {
     name: "NotesModal",
-    props: ['mode','index','note'],
+    props: ['mode','index','widget_data'],
     data() {
         return {
             title: '',
             content: '',
+            type_area: '', // text or markdown
         }
+    },
+    mounted(){
+
+        //
+        //
+        if( this.mode=='add' ){
+            this.type_area = 'text';
+            this.title = '';
+            this.content = '';
+        }
+        else {
+            this.type_area = 'markdown';
+            this.title = this.widget_data.widget_data.notes_array[this.index].title;
+            this.content = this.widget_data.widget_data.notes_array[this.index].content;
+        }
+
     },
     methods: {
         hide_modal() {
@@ -120,9 +132,15 @@ export default {
         remove_note(){
             this.$parent.remove_note(this.index)
         },
+
+        //
+        //
+
+
     },
     components: {
-        GenericButton
+        GenericButton,
+        MarkdownBlock,
     },
 };
 </script>
