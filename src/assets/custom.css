@@ -409,3 +409,7 @@ a {
   border: 1px solid var(--bs-border-color);
 }
 
+.normal-case {
+  text-transform: none !important;
+}
+
