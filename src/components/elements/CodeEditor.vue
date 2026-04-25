@@ -26,6 +26,7 @@ export default {
     data() {
         return {
             local_code: '',
+            html: '',
 
             //
             // --- Feature: Language Recognition (Keywords across languages) ---
@@ -57,33 +58,38 @@ export default {
             
             //
             //
-            let html = this.local_code;
-
+            if(this.local_code == undefined || this.local_code == null){
+                this.html = '# edit this to add your code';
+            }
+            else {
+                this.html = this.local_code;
+            }
+            
             //
             // 1. Escape HTML first so user-typed tags don't break the actual DOM
-            html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            this.html = this.html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
             //
             // 2. Apply Syntax Colors
-            html = html.replace(/(\/\/ .*|# .*)/g, '<span class="comment normal-case">$1</span>');        // comments (has space after it)
-            html = html.replace(/(&quot;.*?&quot;|'.*?'|`.*?`)/g, '<span class="string normal-case">$1</span>'); // Strings
-            html = html.replace(/\b([a-zA-Z_]\w*)(?=\()/g, '<span class="function normal-case">$1</span>');       // Functions
-            html = html.replace(this.keyword_regex, '<span class="keyword normal-case">$1</span>');                 // Keywords
-            html = html.replace(/([{}()[\]])/g, '<span class="bracket normal-case">$1</span>');                    // Brackets
-            html = html.replace(/\b(\d+)\b/g, '<span class="number normal-case">$1</span>');                       // Numbers
-            html = html.replace(/\b([a-zA-Z-]+)(?=:)/g, '<span class="keyword normal-case">$1</span>');           // css
-            html = html.replace(/(&lt;\/?[a-zA-Z0-9!]+.*?&gt;)/g, '<span class="html-tag normal-case">$1</span>'); // html tag opening/closing
+            this.html = this.html.replace(/(\/\/ .*|# .*)/g, '<span class="comment normal-case">$1</span>');        // comments (has space after it)
+            this.html = this.html.replace(/(&quot;.*?&quot;|'.*?'|`.*?`)/g, '<span class="string normal-case">$1</span>'); // Strings
+            this.html = this.html.replace(/\b([a-zA-Z_]\w*)(?=\()/g, '<span class="function normal-case">$1</span>');       // Functions
+            this.html = this.html.replace(this.keyword_regex, '<span class="keyword normal-case">$1</span>');                 // Keywords
+            this.html = this.html.replace(/([{}()[\]])/g, '<span class="bracket normal-case">$1</span>');                    // Brackets
+            this.html = this.html.replace(/\b(\d+)\b/g, '<span class="number normal-case">$1</span>');                       // Numbers
+            this.html = this.html.replace(/\b([a-zA-Z-]+)(?=:)/g, '<span class="keyword normal-case">$1</span>');           // css
+            this.html = this.html.replace(/(&lt;\/?[a-zA-Z0-9!]+.*?&gt;)/g, '<span class="html-tag normal-case">$1</span>'); // html tag opening/closing
 
             //
             // 3. Fix trailing newlines in <pre> tags by appending a blank space
-            if (html[html.length - 1] === '\n') {
+            if (this.html[this.html.length - 1] === '\n') {
 
                 //
                 //
-                html += ' ';
+                this.html += ' ';
             }
 
-            return html;
+            return this.html;
 
         }
 

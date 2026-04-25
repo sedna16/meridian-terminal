@@ -306,6 +306,12 @@ export default {
                         'snippets_ids': [],
                     },
                 },
+                {
+                    'id': '',
+                    'type': 'TinyURL Link Shortener',
+                    'name': 'LNK_ALIAS_REDIRECT',
+                    'widget_data': {},
+                },
 
             ],
             selected_widget_index: 0,

@@ -136,6 +136,13 @@
                     :widget_data="widgets_data[widget_id]" 
                     :show_panel="widget_control[widget_id].show_panel" 
                     />
+                    <TinyURLWidget 
+                    v-if="widgets_data[widget_id].type=='TinyURL Link Shortener'" 
+                    :supabase_instance="supabase_instance" 
+                    :widget_index="index" 
+                    :widget_data="widgets_data[widget_id]" 
+                    :show_panel="widget_control[widget_id].show_panel" 
+                    />
                     
                 </div>
               
@@ -183,6 +190,7 @@ import MarketIndicesWidget from "@/components/widgets/MarketIndicesWidget.vue";
 import GithubRepoWidget from "@/components/widgets/GithubRepoWidget.vue";
 import WeatherWidget from "@/components/widgets/WeatherWidget.vue";
 import CodeSnippetWidget from "@/components/widgets/CodeSnippetWidget.vue";
+import TinyURLWidget from "@/components/widgets/TinyURLWidget.vue";
 
 export default {
     name: "Dashboard",
@@ -781,6 +789,7 @@ export default {
         GithubRepoWidget,
         WeatherWidget,
         CodeSnippetWidget,
+        TinyURLWidget,
     },
 };
 </script>

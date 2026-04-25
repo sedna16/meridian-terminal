@@ -24,9 +24,15 @@
         <div class="card-body p-3">
 
             <template v-if="snippets_array.length < 1 && query_status=='idle'">
-
                 <p>Add code snippet</p>
+            </template>
 
+            <template v-if="query_status!='idle' && query_status!='error'">
+                <p class="text-light">Searching for data</p>
+            </template>
+
+            <template v-if="query_status=='error'">
+                <p class="text-danger">Error</p>
             </template>
             
             <template v-if="snippets_array.length > 0 && query_status=='idle'">
@@ -40,14 +46,6 @@
                     class="d-block mb-3 text-success snippet-bullet">{{item.title}}</a>
 
                 </template>
-            </template>
-
-            <template v-if="query_status!='idle' && query_status!='error'">
-                <p class="text-light">Searching for data</p>
-            </template>
-
-            <template v-if="query_status=='error'">
-                <p class="text-danger">Error</p>
             </template>
 
         </div>

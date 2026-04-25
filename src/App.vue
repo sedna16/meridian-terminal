@@ -24,27 +24,13 @@ function update_navbar(v){
   need to be able to create pages with widget slots
   not just in the dashboard
 
-  xnews
-  xreal time from different locations
-  xcalendar
-  xquicklinks
-  xtask manager
-  xyoutube embed
   spotify playlist
   emails - ***could be dangerous*** - dont
   youtube live news -- can be done via youtube embed, but takes work to find videos
   job openings
   latest hacking/data breach/cyber security news
-  xnotes
-  xKPI/metric/charts
-  xlive youtube webcams
-  live youtube news
-  ximage
-  xweather forecast  - https://open-meteo.com/ - https://www.weatherapi.com/pricing.aspx -- became weather map
   travel safety
-  xstock prices chart / crypto
   regional/country/continent news feed
-  xmarket indices - needs improvement
   earthquakes
   layoffs trackers - companies
   ISS location
@@ -52,7 +38,6 @@ function update_navbar(v){
   xsite uptime monitor - multiple (may need improvement)
   xtrending github repos
   radiation watch
-  xphoto gallery - 1 image per widget
   grocery list
   latst meovie
   latest anime
