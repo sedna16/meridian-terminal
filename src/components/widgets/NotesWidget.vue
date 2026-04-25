@@ -47,7 +47,7 @@
 v-if="show_modal!='hide'" 
 @update-modal="update_modal" 
 :mode="show_modal" 
-index="0" 
+:index="modal_index" 
 :widget_data="widget_data" 
 />
 
@@ -73,7 +73,7 @@ export default {
     data() {
         return {
             show_modal: 'hide',
-            modal_index: '',
+            modal_index: 0,
             modal_note: {},
         }
     },
