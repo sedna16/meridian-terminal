@@ -39,8 +39,8 @@ export default {
                 'fn', 'mut', 'impl', 'pub', 'match', 'struct', 'enum', 'use',
                 // Go
                 'func', 'go', 'chan', 'select', 'defer', 'package', 'type',
-                // HTML / CSS basics (rendered as keywords for simplicity)
-                'div', 'span', 'html', 'body', 'script', 'style', 'color', 'background', 'margin', 'padding'
+                // CSS Properties / HTML Tags
+                'width', 'height', 'margin', 'padding', 'background', 'color', 'display', 'flex', 'position', 'div', 'span', 'html', 'body', 'section', 'header'
             ],
 
         }
@@ -65,12 +65,14 @@ export default {
 
             //
             // 2. Apply Syntax Colors
-            html = html.replace(/(\/\/.*|#.*)/g, '<span class="comment normal-case">$1</span>');                    // comments
+            html = html.replace(/(\/\/ .*|# .*)/g, '<span class="comment normal-case">$1</span>');        // comments (has space after it)
             html = html.replace(/(&quot;.*?&quot;|'.*?'|`.*?`)/g, '<span class="string normal-case">$1</span>'); // Strings
             html = html.replace(/\b([a-zA-Z_]\w*)(?=\()/g, '<span class="function normal-case">$1</span>');       // Functions
             html = html.replace(this.keyword_regex, '<span class="keyword normal-case">$1</span>');                 // Keywords
             html = html.replace(/([{}()[\]])/g, '<span class="bracket normal-case">$1</span>');                    // Brackets
             html = html.replace(/\b(\d+)\b/g, '<span class="number normal-case">$1</span>');                       // Numbers
+            html = html.replace(/\b([a-zA-Z-]+)(?=:)/g, '<span class="keyword normal-case">$1</span>');           // css
+            html = html.replace(/(&lt;\/?[a-zA-Z0-9!]+.*?&gt;)/g, '<span class="html-tag normal-case">$1</span>'); // html tag opening/closing
 
             //
             // 3. Fix trailing newlines in <pre> tags by appending a blank space
@@ -242,7 +244,9 @@ export default {
     :deep(.string) { color: #ce9178; }
     :deep(.bracket) { color: #ffd700; }
     :deep(.number) { color: #b5cea8; }
+    :deep(.html-tag) { color: #808080; font-weight: bold; } /* Grayish-white for tags */
 
     /* Ensure comments take priority visually if overlapping occurs */
     :deep(.comment *) { color: inherit !important; font-style: inherit !important; }
+
 </style>

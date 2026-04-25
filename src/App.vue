@@ -54,7 +54,7 @@ function update_navbar(v){
   radiation watch
   xphoto gallery - 1 image per widget
   grocery list
-  latest movie
+  latst meovie
   latest anime
   latest netflix/prime/etc
   AI chatter (AI bugs you with nonsense)
@@ -74,9 +74,9 @@ function update_navbar(v){
   anonymous chat room
   simple table widget
   excalidraw/draw.io embed
-  large text widget - heading
+  xlarge text widget - heading
   ai enrichment node (think https://www.nodepad.space/) - reads what you write and enriches it with AI — no prompting, no chat. Just capture your thinking and let the structure emerge. No chat · No prompts · AI that augments your thinking
-  progress bar widget
+  progress bar widget - should be in the metrics
   trending apps on appstore and playstore - api widget
   random string generator
   password generator
