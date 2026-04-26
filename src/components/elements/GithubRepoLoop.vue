@@ -96,9 +96,9 @@ export default {
             axios.get(rss_url)
             .then(response => {
                 
-
+                //
+                //
                 var d = response.data.items;
-                console.log(d);
 
                 //
                 //
