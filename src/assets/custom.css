@@ -413,3 +413,10 @@ a {
   text-transform: none !important;
 }
 
+.markdown-list {
+  list-style-type: disc !important;
+}
+.markdown-list::before {
+  content: "- ";
+}
+

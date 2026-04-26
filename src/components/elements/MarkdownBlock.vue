@@ -1,6 +1,6 @@
 <template>
 
-    <div class="markdown-editor">
+    <div class="markdown-container">
         <div class="preview normal-case border border-success" v-html="render_markdown"></div>
     </div>
 
@@ -93,6 +93,8 @@ export default {
     },
     methods: {
 
+        //
+        //
         parseBlocks(line) {
 
             //
@@ -122,7 +124,7 @@ export default {
             //
             // List Items (non-checkbox)
             if (line.match(/^[-*]\s+/)) {
-                return `<li>${this.parseInline(line.replace(/^[-*]\s+/, ''))}</li>`;
+                return `<li class="markdown-list">${this.parseInline(line.replace(/^[-*]\s+/, ''))}</li>`;
             }
 
             //
@@ -140,6 +142,8 @@ export default {
             return `<p>${this.parseInline(line)}</p>`;
         },
 
+        //
+        //
         parseInline(text) {
 
             //
@@ -148,11 +152,11 @@ export default {
                 // Images
                 .replace(/!\[(.*?)\]\((.*?)\s*("(.*?)")?\)/g, '<img src="$2" alt="$1" title="$4">')
                 // Links
-                .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>')
+                .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="normal-case" target="_blank">$1</a>')
                 // Bold
-                .replace(/(\*\*|__)(.*?)\1/g, '<strong>$2</strong>')
+                .replace(/(\*\*|__)(.*?)\1/g, '<strong class="normal-case">$2</strong>')
                 // Italics
-                .replace(/(\*|_)(.*?)\1/g, '<em>$2</em>')
+                .replace(/(\*|_)(.*?)\1/g, '<em class="normal-case">$2</em>')
                 // Final clean up for escaped characters (removing the backslash)
                 .replace(/\\([*!_\[\]|])/g, '$1');
         },
@@ -163,7 +167,7 @@ export default {
 </script>
 
 <style scoped>
-.markdown-editor {
+.markdown-container {
   display: flex;
   gap: 20px;
   font-family: sans-serif;
@@ -187,6 +191,8 @@ export default {
 .preview :deep(img) {
   max-width: 100%;
 }
+
+/* :deep(li) { list-style-type: circle !important; } */
 
 /* Table Styling */
 :deep(table) { border-collapse: collapse; width: 100%; margin: 1rem 0; }

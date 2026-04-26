@@ -123,7 +123,7 @@ export default {
                     'type': 'Notes',
                     'name': 'Mission_Dossier',
                     'widget_data': {
-                        'notes_array': [],
+                        'notes_ids': [],
                     },
                 },
                 {

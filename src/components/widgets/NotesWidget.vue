@@ -9,7 +9,7 @@
 
         <div class="btn-group float-end">
 
-            <WidgetHeaderButton @click="show_modal='add'" title="Add note">
+            <WidgetHeaderButton @click="open_note(null,{})" title="Add note">
                 <PlusSVG w="12" h="12" c="var(--bs-light)" />
             </WidgetHeaderButton>
             <WidgetHeaderButton @click="open_panel()">
@@ -21,19 +21,19 @@
         </div>
         <div class="card-body p-3">
 
-            <template v-if="widget_data.widget_data.notes_array.length < 1">
+            <template v-if="widget_data.widget_data.notes_ids.length < 1">
 
                 <p>Add a note</p>
 
             </template>
         
-            <template v-if="widget_data.widget_data.notes_array.length > 0">
+            <template v-if="widget_data.widget_data.notes_ids.length > 0">
                 <template 
-                v-for="(item,index) in widget_data.widget_data.notes_array" 
+                v-for="(item,index) in notes_array" 
                 :key="item.id">
 
                     <a 
-                    @click.prevent="read_note(index,item)" 
+                    @click.prevent="open_note(index,item)" 
                     href="#" 
                     class="d-block mb-3 text-success note-bullet">{{item.title}}</a>
 
@@ -44,11 +44,12 @@
     </div>
 
 <NotesModal 
-v-if="show_modal!='hide'" 
+v-if="show_modal==true" 
 @update-modal="update_modal" 
-:mode="show_modal" 
+:supabase_instance="supabase_instance" 
+:widget_id="widget_data.id" 
 :index="modal_index" 
-:widget_data="widget_data" 
+:note="modal_note" 
 />
 
 <NotesSP 
@@ -72,13 +73,16 @@ export default {
     props: ['supabase_instance','widget_index','widget_data','show_panel'],
     data() {
         return {
-            show_modal: 'hide',
+            show_logs: false,
+            query_status: 'idle',
+            show_modal: false,
             modal_index: 0,
             modal_note: {},
+            notes_array: [],
         }
     },
     created(){
-
+        this.get_notes();
     },
     methods: {
 
@@ -108,33 +112,109 @@ export default {
 
         //
         //
-        add_note(t,c){
-            this.widget_data.widget_data.notes_array.push({
-                'title': t,
-                'content': c,
-            })
-            this.show_modal = 'hide';
-            this.$parent.update_widget(this.widget_data.id);
-        },
-        switch_to_edit_mode(){
+        open_note(i,n){
 
-            this.show_modal = 'edit'
-
-        },
-        read_note(i,n){
+            //
+            //
             this.modal_index = i;
             this.modal_note = n;
-            this.show_modal = 'read';
+            this.show_modal = true;
+
         },
-        edit_note(){
-            this.show_modal = 'hide';
-            this.$parent.update_widget(this.widget_data.id);
+
+        //
+        //
+        async get_notes(){
+
+            //
+            //
+            this.notes_array = [];
+            this.query_status = 'querying';
+
+            //
+            //
+            const { data, error } = await this.supabase_instance
+                .from('notes')
+                .select('*')
+                .in('id', this.widget_data.widget_data.notes_ids)
+                .order('created_at', { ascending: false });
+
+            //
+            //
+            if(error) {
+
+                //
+                //
+                if(this.show_logs==true){
+                    console.log('Error retrieving notes');
+                    console.log(error.message);
+                }
+                this.query_status = 'error';
+                return error;
+
+            }
+            else {
+
+                //
+                //
+                if(this.show_logs==true){
+                    console.log('Notes retrieved');
+                    console.log(data);
+                }
+
+                //
+                //
+                for (let i = 0; i < data.length; i++) {
+
+                    //
+                    //
+                    this.notes_array.push({
+                        id: data[i].id,
+                        title: data[i].title,
+                        content: data[i].content
+                    })
+                }
+
+                //
+                //
+                this.query_status = 'idle';
+
+                //
+                //
+                return data;
+
+            }
+
+        },
+        add_note(n){
+
+            //
+            //
+            this.notes_array.unshift({
+                id: n.id,
+                title: n.title,
+                content: n.content
+            });
+
+            //
+            //
+            this.widget_data.widget_data.notes_ids.unshift(n.id);
+
+            //
+            //
+            this.update_widget();
+
         },
         remove_note(i){
-            this.widget_data.widget_data.notes_array.splice(i,1);
-            this.show_modal = 'hide';
-            this.$parent.update_widget(this.widget_data.id);
-        },
+           
+            //
+            //
+            this.widget_data.widget_data.notes_ids.splice(i,1);
+            this.show_modal = false;
+            this.get_notes();
+
+        }
+
     },
     components: {
         PlusSVG,

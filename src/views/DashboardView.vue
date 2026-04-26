@@ -526,6 +526,7 @@ export default {
         },
 
         //
+        // logical operators
         //
         add_new_widget(v){
 
@@ -651,6 +652,7 @@ export default {
         },
 
         //
+        // db operators
         //
         async insert_widget(id,session,wdata){
 

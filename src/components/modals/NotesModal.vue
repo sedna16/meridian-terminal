@@ -4,7 +4,14 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header p-2">
-                    <h1 class="modal-title fs-6 p-0 d-inline-block" id="staticBackdropLabel">Note</h1>
+                    <h1 class="modal-title fs-6 p-0 d-inline-block" id="staticBackdropLabel">
+                        Note
+                        <small v-if="query_status=='saving'" class="text-muted small">(Saving...)</small>
+                        <small v-if="query_status=='saved'" class="text-primary small">(Saved)</small>
+                        <small v-if="query_status=='error'" class="text-danger small">(Error_Saving)</small>
+                        <small v-if="query_status=='deleting'" class="text-danger small">(Deleting...)</small>
+                        <small v-if="query_status=='deleted'" class="text-muted small">(Deleted)</small>
+                    </h1>
                     
                     <button
                     type="button"
@@ -65,10 +72,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <GenericButton v-if="mode!='add'" @click="remove_note();update_widget();" label="Delete" />
-                    <GenericButton v-if="mode=='add'" @click="add_note();update_widget();" label="Save" />
-                    <GenericButton v-if="mode=='read'" @click="switch_mode()" label="Edit" />
-                    <GenericButton v-if="mode=='edit'" @click="edit_note();update_widget();" label="Save" />
+                    <GenericButton v-if="index != null || index != null" @click.prevent="remove_note()" label="Delete" />
+                    <GenericButton @click.prevent="save_note()" label="Save" />
                 </div>
             </div>
         </div>
@@ -83,9 +88,11 @@ import MarkdownBlock from "@/components/elements/MarkdownBlock.vue";
 
 export default {
     name: "NotesModal",
-    props: ['mode','index','widget_data'],
+    props: ['supabase_instance','widget_id','index','note'],
     data() {
         return {
+            show_logs: false,
+            query_status: 'idle',
             title: '',
             content: '',
             type_area: '', // text or markdown
@@ -95,19 +102,22 @@ export default {
 
         //
         //
-        if( this.mode=='add' ){
+        if(this.note == {}){
             this.type_area = 'text';
             this.title = '';
             this.content = '';
         }
         else {
             this.type_area = 'markdown';
-            this.title = this.widget_data.widget_data.notes_array[this.index].title;
-            this.content = this.widget_data.widget_data.notes_array[this.index].content;
+            this.title = this.note.title;
+            this.content = this.note.content;
         }
 
     },
     methods: {
+
+        //
+        //
         hide_modal() {
             this.$emit('update-modal', 'hide');
         },
@@ -135,7 +145,151 @@ export default {
 
         //
         //
+        save_note(){
 
+            //
+            //
+            if(this.index == null || this.index == undefined){
+                this.insert_note();
+            }
+            else{
+                this.update_note();
+            }
+
+        },
+
+        //
+        //
+        async insert_note(){
+
+            //
+            //
+            this.query_status = 'saving';
+
+            //
+            //
+            // save widget to db
+            const { data, error } = await this.supabase_instance
+            .from('notes')
+            .insert({ 
+                widget: this.widget_id,
+                title: this.title,
+                content: this.content
+            })
+            .select();
+
+            //
+            //
+            if(error) {
+
+                //
+                //
+                if(this.show_logs == true){
+                    console.log(error);
+                }
+                this.query_status = 'error';
+            }
+            else {
+                //
+                //
+                if(this.show_logs == true){
+                    console.log(data);
+                }
+                this.$parent.add_note(data[0]);
+                this.$parent.update_modal(false);
+            }
+
+        },
+        async update_note(){
+
+            //
+            //
+            this.query_status = 'saving';
+
+            //
+            //
+            // save widget to db
+            const { data, error } = await this.supabase_instance
+            .from('notes')
+            .update([{ 
+                title: this.title,
+                content: this.content
+            }])
+            .eq('id', this.note.id)
+            .select();
+
+            //
+            //
+            if(error) {
+                //
+                //
+                if(this.show_logs == true){
+                    console.log(error);
+                }
+                this.query_status = 'error';
+            }
+            else {
+                //
+                //
+                if(this.show_logs == true){
+                    console.log(data);
+                }
+
+                //
+                //
+                this.query_status = 'saved';
+                this.$parent.get_notes();
+
+                //
+                //
+                setTimeout(() => {
+                    this.query_status = 'idle';
+                }, 2000);
+
+            }
+
+        },
+        async delete_note(){
+
+            //
+            //
+            this.query_status = 'deleting';
+
+            //
+            //
+            const { data, error } = await this.supabase_instance
+            .from('notes')
+            .delete()
+            .eq('id', this.note.id)
+            .select();
+
+            //
+            //
+            if(error) {
+
+                //
+                //
+                if(this.show_logs == true){
+                    console.log(error);
+                }
+                this.query_status = 'error';
+            }
+            else {
+
+                //
+                //
+                if(this.show_logs == true){
+                    console.log(data);
+                }
+
+                //
+                //
+                this.query_status = 'deleted';
+                this.$parent.remove_note(this.index);
+
+            }
+
+        },
 
     },
     components: {
