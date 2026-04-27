@@ -447,7 +447,7 @@ export default {
 
                 //
                 //
-                if(options.settings == 'new'){
+                if(options.settings != null && options.settings == 'new'){
                     this.global_settings = this.create_new_settings();
                 }
 
