@@ -225,7 +225,7 @@ export default {
 
             //
             //
-            show_logs: true,
+            show_logs: false,
             
         }
     },
@@ -496,8 +496,6 @@ export default {
                     public_can_edit: data.settings.public_can_edit,
                     has_password: data.settings.has_password,
                 }
-                console.log('global settings');
-                console.log(this.global_settings);
 
                 //
                 // get the array of widget ids from db

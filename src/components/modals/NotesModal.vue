@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <GenericButton v-if="index != null || index != null" @click.prevent="remove_note()" label="Delete" />
+                    <GenericButton v-if="index != null || index != null" @click.prevent="delete_note()" label="Delete" />
                     <GenericButton @click.prevent="save_note()" label="Save" />
                 </div>
             </div>
