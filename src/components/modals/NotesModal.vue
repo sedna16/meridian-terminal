@@ -24,7 +24,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class="d-block mb-3">
+                    <div id="note-title" class="d-block mb-3">
                         <label for="title_input" class="form-label">Title</label>
                         <input 
                         v-model="title" 
@@ -34,7 +34,7 @@
                         placeholder="Note Title">
                     </div>
 
-                    <div class="d-block mb-3">
+                    <div id="note-content" class="d-block mb-3">
                         <label for="content_input" class="form-label">
                             Content
                             <span v-if="type_area=='text'">

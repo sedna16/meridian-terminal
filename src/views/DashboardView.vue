@@ -202,6 +202,7 @@ export default {
             //
             //
             session_string: '',
+            global_settings: {},
             widgets: [],
             widgets_data: {},
             settings_json: {},
@@ -224,7 +225,7 @@ export default {
 
             //
             //
-            show_logs: false,
+            show_logs: true,
             
         }
     },
@@ -374,11 +375,16 @@ export default {
                 } else {
 
                     //
+                    // if session does not exist
                     //
                     if(count == 0){
                         //console.log('session does not exist in db');
-                        this.save_session();
+                        this.save_session({settings:'new'});
                     }
+                    
+                    //
+                    // if session already exists
+                    //
                     else {
                         //console.log('session exist in db');
                         this.get_session();
@@ -402,7 +408,7 @@ export default {
 
             }
         },
-        async save_session(){
+        async save_session(options){
 
             //
             //
@@ -420,15 +426,34 @@ export default {
             //
             //
             if (error) {
+
+                //
+                //
                 if(this.show_logs==true){
                     console.error('Error saving session:', error.message);
                 }
+
+                //
+                //
                 return false;
+
             } else {
+
+                //
+                //
                 if(this.show_logs==true){
                     console.log('Session saved:', data);
                 }
-                return data[0]
+
+                //
+                //
+                if(options.settings == 'new'){
+                    this.global_settings = this.create_new_settings();
+                }
+
+                //
+                //
+                return data[0];
             }
             
         },
@@ -439,7 +464,7 @@ export default {
             //
             const { data, error } = await this.supabase_instance
                 .from('sessions')
-                .select('*,widget_array,widgets!inner(*)')
+                .select('*,widget_array,widgets!inner(*),settings(session,sitename,theme,is_public,public_can_edit,has_password)')
                 .eq('session_string', this.session_string)
                 .single();
 
@@ -460,6 +485,19 @@ export default {
                     console.log('Session retrieved');
                     console.log(data);
                 }
+
+                //
+                //
+                this.global_settings = {
+                    session: data.settings.session,
+                    sitename: data.settings.sitename,
+                    theme: data.settings.theme,
+                    is_public: data.settings.is_public,
+                    public_can_edit: data.settings.public_can_edit,
+                    has_password: data.settings.has_password,
+                }
+                console.log('global settings');
+                console.log(this.global_settings);
 
                 //
                 // get the array of widget ids from db
@@ -522,6 +560,58 @@ export default {
                 }
 
             } 
+
+        },
+
+        //
+        // settings
+        //
+        async create_new_settings(){
+
+            //
+            //
+            const { data, error } = await this.supabase_instance
+            .from('settings')
+            .insert(
+                {
+                    sitename: 'Meridian Terminal',
+                    theme: 'specops',
+                    is_public: true,
+                    public_can_edit: false,
+                    has_password: false,
+                    password: '',
+                }
+            )
+            .select();
+
+            //
+            //
+            if (error) {
+
+                //
+                //
+                if(this.show_logs==true){
+                    console.error('Error creating new settings:', error.message);
+                }
+
+                //
+                //
+                return false;
+
+            }
+            else {
+
+                //
+                //
+                if(this.show_logs==true){
+                    console.log(data);
+                }
+
+                //
+                //
+                return data[0];
+
+            }
 
         },
 
@@ -798,5 +888,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
