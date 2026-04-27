@@ -22,9 +22,13 @@
         <div class="card-body p-3">
 
             <template v-if="widget_data.widget_data.notes_ids.length < 1">
-
                 <p>Add a note</p>
-
+            </template>
+            <template v-if="query_status!='idle' && query_status!='error'">
+                <p class="text-light">Searching for data</p>
+            </template>
+            <template v-if="query_status=='error'">
+                <p class="text-danger">Error</p>
             </template>
         
             <template v-if="widget_data.widget_data.notes_ids.length > 0">
