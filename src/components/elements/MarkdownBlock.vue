@@ -65,16 +65,16 @@ export default {
                     continue;
                 }
                 } else if (inTable) {
-                html.push('</tbody></table>');
-                inTable = false;
+                    html.push('</tbody></table>');
+                    inTable = false;
                 }
 
                 // 2. Checkboxes ([x] or [ ])
                 if (line.match(/^[-*]\s\[([ xX])\]\s(.*)/)) {
-                const checked = line.match(/\[x\]/i) ? 'checked' : '';
-                const text = line.replace(/^[-*]\s\[([ xX])\]\s/, '');
-                html.push(`<div class="checkbox"><input type="checkbox" ${checked} disabled> ${this.parseInline(text)}</div>`);
-                continue;
+                    const checked = line.match(/\[x\]/i) ? 'checked' : '';
+                    const text = line.replace(/^[-*]\s\[([ xX])\]\s/, '');
+                    html.push(`<div class="checkbox"><input type="checkbox" ${checked} disabled> ${this.parseInline(text)}</div>`);
+                    continue;
                 }
 
                 // 3. Block elements (Headers, HR, Quotes, Lists)
