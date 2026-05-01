@@ -46,7 +46,7 @@ export default {
     props: ['widget_data'],
     data() {
         return {
-            show_logs: true,
+            show_logs: false,
             query_status: 'idle',
             feed_loop: [],
         }
@@ -299,15 +299,15 @@ export default {
 
 
 
-                                
 
-                            case 'entertainment_weekly':                         // double check on this
-                                feedItems.push({
-                                    'title': el.children[ 0 ].textContent,
-                                    'link': el.children[ 1 ].textContent,
-                                    'pubDate': el.children[ 3 ].textContent,
-                                })
-                                break;
+
+                            // case 'entertainment_weekly':                         // double check on this
+                            //     feedItems.push({
+                            //         'title': el.children[ 0 ].textContent,
+                            //         'link': el.children[ 1 ].textContent,
+                            //         'pubDate': el.children[ 3 ].textContent,
+                            //     })
+                            //     break;
 
                             // case 'buzzfeed':
                             //     feedItems.push({

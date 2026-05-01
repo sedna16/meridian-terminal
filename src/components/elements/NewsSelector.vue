@@ -132,13 +132,13 @@ export default {
                 
 
 
-                
-                {
-                    'text': 'Entertainment Weekly',
-                    'url': 'https://feeds-api.dotdashmeredith.com/v1/rss/google/06e092d0-4dff-468a-93db-8d6a995730b4',
-                    'format': 'item',
-                    'value_map': 'entertainment_weekly',
-                },
+
+                // {
+                //     'text': 'Entertainment Weekly',
+                //     'url': 'https://feeds-api.dotdashmeredith.com/v1/rss/google/06e092d0-4dff-468a-93db-8d6a995730b4',
+                //     'format': 'item',
+                //     'value_map': 'entertainment_weekly',
+                // },
                 // {
                 //     'text': 'Buzzfeed',
                 //     'url': 'https://www.buzzfeed.com/index.xml',
