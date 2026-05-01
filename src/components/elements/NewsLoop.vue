@@ -46,7 +46,7 @@ export default {
     props: ['widget_data'],
     data() {
         return {
-            show_logs: false,
+            show_logs: true,
             query_status: 'idle',
             feed_loop: [],
         }
@@ -220,6 +220,142 @@ export default {
                                     'pubDate': el.children[ 3 ].textContent,
                                 })
                                 break;
+
+                            case 'entertainment_tonight':
+                                feedItems.push({
+                                    'title': el.children[ 0 ].textContent,
+                                    'link': el.children[ 1 ].textContent,
+                                    'pubDate': el.children[ 3 ].textContent,
+                                })
+                                break;
+
+                            case 'ign':
+                                feedItems.push({
+                                    'title': el.children[ 0 ].textContent,
+                                    'link': el.children[ 1 ].textContent,
+                                    'pubDate': el.children[ 3 ].textContent,
+                                })
+                                break;
+
+                            case 'abcnews':
+                                feedItems.push({
+                                    'title': el.children[ 8 ].textContent,
+                                    'link': el.children[ 9 ].textContent,
+                                    'pubDate': el.children[ 11 ].textContent,
+                                })
+                                break;
+
+                            case 'market_watch':
+                                feedItems.push({
+                                    'title': el.children[ 1 ].textContent,
+                                    'link': el.children[ 3 ].textContent,
+                                    'pubDate': el.children[ 4 ].textContent,
+                                })
+                                break;
+
+                            case 'kotaku':
+                                feedItems.push({
+                                    'title': el.children[ 0 ].textContent,
+                                    'link': el.children[ 1 ].textContent,
+                                    'pubDate': el.children[ 4 ].textContent,
+                                })
+                                break;
+
+                            case 'nintendo_life':
+                                feedItems.push({
+                                    'title': el.children[ 1 ].textContent,
+                                    'link': el.children[ 4 ].textContent,
+                                    'pubDate': el.children[ 0 ].textContent,
+                                })
+                                break;
+
+                            case 'rock_paper_shotgun':
+                                feedItems.push({
+                                    'title': el.children[ 0 ].textContent,
+                                    'link': el.children[ 1 ].textContent,
+                                    'pubDate': el.children[ 3 ].textContent,
+                                })
+                                break;
+
+                            case 'news_xbox':
+                                feedItems.push({
+                                    'title': el.children[ 0 ].textContent,
+                                    'link': el.children[ 1 ].textContent,
+                                    'pubDate': el.children[ 3 ].textContent,
+                                })
+                                break;
+
+                            case 'futurism':
+                                feedItems.push({
+                                    'title': el.children[ 0 ].textContent,
+                                    'link': el.children[ 2 ].textContent,
+                                    'pubDate': el.children[ 4 ].textContent,
+                                })
+                                break;
+
+
+
+
+
+
+
+                                
+
+                            case 'entertainment_weekly':                         // double check on this
+                                feedItems.push({
+                                    'title': el.children[ 0 ].textContent,
+                                    'link': el.children[ 1 ].textContent,
+                                    'pubDate': el.children[ 3 ].textContent,
+                                })
+                                break;
+
+                            // case 'buzzfeed':
+                            //     feedItems.push({
+                            //         'title': el.children[ 0 ].textContent,
+                            //         'link': el.children[ 1 ].textContent,
+                            //         'pubDate': el.children[ 3 ].textContent,
+                            //     })
+                            //     break;
+
+                            // case 'polygon':
+                            //     feedItems.push({
+                            //         'title': el.children[ 0 ].textContent,
+                            //         'link': el.children[ 1 ].textContent,
+                            //         'pubDate': el.children[ 3 ].textContent,
+                            //     })
+                            //     break;
+
+                            // case 'tmz':
+                            //     feedItems.push({
+                            //         'title': el.children[ 0 ].textContent,
+                            //         'link': el.children[ 1 ].textContent,
+                            //         'pubDate': el.children[ 3 ].textContent,
+                            //     })
+                            //     break;
+
+                            // case 'ladbible':
+                            //     feedItems.push({
+                            //         'title': el.children[ 0 ].textContent,
+                            //         'link': el.children[ 1 ].textContent,
+                            //         'pubDate': el.children[ 3 ].textContent,
+                            //     })
+                            //     break;
+
+                            // case 'gamespot':
+                            //     feedItems.push({
+                            //         'title': el.children[ 0 ].textContent,
+                            //         'link': el.children[ 1 ].textContent,
+                            //         'pubDate': el.children[ 3 ].textContent,
+                            //     })
+                            //     break;
+
+                            // case 'pc_gamer':
+                            //     feedItems.push({
+                            //         'title': el.children[ 0 ].textContent,
+                            //         'link': el.children[ 1 ].textContent,
+                            //         'pubDate': el.children[ 3 ].textContent,
+                            //     })
+                            //     break;
                         
                         }
 
